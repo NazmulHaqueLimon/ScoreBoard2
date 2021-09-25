@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/baseline_looks_3_24.xml" value="0.3828125" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/baseline_looks_two_24.xml" value="0.3828125" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_add_task_black_24dp.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_ball.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket__11_crossbat.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket__1_.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket__2_stump.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket__3_batsman.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/drawable/ic_cricket__4_vs.xml" value="0.2657407407407407" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/dropdown_item.xml" value="0.3609375" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/fragment_match_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/fragment_new_match.xml" value="0.33" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/fragment_scoring.xml" value="0.25" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/fragment_team.xml" value="0.25" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/match_formats.xml" value="0.2078125" />
+        <entry key="..\:/ScoreBoard/app/src/main/res/layout/player_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/activity_main.xml" value="0.1893939393939394" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_match_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_match_list.xml" value="0.17525773195876287" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_new_match.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_scoring.xml" value="0.25" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_team.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/player_item.xml" value="0.29322916666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

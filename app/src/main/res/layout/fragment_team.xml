@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewmodel"
+            type="com.example.scoreboard.viewmodels.MatchViewModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/teal_200">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_200">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="159dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/add_team_information"
+                android:textColor="#120707"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="353dp"
+                android:layout_height="245dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/icon_team"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_cricket__red_ball" />
+
+
+                <ImageView
+                    android:id="@+id/teamLogo"
+                    android:layout_width="71dp"
+                    android:layout_height="69dp"
+                    android:elevation="6dp"
+                    app:layout_constraintBottom_toTopOf="@+id/player_name_txt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.524"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/team_name_txt"
+                    app:layout_constraintVertical_bias="0.29"
+                    app:srcCompat="@drawable/ic_group">
+
+                </ImageView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/team_name_txt"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="team name"
+                    android:textColorHint="#1C1616"
+                    app:boxBackgroundColor="#8AF112"
+                    app:helperText="type your team name"
+                    app:layout_constraintStart_toEndOf="@+id/icon_team"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/team_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="team name"
+                        android:inputType="text"
+                        android:textColor="#100707"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icon_player"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_cricket__3_batsman" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/player_name_txt"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="player name"
+                    app:helperText="team name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/icon_player">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/player_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/buttonAdd"
+                    android:layout_width="61dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#FFC107"
+                    android:text="A"
+                    android:textColor="#150C0C"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/player_name_txt"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/logoTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/select_a_logo"
+                    android:textColor="#150C0C"
+                    app:layout_constraintBottom_toTopOf="@+id/player_name_txt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/teamLogo"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/player_list_recycler"
+                android:layout_width="339dp"
+                android:layout_height="444dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+                tools:context="com.example.scoreboard.MainActivity"
+                tools:listitem="@layout/player_item" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/save_tram_fab"
+                android:layout_width="185dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:backgroundTint="#F8C11B"
+                android:contentDescription="@string/extended_fab_content_desc"
+                android:elevation="6dp"
+                android:text="@string/save_button_txt"
+                android:textAlignment="center"
+                app:icon="@drawable/ic_group_add_black_24dp"
+                app:iconGravity="end"
+                app:iconTint="#1C0A0A"
+                app:layout_constraintBottom_toBottomOf="@+id/player_list_recycler"
+                app:layout_constraintEnd_toEndOf="@+id/player_list_recycler"
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="@+id/player_list_recycler"
+                app:layout_constraintTop_toTopOf="@+id/player_list_recycler"
+                app:layout_constraintVertical_bias="0.833" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

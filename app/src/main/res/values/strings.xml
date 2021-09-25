@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ScoreBoard</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="venue">Ground Name</string>
+    <string name="match_list">Match List</string>
+    <string name="newMatch">New Match</string>
+    <string name="scoring">score</string>
+    <string name="extended_fab_content_desc">Save Team</string>
+    <string name="top_players">Top Players</string>
+    <string name="save_button_txt">Save Team</string>
+    <string name="add_team_information">Add Team Information:</string>
+    <string name="select_a_logo">Select A Team Logo</string>
+    <string name="start_scoring">Start Scoring</string>
+    <string name="toss_won_by">toss won by</string>
+    <string name="select_over">select over</string>
+    <string name="name_of_ur_cricket_ground">name of ur cricket ground</string>
+    <string name="add_team">Add Team</string>
+    <string name="start_a_new_match">Start A New Match</string>
+    <string name="bat_first">Bat First</string>
+
+    <string-array name="formats">
+        <item>T10</item>
+        <item>12-over</item>
+        <item>15-over</item>
+        <item>T20</item>
+        <item>T25</item>
+        <item>ODI(50)</item>
+    </string-array>
+
+</resources>

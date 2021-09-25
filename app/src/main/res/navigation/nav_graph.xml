@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/newMatchFragment">
+
+    <fragment
+        android:id="@+id/newMatchFragment"
+        android:name="com.example.scoreboard.fragments.NewMatchFragment"
+        android:label="fragment_new_match"
+        tools:layout="@layout/fragment_new_match" >
+        <action
+            android:id="@+id/action_newMatchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_newMatchFragment_to_scoringFragment"
+            app:destination="@id/scoringFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoringFragment"
+        android:name="com.example.scoreboard.fragments.ScoringFragment"
+        android:label="fragment_scoring"
+        tools:layout="@layout/fragment_scoring" >
+        <argument
+            android:name="match_id"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.example.scoreboard.fragments.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/action_teamFragment_to_newMatchFragment"
+            app:destination="@id/newMatchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topPlayersFragment"
+        android:name="com.example.scoreboard.fragments.TopPlayersFragment"
+        android:label="TopPlayersFragment" />
+    <fragment
+        android:id="@+id/matchListFragment"
+        android:name="com.example.scoreboard.fragments.MatchListFragment"
+        android:label="fragment_match_list"
+        tools:layout="@layout/fragment_match_list" >
+        <action
+            android:id="@+id/action_matchListFragment_to_matchDetailsFragment"
+            app:destination="@id/matchDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchDetailsFragment"
+        android:name="com.example.scoreboard.fragments.MatchDetailsFragment"
+        android:label="MatchDetailsFragment" />
+</navigation>
