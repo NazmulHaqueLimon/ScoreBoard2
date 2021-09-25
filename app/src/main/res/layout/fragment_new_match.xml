@@ -68,7 +68,7 @@
                             android:id="@+id/teamImage1"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
-                            app:srcCompat="@drawable/ic_cricket__1_" />
+                            app:srcCompat="@drawable/ic_trophy" />
 
                         <TextView
                             android:id="@+id/team_txt"
@@ -109,7 +109,7 @@
                             android:id="@+id/teamImage2"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
-                            app:srcCompat="@drawable/ic_cricket__1_" />
+                            app:srcCompat="@drawable/ic_trophy" />
 
                         <TextView
                             android:id="@+id/teamB_txt"
@@ -200,7 +200,7 @@
                     android:elevation="6dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_ground"
-                    app:srcCompat="@drawable/ic_ball">
+                    app:srcCompat="@drawable/ic_cricket__red_ball">
 
                 </ImageView>
 
@@ -277,7 +277,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_toss"
-                    app:srcCompat="@drawable/ic_cricket__pads_">
+                    app:srcCompat="@drawable/ic_cricket__2_stump">
 
                 </ImageView>
 
@@ -315,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/newButton"
+                android:backgroundTint="@color/buttons"
                 android:text="@string/start_scoring"
                 android:textColor="#492121"
                 android:textStyle="bold"
