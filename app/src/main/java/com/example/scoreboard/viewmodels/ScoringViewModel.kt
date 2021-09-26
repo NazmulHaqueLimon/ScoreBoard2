@@ -52,10 +52,16 @@ class ScoringViewModel @Inject internal constructor(
      */
     private val _battingTeam : MutableLiveData<TeamWithPlayers> = MutableLiveData(getBattingTeam())
     val battingTeam : LiveData<TeamWithPlayers> =_battingTeam
-    val batsmans :LiveData<String> =Transformations.map(battingTeam) {
-        it.playerList.map { player ->
-            player.name
 
+
+    fun collectBatsmanNames(): List<String>? {
+        return battingTeam.value?.playerList?.map {
+            it.name.toString()
+        }
+    }
+    fun collectBowlerNames():List<String>?{
+        return bowlingTeam.value?.playerList?.map {
+            it.name.toString()
         }
     }
     /**
@@ -156,9 +162,6 @@ class ScoringViewModel @Inject internal constructor(
                     it.run +=5
             }
         }
-
-
-
     }
     fun updateTeamScore(){
 

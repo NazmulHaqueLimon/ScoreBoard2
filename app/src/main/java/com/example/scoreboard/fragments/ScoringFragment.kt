@@ -30,45 +30,39 @@ class ScoringFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-         binding =DataBindingUtil.inflate<FragmentScoringBinding>(
-            inflater,
-            R.layout.fragment_scoring,
-            container,
-            false).apply {
+         binding =DataBindingUtil.inflate<FragmentScoringBinding>(inflater, R.layout.fragment_scoring, container, false).apply {
              viewModel =scoringViewModel
-             lifecycleOwner =viewLifecycleOwner
         }
+        binding.lifecycleOwner =this
 
         scoringViewModel._matchId.value=args.matchId
 
-        //setDropDowns()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val batsmanNames  =scoringViewModel.collectBatsmanNames()
+        if (batsmanNames!=null){
+            setBatsmansDropDown(batsmanNames)
+        }
+        val bowlerNames =scoringViewModel.collectBowlerNames()
+        if (bowlerNames!=null){
+            setBowlersDropDown(bowlerNames)
+        }
     }
     override fun onResume() {
         super.onResume()
-        setDropDowns()
     }
 
-
-    private fun setDropDowns() {
-        val _batsmanNames = mutableListOf<String>()
-        val batsmanNames :List<String> =_batsmanNames
-        //val t = scoringViewModel.battingTeam.value
-        scoringViewModel.battingTeam.value?.playerList?.map { player ->
-            Log.d("players",player.name.toString())
-            when(player.isOut){
-                true -> _batsmanNames.add(player.name.toString())
-                false -> _batsmanNames.add(player.name.toString())
-            }
-        }
+    private fun setBatsmansDropDown(batsmanNames: List<String>) {
         val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, batsmanNames)
         (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
 
         binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
             scoringViewModel.battingTeam.value?.playerList?.forEach {player ->
                 if (batsmanAdapter.getItem(i).equals(player.name)){
-                   scoringViewModel._onStrike.value =player
+                    scoringViewModel._onStrike.value =player
                 }
             }
 
@@ -82,12 +76,9 @@ class ScoringFragment : Fragment() {
             }
 
         }
-
-        val bowlersNames = mutableListOf<String>()
-        scoringViewModel.bowlingTeam.value?.playerList?.forEach{ player ->
-            bowlersNames.add(player.name.toString())
-        }
-        val bowlersAdapter =ArrayAdapter(requireContext(),R.layout.dropdown_item,bowlersNames)
+    }
+    private fun setBowlersDropDown(bowlerNames:List<String>) {
+        val bowlersAdapter =ArrayAdapter(requireContext(),R.layout.dropdown_item,bowlerNames)
         (binding.bowlerSelection as? AutoCompleteTextView)?.setAdapter(bowlersAdapter)
 
         binding.bowlerSelection.setOnItemClickListener{_, _, i, _ ->
@@ -97,8 +88,8 @@ class ScoringFragment : Fragment() {
                 }
             }
         }
-
-
     }
+
+
 
 }
