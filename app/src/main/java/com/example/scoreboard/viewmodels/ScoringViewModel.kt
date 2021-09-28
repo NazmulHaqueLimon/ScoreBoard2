@@ -17,19 +17,23 @@ class ScoringViewModel @Inject internal constructor(
 ): ViewModel(){
     val scoringTitleText :String ="teamA won the toss and elected to bat First"
 
+    /**
+     * matchId...need to save in savedStateHandle*/
     val _matchId =MutableLiveData<String>()
     private val matchId:LiveData<String> =_matchId
 
-     private val match :LiveData<Match> =matchId.switchMap {
+    /**
+     * get the match from database using matchId*/
+    val match :LiveData<Match> =matchId.switchMap {
         repository.getMatch(it).asLiveData()
 
     }
 
-
+    /**
+     * get the teams from the database*/
      private val teamA = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamA_id).asLiveData()
     }
-
     private val teamB = match.switchMap {
         repository.getTeamWithPlayers(it.teamB_id).asLiveData()
     }
@@ -41,7 +45,7 @@ class ScoringViewModel @Inject internal constructor(
         viewModelScope.launch {
             teamA.value?.playerList?.forEach { player ->
                 val playerScore = match.value?.let { PlayersScore(matchId = it.matchId,playerId = player.id) }
-                repository.createPlayerScore(playerScore)
+                //repository.createPlayerScore(playerScore)
 
             }
         }
@@ -55,14 +59,13 @@ class ScoringViewModel @Inject internal constructor(
 
 
     fun collectBatsmanNames(): List<String>? {
-        return battingTeam.value?.playerList?.map {
+        return teamA.value?.playerList?.map {
             it.name.toString()
         }
+       // return battingTeam.value?.playerList?.map { it.name.toString() }
     }
     fun collectBowlerNames():List<String>?{
-        return bowlingTeam.value?.playerList?.map {
-            it.name.toString()
-        }
+        return bowlingTeam.value?.playerList?.map { it.name.toString() }
     }
     /**
      * batting team score

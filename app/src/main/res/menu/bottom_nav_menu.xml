@@ -11,7 +11,7 @@
         android:id="@+id/newMatchFragment"
         android:enabled="true"
         android:title="@string/newMatch"
-        android:icon="@drawable/ic_add_task_black_24dp"/>
+        android:icon="@drawable/ic_sports_cricket_black_24dp"/>
 
     <item
         android:id="@+id/scoringFragment"
@@ -22,5 +22,5 @@
         android:id="@+id/topPlayersFragment"
         android:enabled="true"
         android:title="@string/top_players"
-        android:icon="@drawable/ic_ball"/>
+        android:icon="@drawable/ic_cricket_batsman_dark"/>
 </menu>

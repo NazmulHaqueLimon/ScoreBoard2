@@ -9,7 +9,7 @@ import java.util.*
 data class Player(
     @PrimaryKey
     val id : String = UUID.randomUUID().toString(),
-    val name: String?,
+    val name: String,
     val isOut : Boolean =false,
     val totalRun:Int=0,
     val totalWicket: Int=0

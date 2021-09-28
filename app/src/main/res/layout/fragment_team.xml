@@ -12,22 +12,23 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200">
+        android:background="@color/themeB2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_200">
+            >
 
             <TextView
                 android:id="@+id/titleText"
                 android:layout_width="159dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/add_team_information"
-                android:textColor="#120707"
+                android:textColor="#0A7369"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +38,7 @@
                 android:id="@+id/constraintLayout4"
                 android:layout_width="353dp"
                 android:layout_height="245dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -77,7 +78,6 @@
                     android:layout_marginTop="16dp"
                     android:hint="team name"
                     android:textColorHint="#1C1616"
-                    app:boxBackgroundColor="#8AF112"
                     app:helperText="type your team name"
                     app:layout_constraintStart_toEndOf="@+id/icon_team"
                     app:layout_constraintTop_toTopOf="parent">
@@ -88,7 +88,8 @@
                         android:layout_height="match_parent"
                         android:hint="team name"
                         android:inputType="text"
-                        android:textColor="#100707"
+                        android:textColor="#0B7168"
+                        android:textColorHint="#0B7168"
                         tools:ignore="TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,6 +111,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
                     android:hint="player name"
+                    app:hintTextColor="#0B7168"
                     app:helperText="team name"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icon_player">
@@ -119,6 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="text"
+                        android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -131,9 +134,11 @@
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="#FFC107"
                     android:text="A"
-                    android:textColor="#150C0C"
+                    android:textColor="#0B7168"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/player_name_txt"
+                    app:strokeColor="#009688"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
@@ -142,7 +147,8 @@
                     android:layout_height="18dp"
                     android:layout_marginStart="24dp"
                     android:text="@string/select_a_logo"
-                    android:textColor="#150C0C"
+                    android:textColor="#0B7168"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/player_name_txt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +185,8 @@
                 android:elevation="6dp"
                 android:text="@string/save_button_txt"
                 android:textAlignment="center"
+                android:textColor="#0B6E65"
+                android:textStyle="bold"
                 app:icon="@drawable/ic_group_add_black_24dp"
                 app:iconGravity="end"
                 app:iconTint="#1C0A0A"
@@ -187,7 +195,8 @@
                 app:layout_constraintHorizontal_bias="0.538"
                 app:layout_constraintStart_toStartOf="@+id/player_list_recycler"
                 app:layout_constraintTop_toTopOf="@+id/player_list_recycler"
-                app:layout_constraintVertical_bias="0.833" />
+                app:layout_constraintVertical_bias="0.833"
+                app:strokeColor="#009688" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

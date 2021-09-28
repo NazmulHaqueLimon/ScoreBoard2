@@ -5,6 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.scoreboard.data.objects.Team"/>
+        <import type="com.example.scoreboard.data.objects.Match"/>
+        <import type="com.example.scoreboard.data.objects.Player"/>
+        <import type="com.example.scoreboard.data.objects.TeamWithPlayers"/>
         <variable
             name="viewModel"
             type="com.example.scoreboard.viewmodels.ScoringViewModel" />
@@ -13,7 +17,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200">
+        android:background="@color/themeB2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,11 +26,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
-            android:layout_width="163dp"
-            android:layout_height="113dp"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
             android:layout_marginTop="5dp"
-            app:cardBackgroundColor="#16CCBB"
-            app:cardElevation="6dp"
+            android:backgroundTint="@color/themeB2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleText">
@@ -39,8 +42,8 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="38dp"
-                    android:layout_height="39dp"
+                    android:layout_width="44dp"
+                    android:layout_height="45dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +53,14 @@
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="@{viewModel.battingTeam.team.name.toString()}"
+                    android:hint="Team Name"
+                    android:textColorHint="#0B7168"
+                    android:text="@{viewModel.battingTeam.team.name}"
+                    android:textColor="#0A6E64"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -65,6 +72,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="3dp"
                     android:text="Score"
+                    android:textColor="#0A6860"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/textView21"
                     app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +86,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="4dp"
                     android:text="Over :"
+                    android:textColor="#0A675E"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -85,7 +96,11 @@
                     android:id="@+id/textView22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="run"
+                    android:layout_marginStart="8dp"
+                    android:hint="Total Score"
+                    android:textColorHint="#0B7168"
+                    android:text="@{Integer.toString(viewModel.battingTeam.team.totalLoses)}"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView20"
@@ -95,8 +110,13 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="4dp"
-                    android:text="fghg"
+                    android:hint="Over Played"
+                    android:textColorHint="#0B7168"
+                    android:text="@{Integer.toString(viewModel.match.format)}"
+                    android:textColor="#171616"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView21" />
@@ -109,9 +129,9 @@
             android:id="@+id/materialCardView2"
             android:layout_width="350dp"
             android:layout_height="33dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/purple_200"
             app:cardElevation="6dp"
-            app:cardBackgroundColor="#16CCBB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView">
@@ -133,8 +153,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:cardBackgroundColor="#16CCBB"
             app:cardElevation="6dp"
+            android:backgroundTint="@color/themeB2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
@@ -151,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +183,8 @@
                         android:layout_height="match_parent"
                         android:text="Batsman:"
                         android:textAlignment="center"
+                        android:textColor="#087168"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -170,6 +193,8 @@
                         android:layout_height="match_parent"
                         android:text="R"
                         android:textAlignment="center"
+                        android:textColor="#096A61"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -178,6 +203,8 @@
                         android:layout_height="match_parent"
                         android:text="B"
                         android:textAlignment="center"
+                        android:textColor="#0A756B"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -186,6 +213,8 @@
                         android:layout_height="match_parent"
                         android:text="4's"
                         android:textAlignment="center"
+                        android:textColor="#0A7369"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -194,6 +223,8 @@
                         android:layout_height="match_parent"
                         android:text="6's"
                         android:textAlignment="center"
+                        android:textColor="#0A7C71"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -203,6 +234,7 @@
                     android:id="@+id/linearLayout1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -214,7 +246,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#16CCBB"
                         android:padding="0dp"
                         app:helperTextEnabled="false"
                         app:hintEnabled="false">
@@ -235,8 +266,7 @@
                         android:id="@+id/textView10"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="sgf"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -244,8 +274,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="sdf"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -253,8 +282,7 @@
                         android:id="@+id/textView12"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="dsfd"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -262,8 +290,7 @@
                         android:id="@+id/textView13"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="sdf"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -286,7 +313,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#16CCBB"
                         android:padding="0dp"
                         app:helperTextEnabled="false"
                         app:hintEnabled="false">
@@ -308,8 +334,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="sfdds"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -317,7 +342,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="sdf"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -325,7 +350,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="sdf"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -333,7 +358,7 @@
                         android:id="@+id/textView17"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="sdfd"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -345,12 +370,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="27dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/buttons"
                     android:gravity="start"
                     android:onClick="@{()-> viewModel.changeStrike()}"
                     android:text="Change Strike"
+                    android:textColor="#0A7A70"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:strokeColor="#4CAF50"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <androidx.constraintlayout.widget.Guideline
@@ -370,7 +399,8 @@
             android:id="@+id/materialCardView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#16CCBB"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/themeB2"
             app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -401,9 +431,11 @@
 
                     android:onClick="@{()-> viewModel.updatePlayerScore(1)}"
                     app:icon="@drawable/baseline_looks_one_24"
+                    app:iconTint="#009688"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="#4CAF50"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
@@ -415,9 +447,11 @@
                     android:onClick="@{()-> viewModel.updatePlayerScore(2)}"
                     android:textSize="8sp"
                     app:icon="@drawable/baseline_looks_two_24"
+                    app:iconTint="#009688"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintStart_toEndOf="@+id/button1"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="#009688"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <Button
@@ -433,6 +467,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toEndOf="@+id/button2"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="#009688"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <Button
@@ -446,6 +481,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    app:strokeColor="#009688"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
@@ -459,6 +495,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/button4"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    app:strokeColor="#009688"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
@@ -474,6 +511,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toEndOf="@+id/button6"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    app:strokeColor="#009688"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
@@ -481,9 +519,10 @@
                     android:layout_width="60dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="8dp"
-                    android:text="NB"
-                    android:textColor="@color/black"
                     android:backgroundTint="@color/buttons"
+                    android:text="NB"
+                    android:textColor="#0D736A"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -492,9 +531,10 @@
                     android:id="@+id/popup_lb"
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:text="LB"
-                    android:textColor="@color/black"
                     android:backgroundTint="@color/buttons"
+                    android:text="LB"
+                    android:textColor="#0F7168"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintEnd_toStartOf="@+id/popup_nb"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -505,10 +545,11 @@
                     android:layout_width="60dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/buttons"
                     android:padding="0dp"
                     android:text="wide"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/buttons"
+                    android:textColor="#0B786E"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -520,10 +561,11 @@
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/buttons"
                     android:padding="0dp"
                     android:text="Out"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/buttons"
+                    android:textColor="#0B8075"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/popup_wide"
@@ -547,8 +589,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardBackgroundColor="#16CCBB"
             app:cardElevation="6dp"
+            android:backgroundTint="@color/themeB2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
@@ -575,6 +617,8 @@
                         android:layout_height="match_parent"
                         android:text="Bowler"
                         android:textAlignment="center"
+                        android:textColor="#08675E"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -583,6 +627,8 @@
                         android:layout_height="match_parent"
                         android:text="over"
                         android:textAlignment="center"
+                        android:textColor="#0A6C63"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -591,6 +637,8 @@
                         android:layout_height="match_parent"
                         android:text="R"
                         android:textAlignment="center"
+                        android:textColor="#0A7369"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -599,6 +647,8 @@
                         android:layout_height="match_parent"
                         android:text="wickt"
                         android:textAlignment="center"
+                        android:textColor="#0A6E64"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -607,6 +657,7 @@
                         android:layout_height="match_parent"
                         android:text="Econ"
                         android:textAlignment="center"
+                        android:textColor="#097369"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -628,7 +679,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#16CCBB"
                         android:padding="0dp"
                         app:helperTextEnabled="false"
                         app:hintEnabled="false">
@@ -649,8 +699,7 @@
                         android:id="@+id/bowler_over"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="ovr"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -658,8 +707,7 @@
                         android:id="@+id/bowler_run"
                         android:layout_width="51dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="rn"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -667,8 +715,7 @@
                         android:id="@+id/bowler_wicket"
                         android:layout_width="57dp"
                         android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:text="wick"
+                        android:text="0"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -676,7 +723,7 @@
                         android:id="@+id/bowler_econ"
                         android:layout_width="59dp"
                         android:layout_height="match_parent"
-                        android:text="econ"
+                        android:text="0"
                         android:textAlignment="center" />
 
                 </LinearLayout>
@@ -692,7 +739,6 @@
             android:layout_width="264dp"
             android:layout_height="21dp"
             android:layout_marginTop="16dp"
-            android:background="#16CCBB"
             android:text="@{viewModel.scoringTitleText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
