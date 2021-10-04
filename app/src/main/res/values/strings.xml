@@ -12,9 +12,9 @@
     <string name="add_team_information">Add Team Information:</string>
     <string name="select_a_logo">Select A Team Logo</string>
     <string name="start_scoring">Start Scoring</string>
-    <string name="toss_won_by">toss won by</string>
-    <string name="select_over">select over</string>
-    <string name="name_of_ur_cricket_ground">name of ur cricket ground</string>
+    <string name="toss_won_by">Toss won by</string>
+    <string name="select_over">Select over</string>
+    <string name="name_of_ur_cricket_ground">Ground or Field name</string>
     <string name="add_team">Add Team</string>
     <string name="start_a_new_match">Start A New Match</string>
     <string name="bat_first">Bat First</string>
