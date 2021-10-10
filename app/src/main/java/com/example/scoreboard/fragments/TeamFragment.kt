@@ -62,7 +62,7 @@ class TeamFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding == null
+        false
     }
 
     private fun hideSoftKeyboard(view: View) {

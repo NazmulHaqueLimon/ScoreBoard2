@@ -13,5 +13,5 @@ interface TeamPlayersDao {
     fun getTeamWithPlayers(id:String): Flow<TeamWithPlayers>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTeamAndPlayer(teamPlayer: TeamPlayers)
+    suspend fun insertTeamPlayer(teamPlayer: TeamPlayers)
 }

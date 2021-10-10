@@ -27,7 +27,7 @@ class NewMatchRepository  @Inject constructor(
     suspend fun saveTeam(team: Team) =teamDao.insertTeam(team)
 
     suspend fun saveTeamPlayers(teamPlayer: TeamPlayers) {
-        teamPlayerDao.insertTeamAndPlayer(teamPlayer)
+        teamPlayerDao.insertTeamPlayer(teamPlayer)
     }
 
 }

@@ -1,33 +1,47 @@
 package com.example.scoreboard.viewmodels
 
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.scoreboard.data.objects.*
 import com.example.scoreboard.data.repositories.ScoringRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ScoringViewModel @Inject internal constructor(
 
-    private val repository: ScoringRepository
+    private val repository: ScoringRepository,
+    private val savedState: SavedStateHandle
 
 ): ViewModel(){
     val scoringTitleText :String ="teamA won the toss and elected to bat First"
-
     /**
      * matchId...need to save in savedStateHandle*/
-    val _matchId =MutableLiveData<String>()
-    private val matchId:LiveData<String> =_matchId
-
+    //val _matchId =MutableLiveData<String>()
+    //private val matchId:LiveData<String> =_matchId
+    private val matchId: MutableStateFlow<String> = MutableStateFlow(
+        savedState.get(MATCH_ID) ?: NO_MATCH_ID
+    )
+    init {
+        viewModelScope.launch {
+            matchId.collect { mid->
+                savedState.set(MATCH_ID, mid )
+            }
+        }
+    }
     /**
      * get the match from database using matchId*/
-    val match :LiveData<Match> =matchId.switchMap {
-        repository.getMatch(it).asLiveData()
-
-    }
+    val match :LiveData<Match> =matchId.flatMapLatest {
+        if (it == MATCH_ID){
+            repository.getMatch(it)
+        }else{
+            repository.getMatch(it)
+        }
+    }.asLiveData()
 
     /**
      * get the teams from the database*/
@@ -38,57 +52,37 @@ class ScoringViewModel @Inject internal constructor(
         repository.getTeamWithPlayers(it.teamB_id).asLiveData()
     }
 
-    /**
-     * create player score for eatch player playing the match
-     */
-    init {
-        viewModelScope.launch {
-            teamA.value?.playerList?.forEach { player ->
-                val playerScore = match.value?.let { PlayersScore(matchId = it.matchId,playerId = player.id) }
-                //repository.createPlayerScore(playerScore)
-
-            }
-        }
-    }
 
     /**
      * get the batting team with players
      */
-    private val _battingTeam : MutableLiveData<TeamWithPlayers> = MutableLiveData(getBattingTeam())
-    val battingTeam : LiveData<TeamWithPlayers> =_battingTeam
+    private val _battingTeam = MutableLiveData<TeamWithPlayers>()
+    //val battingTeam : LiveData<TeamWithPlayers> =_battingTeam
 
 
-    fun collectBatsmanNames(): List<String>? {
-        return teamA.value?.playerList?.map {
-            it.name.toString()
-        }
-       // return battingTeam.value?.playerList?.map { it.name.toString() }
-    }
-    fun collectBowlerNames():List<String>?{
-        return bowlingTeam.value?.playerList?.map { it.name.toString() }
-    }
-    /**
-     * batting team score
-     */
-    val battingTeamScore = battingTeam.value?.team?.let {
-        match.value?.let { it1 ->
-            repository.getTeamScore(it.teamId, it1.matchId)
-        }
-    }?.asLiveData()
+    val p:LiveData<TeamWithPlayers> = getBattingTeam()
+    val p2:LiveData<TeamWithPlayers> =getBowlingTeam()
 
     /**get the bowling team with players*/
-    private val _bowlingTeam  :MutableLiveData<TeamWithPlayers> = MutableLiveData(getBowlingTeam())
-    val bowlingTeam:LiveData<TeamWithPlayers> =_bowlingTeam
-    /**
-     * bowling team score
-     */
-    val bowlingTeamScore = bowlingTeam.value?.team?.let {
-        match.value?.let { it1 ->
-            repository.getTeamScore(it.teamId, it1.matchId)
+    private val _bowlingTeam  = MutableLiveData<TeamWithPlayers>()
+    //val bowlingTeam:LiveData<TeamWithPlayers> =_bowlingTeam
+
+
+    fun getBattingTeam():LiveData<TeamWithPlayers>{
+        if (teamA.value?.team?.batFirst == true){
+            return teamA
+        }else{
+            return teamB
         }
-    }?.asLiveData()
-
-
+    }
+    fun getBowlingTeam():LiveData<TeamWithPlayers>{
+        if (teamA.value?.team?.batFirst == true){
+            return teamB
+        }else{
+            return teamA
+        }
+    }
+    
     /**
      * selected batsman from the dropdowns
      * */
@@ -104,6 +98,9 @@ class ScoringViewModel @Inject internal constructor(
      */
     val _bowler =MutableLiveData<Player>()
     val bowler:LiveData<Player> =_bowler
+
+
+
     /**
      * Striker score
      */
@@ -130,6 +127,8 @@ class ScoringViewModel @Inject internal constructor(
             repository.getPlayerScore(it, it1.matchId)
         }
     }?.asLiveData()
+
+
 
 
     fun changeStrike(){
@@ -170,23 +169,15 @@ class ScoringViewModel @Inject internal constructor(
 
     }
 
-    private fun getBattingTeam(): TeamWithPlayers? {
-        return when(teamA.value?.team?.batFirst){
-            true ->
-                teamA.value
-            else ->
-                teamB.value
-        }
+
+    fun setMatchId(id:String){
+        matchId.value =id
     }
 
-    private fun getBowlingTeam(): TeamWithPlayers? {
-        return when(teamA.value?.team?.batFirst){
-            true ->
-                teamB.value
-            else ->
-                teamA.value
-        }
-
+    companion object {
+        private const val NO_MATCH_ID = "NO_MATCH_ID"
+        private const val MATCH_ID = "MATCH_ID"
     }
+
 
 }
