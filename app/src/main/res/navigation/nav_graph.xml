@@ -15,7 +15,12 @@
             app:destination="@id/teamFragment" />
         <action
             android:id="@+id/action_newMatchFragment_to_scoringFragment"
-            app:destination="@id/scoringFragment" />
+            app:destination="@id/scoringFragment" >
+            <argument
+                android:name="match_id"
+                app:argType="string"
+                 />
+        </action>
     </fragment>
 
     <fragment
@@ -25,7 +30,8 @@
         tools:layout="@layout/fragment_scoring" >
         <argument
             android:name="match_id"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="NO_ID"/>
     </fragment>
 
     <fragment

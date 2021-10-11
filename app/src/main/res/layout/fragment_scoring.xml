@@ -16,7 +16,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/themeB2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,11 +55,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:hint="Team Name"
-                    android:textColorHint="#0B7168"
                     android:text="@{viewModel.battingTeam.team.name.toString()}"
                     android:textColor="#0A6E64"
+                    android:textColorHint="#0B7168"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -97,9 +97,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:hint="@string/total_score"
-                    android:textColorHint="#0B7168"
                     android:text="@{Integer.toString(viewModel.battingTeam.team.totalLoses)}"
+                    android:textColorHint="#0B7168"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +115,7 @@
                     android:layout_marginBottom="4dp"
                     android:hint="@string/over_played"
                     android:textColorHint="#0B7168"
-                    android:text="@{Integer.toString(viewModel.match.format)}"
+                    android:text="@{Integer.toString(viewModel.battingTeam.team.totalLoses)}"
                     android:textColor="#171616"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +130,6 @@
             android:id="@+id/materialCardView2"
             android:layout_width="350dp"
             android:layout_height="33dp"
-            android:layout_marginTop="16dp"
             android:backgroundTint="@color/purple_200"
             app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +257,7 @@
                             android:focusable="true"
                             android:inputType="none"
                             android:padding="0dp"
-                            android:text="Batsman" />
+                            android:text="batsman" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -324,7 +324,7 @@
                             android:focusable="true"
                             android:inputType="none"
                             android:padding="0dp"
-                            android:text="Batsman" />
+                            android:text="batsman" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -399,7 +399,7 @@
             android:id="@+id/materialCardView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/themeB2"
             app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -428,7 +428,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="16dp"
-
                     android:onClick="@{()-> viewModel.updatePlayerScore(1)}"
                     app:icon="@drawable/baseline_looks_one_24"
                     app:iconTint="#009688"
@@ -588,9 +587,9 @@
             android:id="@+id/materialCardView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardElevation="6dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/themeB2"
+            app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
@@ -605,7 +604,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayoutB1"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -613,9 +612,9 @@
 
                     <TextView
                         android:id="@+id/textViewB1"
-                        android:layout_width="165dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Bowler"
+                        android:text="       Bowler         "
                         android:textAlignment="center"
                         android:textColor="#08675E"
                         android:textSize="16sp"
@@ -690,7 +689,7 @@
                             android:focusable="true"
                             android:inputType="none"
                             android:padding="0dp"
-                            android:text="select bowler"
+                            android:text="select"
                             tools:ignore="TouchTargetSizeCheck" />
 
                     </com.google.android.material.textfield.TextInputLayout>

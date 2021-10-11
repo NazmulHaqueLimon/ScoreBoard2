@@ -27,7 +27,7 @@ class TopPlayersFragment : Fragment() {
         val adapter =PlayersAdapter()
         binding.playerList.adapter =adapter
 
-        viewModel.p.observe(viewLifecycleOwner){
+        viewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
             adapter.submitList(it.playerList)
         }
 

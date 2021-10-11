@@ -34,24 +34,38 @@ class ScoringFragment : Fragment() {
              viewModel =scoringViewModel
         }
         binding.lifecycleOwner =this
-        scoringViewModel.setMatchId(args.matchId)
+        args.matchId.let { id ->
+            if (id == "NO_ID"){
+                savedInstanceState?.getString(MATCH_ID_KEY)?.let {
+                    scoringViewModel.setMatchId(it)
+                }
+            }else{
+                scoringViewModel.setMatchId(args.matchId)
+            }
+        }
 
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MATCH_ID_KEY,args.matchId)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scoringViewModel.p.observe(viewLifecycleOwner){
+        scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
             val batsmanNames = it.playerList.map { player ->
                 player.name
             }
             setBatsmansDropDown(batsmanNames)
         }
-        scoringViewModel.p2.observe(viewLifecycleOwner){
-            val batsmanNames = it.playerList.map { player ->
+        scoringViewModel.bowlingTeamWithPlayers.observe(viewLifecycleOwner){
+            //val bowlersNames = mutableListOf<String>()
+            val bowlersNames=it.playerList.map { player ->
                 player.name
             }
-            setBatsmansDropDown(batsmanNames)
+            setBowlersDropDown(bowlersNames)
         }
 
     }
@@ -65,7 +79,7 @@ class ScoringFragment : Fragment() {
         }
         (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
         binding.batsmanSelection2.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.battingTeam.value?.playerList?.forEach {player ->
+            scoringViewModel.battingTeamWithPlayers.value?.playerList?.forEach { player ->
                 if (batsmanAdapter.getItem(i).equals(player.name)){
                     scoringViewModel._nonStrike.value=player
                 }
@@ -85,6 +99,8 @@ class ScoringFragment : Fragment() {
         }
     }
 
-
+    companion object {
+        private const val MATCH_ID_KEY = "MATCH_ID"
+    }
 
 }

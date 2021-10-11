@@ -38,7 +38,7 @@
                 android:id="@+id/constraintLayout4"
                 android:layout_width="353dp"
                 android:layout_height="245dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -128,18 +128,17 @@
 
                 <Button
                     android:id="@+id/buttonAdd"
-                    android:layout_width="61dp"
+                    android:layout_width="70dp"
                     android:layout_height="58dp"
-                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="#FFC107"
-                    android:text="A"
+                    android:text="ADD"
+                    android:textAlignment="textStart"
                     android:textColor="#0B7168"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/player_name_txt"
-                    app:strokeColor="#009688"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    app:strokeColor="#009688" />
 
                 <TextView
                     android:id="@+id/logoTitleText"
@@ -192,10 +191,10 @@
                 app:iconTint="#1C0A0A"
                 app:layout_constraintBottom_toBottomOf="@+id/player_list_recycler"
                 app:layout_constraintEnd_toEndOf="@+id/player_list_recycler"
-                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintHorizontal_bias="0.564"
                 app:layout_constraintStart_toStartOf="@+id/player_list_recycler"
                 app:layout_constraintTop_toTopOf="@+id/player_list_recycler"
-                app:layout_constraintVertical_bias="0.833"
+                app:layout_constraintVertical_bias="0.707"
                 app:strokeColor="#009688" />
 
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.scoreboard.data.objects.*
 import com.example.scoreboard.data.repositories.ScoringRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
@@ -35,6 +36,7 @@ class ScoringViewModel @Inject internal constructor(
     }
     /**
      * get the match from database using matchId*/
+    @ExperimentalCoroutinesApi
     val match :LiveData<Match> =matchId.flatMapLatest {
         if (it == MATCH_ID){
             repository.getMatch(it)
@@ -56,30 +58,30 @@ class ScoringViewModel @Inject internal constructor(
     /**
      * get the batting team with players
      */
-    private val _battingTeam = MutableLiveData<TeamWithPlayers>()
+   // private val _battingTeam = MutableLiveData<TeamWithPlayers>()
     //val battingTeam : LiveData<TeamWithPlayers> =_battingTeam
 
 
-    val p:LiveData<TeamWithPlayers> = getBattingTeam()
-    val p2:LiveData<TeamWithPlayers> =getBowlingTeam()
+    val battingTeamWithPlayers :LiveData<TeamWithPlayers> = getBattingTeam()
+    val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = getBowlingTeam()
 
     /**get the bowling team with players*/
-    private val _bowlingTeam  = MutableLiveData<TeamWithPlayers>()
+    //private val _bowlingTeam  = MutableLiveData<TeamWithPlayers>()
     //val bowlingTeam:LiveData<TeamWithPlayers> =_bowlingTeam
 
 
     fun getBattingTeam():LiveData<TeamWithPlayers>{
-        if (teamA.value?.team?.batFirst == true){
-            return teamA
+        return if (teamA.value?.team?.batFirst == true){
+            teamA
         }else{
-            return teamB
+            teamB
         }
     }
     fun getBowlingTeam():LiveData<TeamWithPlayers>{
-        if (teamA.value?.team?.batFirst == true){
-            return teamB
+        return if (teamA.value?.team?.batFirst == true){
+            teamB
         }else{
-            return teamA
+            teamA
         }
     }
     
