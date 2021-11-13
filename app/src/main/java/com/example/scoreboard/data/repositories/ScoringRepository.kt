@@ -1,5 +1,6 @@
 package com.example.scoreboard.data.repositories
 
+import androidx.lifecycle.LiveData
 import com.example.scoreboard.data.dao.*
 import com.example.scoreboard.data.objects.*
 import javax.inject.Inject
@@ -14,14 +15,23 @@ class ScoringRepository @Inject constructor(
 ){
 
     fun getMatch(id:String) = matchDao.getMatch(id)
-
+    fun getPlayers() =playerDao.getPlayers()
     fun getTeamWithPlayers(teamId: String) =teamPlayersDao.getTeamWithPlayers(teamId)
 
-    fun getTeamScore(teamId: String,matchId:String) =scoreDao.getTeamScore(teamId,matchId)
-
-    fun getPlayers() =playerDao.getPlayers()
 
     fun getPlayerScore(id: String, mId: String) =scoreDao.getPlayerScore(id,mId)
+    fun getTeamScore(teamId: String, matchId:String) =scoreDao.getTeamScore(teamId,matchId)
+
+
+    suspend fun createTeamScore(score: TeamsScore) = scoreDao.insertTeamScore(score)
+    suspend fun createPlayerScore(score: PlayersScore) = scoreDao.insertPlayerScore(score)
+
+
+    suspend fun updatePlayerScore(playerScore: PlayersScore) =scoreDao.updatePlayerScore(playerScore)
+
+    suspend fun updateTeamScore(teamScore: TeamsScore) =scoreDao.updateTeamScore(teamScore)
+
+
 
 
 }

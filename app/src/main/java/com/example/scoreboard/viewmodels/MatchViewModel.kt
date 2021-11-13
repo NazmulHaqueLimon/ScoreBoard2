@@ -1,10 +1,7 @@
 package com.example.scoreboard.viewmodels
 
 import androidx.lifecycle.*
-import com.example.scoreboard.data.objects.Match
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.data.objects.Team
-import com.example.scoreboard.data.objects.TeamPlayers
+import com.example.scoreboard.data.objects.*
 import com.example.scoreboard.data.repositories.NewMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -56,14 +53,14 @@ class MatchViewModel @Inject internal constructor(
         val id2 = teamB.value?.teamId
         val frmt = over.value
         val grnd = ground.value
-        val tos =toss.value
+        val toss =toss.value
 
         val match= Match(
                     teamA_id = id!!,
                     teamB_id = id2!!,
                     format = frmt!!,
                     ground = grnd.toString(),
-                    toss = tos.toString()
+                    toss = toss.toString()
       )
         _match.value=match
     }
@@ -87,48 +84,66 @@ class MatchViewModel @Inject internal constructor(
 
     }
 
-
      fun saveTeamPlayers(){
-        viewModelScope.launch {
-            val teamAId = teamA.value?.teamId
-            val teamBId = teamB.value?.teamId
+         val teamAId = teamA.value?.teamId
+         val teamBId = teamB.value?.teamId
+         teamAplayers.value?.map { player ->
+             val teamPlayer= teamAId?.let { TeamPlayers(it,player.id) }
+             if (teamPlayer != null) {
+                 insertTeamPlayers(teamPlayer)
+             }
+         }
+         teamBplayers.value?.map {player->
+             val teamPlayer= teamBId?.let { TeamPlayers(it,player.id) }
+             if (teamPlayer != null) {
+                 insertTeamPlayers(teamPlayer)
 
-            teamAplayers.value?.map { player ->
-                val teamPlayer= teamAId?.let { TeamPlayers(it,player.id) }
-                if (teamPlayer != null) {
-                    repository.saveTeamPlayers(teamPlayer)
-                }
-            }
-            teamBplayers.value?.map {player->
-                val teamPlayer= teamBId?.let { TeamPlayers(it,player.id) }
-                if (teamPlayer != null) {
-                    repository.saveTeamPlayers(teamPlayer)
-                }
-            }
-        }
+             }
+         }
 
     }
 
      fun saveTeams() {
-        viewModelScope.launch {
-            teamA.value?.let { repository.saveTeam(it) }
-            teamB.value?.let { repository.saveTeam(it) }
-        }
+         teamA.value?.let { it ->
+             insertTeam(it)
+         }
+         teamB.value?.let { it ->
+             insertTeam(it)
+         }
+
     }
 
      fun savePlayers() {
-        viewModelScope.launch {
-            teamAplayers.value?.let { repository.savePlayers(it) }
-            teamBplayers.value?.let { repository.savePlayers(it) }
-        }
+         teamAplayers.value?.let { insertPlayers(it) }
+         teamBplayers.value?.let { insertPlayers(it) }
+
     }
     fun saveMatch() {
-        viewModelScope.launch {
-            match.value?.let {
-                repository.saveMatch(it)
-            }
+        match.value?.let {
+             insertMatch(it)
         }
+    }
 
+
+    private fun insertPlayers(list: List<Player>){
+        viewModelScope.launch {
+            repository.savePlayers(list)
+        }
+    }
+    private fun insertTeam(team: Team){
+        viewModelScope.launch {
+            repository.saveTeam(team)
+        }
+    }
+    private fun insertMatch(match: Match){
+        viewModelScope.launch {
+            repository.saveMatch(match)
+        }
+    }
+    private fun insertTeamPlayers(teamPlayers: TeamPlayers){
+        viewModelScope.launch {
+            repository.saveTeamPlayers(teamPlayers)
+        }
     }
 
 

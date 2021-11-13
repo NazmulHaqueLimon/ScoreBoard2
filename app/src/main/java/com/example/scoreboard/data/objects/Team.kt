@@ -10,7 +10,7 @@ data class Team(
     val teamId :String = UUID.randomUUID().toString(),
     val name: String,
     var batFirst:Boolean=false,
-    val totalMatch:Int=0,
-    val totalWin: Int=0,
-    val totalLoses: Int=0
+    var totalMatch:Int=0,
+    var totalWin: Int=0,
+    var totalLoses: Int=0
 )

@@ -42,21 +42,21 @@ class NewMatchFragment : Fragment() {
             cardView2.setOnClickListener {
                 navigateToTeamFragment("B")
             }
+            matchViewModel._ground.value = textInputGround.editText?.text.toString()
+            // Get input text
+            //matchViewModel._ground.value=binding.textInputGround.editText?.text.toString()
+
 
             createMatchButton.setOnClickListener {
-                lifecycleScope.launch {
+                    matchViewModel.createMatch()
                     matchViewModel.savePlayers()
                     matchViewModel.saveTeams()
                     matchViewModel.saveTeamPlayers()
-                    matchViewModel.createMatch()
                     matchViewModel.saveMatch()
                     navigateToScoringFragment()
-                }
 
             }
         }
-        // Get input text
-         matchViewModel._ground.value=binding.textInputGround.editText?.text.toString()
 
 
         return binding.root

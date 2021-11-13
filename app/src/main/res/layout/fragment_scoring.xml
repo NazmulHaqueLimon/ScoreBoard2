@@ -16,7 +16,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/themeB2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,10 +56,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:hint="Team Name"
-                    android:text="@{viewModel.battingTeam.team.name.toString()}"
+                    android:hint="@string/team_name"
+                    android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
                     android:textColor="#0A6E64"
                     android:textColorHint="#0B7168"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="3dp"
-                    android:text="Score"
+                    android:text="@string/score"
                     android:textColor="#0A6860"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="4dp"
-                    android:text="Over :"
+                    android:text="@string/over"
                     android:textColor="#0A675E"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -94,18 +95,20 @@
 
                 <TextView
                     android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="77dp"
+                    android:layout_height="25dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:hint="@string/total_score"
-                    android:text="@{Integer.toString(viewModel.battingTeam.team.totalLoses)}"
+                    android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
                     android:textColorHint="#0B7168"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.542"
                     app:layout_constraintStart_toEndOf="@+id/textView20"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView18"
+                    app:layout_constraintVertical_bias="0.347" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -114,12 +117,13 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="4dp"
                     android:hint="@string/over_played"
-                    android:textColorHint="#0B7168"
-                    android:text="@{Integer.toString(viewModel.battingTeam.team.totalLoses)}"
+                    android:text="@{Integer.toString(viewModel.battingTeamScore.overPlayed)}"
                     android:textColor="#171616"
+                    android:textColorHint="#0B7168"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.507"
                     app:layout_constraintStart_toEndOf="@+id/textView21" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,7 +185,7 @@
                         android:id="@+id/textView"
                         android:layout_width="135dp"
                         android:layout_height="match_parent"
-                        android:text="Batsman:"
+                        android:text="@string/batsman"
                         android:textAlignment="center"
                         android:textColor="#087168"
                         android:textSize="16sp"
@@ -191,7 +195,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="R"
+                        android:text="@string/r"
                         android:textAlignment="center"
                         android:textColor="#096A61"
                         android:textSize="16sp"
@@ -201,7 +205,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="B"
+                        android:text="@string/b"
                         android:textAlignment="center"
                         android:textColor="#0A756B"
                         android:textSize="16sp"
@@ -211,7 +215,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="4's"
+                        android:text="@string/_4_s"
                         android:textAlignment="center"
                         android:textColor="#0A7369"
                         android:textSize="16sp"
@@ -221,7 +225,7 @@
                         android:id="@+id/textView7"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="6's"
+                        android:text="@string/_6_s"
                         android:textAlignment="center"
                         android:textColor="#0A7C71"
                         android:textSize="16sp"
@@ -244,7 +248,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/selectBatsman1"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="wrap_content"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:padding="0dp"
                         app:helperTextEnabled="false"
@@ -252,7 +256,7 @@
 
                         <AutoCompleteTextView
                             android:id="@+id/batsman_selection1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="true"
                             android:inputType="none"
@@ -266,7 +270,7 @@
                         android:id="@+id/textView10"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.strikerScore.run)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -274,7 +278,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.strikerScore.ballFaced)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -282,7 +286,7 @@
                         android:id="@+id/textView12"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.strikerScore.fours)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -290,7 +294,7 @@
                         android:id="@+id/textView13"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.strikerScore.sixes)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -301,9 +305,7 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/changeStrikeBtn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
@@ -311,7 +313,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/selectBatsman"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="wrap_content"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:padding="0dp"
                         app:helperTextEnabled="false"
@@ -319,7 +321,7 @@
 
                         <AutoCompleteTextView
                             android:id="@+id/batsman_selection2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="true"
                             android:inputType="none"
@@ -334,7 +336,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.nonStrikerScore.run)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -342,7 +344,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.nonStrikerScore.ballFaced)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -350,7 +352,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.nonStrikerScore.fours)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -358,29 +360,11 @@
                         android:id="@+id/textView17"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.strikerScore.sixes)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/changeStrikeBtn"
-                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="@color/buttons"
-                    android:gravity="start"
-                    android:onClick="@{()-> viewModel.changeStrike()}"
-                    android:text="Change Strike"
-                    android:textColor="#0A7A70"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:strokeColor="#4CAF50"
-                    tools:ignore="TouchTargetSizeCheck" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"
@@ -389,8 +373,27 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_begin="142dp" />
 
+                <Button
+                    android:id="@+id/rotate_strike"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="135dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> viewModel.changeStrike()}"
+                    android:text="Rotate Strike"
+                    android:textStyle="bold"
+                    app:iconTint="#009688"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    android:backgroundTint="@color/buttons"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -399,7 +402,7 @@
             android:id="@+id/materialCardView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@color/themeB2"
             app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -428,7 +431,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="16dp"
-                    android:onClick="@{()-> viewModel.updatePlayerScore(1)}"
+                    android:onClick="@{()-> viewModel.updateScore(1)}"
                     app:icon="@drawable/baseline_looks_one_24"
                     app:iconTint="#009688"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -443,8 +446,8 @@
                     android:layout_width="44dp"
                     android:layout_height="45dp"
                     android:layout_marginStart="8dp"
-                    android:onClick="@{()-> viewModel.updatePlayerScore(2)}"
-                    android:textSize="8sp"
+                    android:onClick="@{()-> viewModel.updateScore(2)}"
+                    android:textSize="30sp"
                     app:icon="@drawable/baseline_looks_two_24"
                     app:iconTint="#009688"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -460,7 +463,7 @@
                     android:layout_height="45dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:onClick="@{()-> viewModel.updatePlayerScore(3)}"
+                    android:onClick="@{()-> viewModel.updateScore(3)}"
                     app:icon="@drawable/baseline_looks_3_24"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -475,7 +478,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="16dp"
-                    android:onClick="@{()-> viewModel.updatePlayerScore(4)}"
+                    android:onClick="@{()-> viewModel.updateScore(4)}"
                     app:icon="@drawable/baseline_looks_4_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -489,7 +492,7 @@
                     android:layout_width="44dp"
                     android:layout_height="45dp"
                     android:layout_marginStart="8dp"
-                    android:onClick="@{()-> viewModel.updatePlayerScore(6)}"
+                    android:onClick="@{()-> viewModel.updateScore(6)}"
                     app:icon="@drawable/baseline_looks_6_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/button4"
@@ -519,7 +522,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/buttons"
-                    android:text="NB"
+                    android:text="@string/nb"
                     android:textColor="#0D736A"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -531,7 +534,7 @@
                     android:layout_width="60dp"
                     android:layout_height="50dp"
                     android:backgroundTint="@color/buttons"
-                    android:text="LB"
+                    android:text="@string/lb"
                     android:textColor="#0F7168"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -546,7 +549,7 @@
                     android:layout_marginStart="8dp"
                     android:backgroundTint="@color/buttons"
                     android:padding="0dp"
-                    android:text="wide"
+                    android:text="@string/wide"
                     android:textColor="#0B786E"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -562,7 +565,8 @@
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/buttons"
                     android:padding="0dp"
-                    android:text="Out"
+                    android:text="@string/out"
+                    android:onClick="@{()-> viewModel.onOut()}"
                     android:textColor="#0B8075"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -587,9 +591,11 @@
             android:id="@+id/materialCardView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/themeB2"
             app:cardElevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
@@ -612,9 +618,9 @@
 
                     <TextView
                         android:id="@+id/textViewB1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="110dp"
                         android:layout_height="match_parent"
-                        android:text="       Bowler         "
+                        android:text="@string/bowler"
                         android:textAlignment="center"
                         android:textColor="#08675E"
                         android:textSize="16sp"
@@ -624,7 +630,7 @@
                         android:id="@+id/textViewB2"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="over"
+                        android:text="@string/over"
                         android:textAlignment="center"
                         android:textColor="#0A6C63"
                         android:textSize="16sp"
@@ -684,7 +690,7 @@
 
                         <AutoCompleteTextView
                             android:id="@+id/bowler_selection"
-                            android:layout_width="wrap_content"
+                            android:layout_width="115dp"
                             android:layout_height="wrap_content"
                             android:focusable="true"
                             android:inputType="none"
@@ -698,7 +704,7 @@
                         android:id="@+id/bowler_over"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.overBowled)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -706,7 +712,7 @@
                         android:id="@+id/bowler_run"
                         android:layout_width="51dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.runGiven)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -714,7 +720,7 @@
                         android:id="@+id/bowler_wicket"
                         android:layout_width="57dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.wicketTaken)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 

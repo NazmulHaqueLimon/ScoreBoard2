@@ -4,8 +4,10 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/f8433726eff23e38d141645771b1000f/transformed/activity-ktx-1.1.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/d3b2770b20c7695dc71404af7256be7e/transformed/activity-ktx-1.1.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/12851dcf9df9a5752d71966c8ce893ac/transformed/activity-ktx-1.1.0/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/12851dcf9df9a5752d71966c8ce893ac/transformed/activity-ktx-1.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/12851dcf9df9a5752d71966c8ce893ac/transformed/activity-ktx-1.1.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/f65898b00ec6f39f49e5115106b0b210/transformed/activity-ktx-1.1.0/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/69352df7f933675dbe65bd545db9af7c/transformed/activity-ktx-1.1.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/69352df7f933675dbe65bd545db9af7c/transformed/activity-ktx-1.1.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/69352df7f933675dbe65bd545db9af7c/transformed/activity-ktx-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

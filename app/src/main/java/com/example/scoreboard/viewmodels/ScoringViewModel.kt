@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,8 +23,6 @@ class ScoringViewModel @Inject internal constructor(
     val scoringTitleText :String ="teamA won the toss and elected to bat First"
     /**
      * matchId...need to save in savedStateHandle*/
-    //val _matchId =MutableLiveData<String>()
-    //private val matchId:LiveData<String> =_matchId
     private val matchId: MutableStateFlow<String> = MutableStateFlow(
         savedState.get(MATCH_ID) ?: NO_MATCH_ID
     )
@@ -35,7 +34,8 @@ class ScoringViewModel @Inject internal constructor(
         }
     }
     /**
-     * get the match from database using matchId*/
+     * get the match from database using matchId
+     * */
     @ExperimentalCoroutinesApi
     val match :LiveData<Match> =matchId.flatMapLatest {
         if (it == MATCH_ID){
@@ -45,46 +45,96 @@ class ScoringViewModel @Inject internal constructor(
         }
     }.asLiveData()
 
+
     /**
-     * get the teams from the database*/
+     * get the teams from the database
+     * */
+     @ExperimentalCoroutinesApi
      private val teamA = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamA_id).asLiveData()
     }
-    private val teamB = match.switchMap {
-        repository.getTeamWithPlayers(it.teamB_id).asLiveData()
+    @ExperimentalCoroutinesApi
+    private val teamB = match.switchMap {match ->
+        repository.getTeamWithPlayers(match.teamB_id).asLiveData()
     }
+
+
+    @ExperimentalCoroutinesApi
+    fun openScoreSheet(){
+        val teamAScore = teamA.value?.team?.let {
+            match.value?.let {
+                    it1 -> TeamsScore(teamId = it.teamId ,matchId = it1.matchId)
+            }
+        }
+        if (teamAScore != null) {
+            createTeamScoreSheet(teamAScore)
+        }
+        val teamBScore = teamB.value?.team?.let {
+            match.value?.let {
+                    it1 -> TeamsScore(teamId = it.teamId ,matchId = it1.matchId)
+            }
+        }
+        if (teamBScore != null) {
+            createTeamScoreSheet(teamBScore)
+        }
+
+        teamA.value?.playerList?.map {player ->
+            val score = match.value?.let { PlayersScore(playerId = player.id , matchId = it.matchId) }
+            if (score != null) {
+                createPlayersScoreSheet(score)
+            }
+        }
+        teamB.value?.playerList?.map {player ->
+            val score = match.value?.let { PlayersScore(playerId = player.id , matchId = it.matchId) }
+            if (score != null) {
+                createPlayersScoreSheet(score)
+            }
+        }
+    }
+    private fun createTeamScoreSheet(score: TeamsScore){
+        viewModelScope.launch {
+            repository.createTeamScore(score)
+        }
+    }
+    private fun createPlayersScoreSheet(score: PlayersScore){
+        viewModelScope.launch {
+            repository.createPlayerScore(score)
+        }
+    }
+
+
 
 
     /**
      * get the batting team with players
      */
-   // private val _battingTeam = MutableLiveData<TeamWithPlayers>()
-    //val battingTeam : LiveData<TeamWithPlayers> =_battingTeam
 
-
+    @ExperimentalCoroutinesApi
     val battingTeamWithPlayers :LiveData<TeamWithPlayers> = getBattingTeam()
+
+    @ExperimentalCoroutinesApi
+    private fun getBattingTeam():LiveData<TeamWithPlayers>{
+        return if (teamA.value?.team?.batFirst == true){
+            teamA
+        }else{
+            teamB
+        }
+    }
+    /**
+     * get the bowling team with players
+     */
+    @ExperimentalCoroutinesApi
     val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = getBowlingTeam()
 
-    /**get the bowling team with players*/
-    //private val _bowlingTeam  = MutableLiveData<TeamWithPlayers>()
-    //val bowlingTeam:LiveData<TeamWithPlayers> =_bowlingTeam
-
-
-    fun getBattingTeam():LiveData<TeamWithPlayers>{
-        return if (teamA.value?.team?.batFirst == true){
-            teamA
-        }else{
-            teamB
-        }
-    }
-    fun getBowlingTeam():LiveData<TeamWithPlayers>{
+    @ExperimentalCoroutinesApi
+    private fun getBowlingTeam():LiveData<TeamWithPlayers>{
         return if (teamA.value?.team?.batFirst == true){
             teamB
         }else{
             teamA
         }
     }
-    
+
     /**
      * selected batsman from the dropdowns
      * */
@@ -101,75 +151,122 @@ class ScoringViewModel @Inject internal constructor(
     val _bowler =MutableLiveData<Player>()
     val bowler:LiveData<Player> =_bowler
 
-
-
     /**
      * Striker score
      */
-    val strikerScore = onStrike.value?.id?.let {
-        match.value?.let { it1 ->
-            repository.getPlayerScore(it, it1.matchId)
+    @ExperimentalCoroutinesApi
+    val strikerScore :LiveData<PlayersScore> = onStrike.switchMap {player->
+        player.id.let {
+            match.switchMap { match->
+                repository.getPlayerScore(it,match.matchId).asLiveData()
+            }
         }
-    }?.asLiveData()
+    }
 
     /**
      * nonStriker score
      */
-    val nonStrikerScore = nonStrike.value?.id?.let {
-        match.value?.let { it1 ->
-            repository.getPlayerScore(it, it1.matchId)
+    @ExperimentalCoroutinesApi
+    val nonStrikerScore :LiveData<PlayersScore> = nonStrike.switchMap {player->
+        player.id.let {
+            match.switchMap { match->
+                repository.getPlayerScore(it,match.matchId).asLiveData()
+            }
         }
-    }?.asLiveData()
+    }
 
     /**
      * bowlers score
      */
-    val bowlersScore =bowler.value?.id?.let {
-        match.value?.let { it1 ->
-            repository.getPlayerScore(it, it1.matchId)
-        }
-    }?.asLiveData()
-
-
-
-
-    fun changeStrike(){
-        _onStrike.value =nonStrike.value
-        _nonStrike.value =onStrike.value
-    }
-
-
-    fun updatePlayerScore(run:Int){
-        val new = strikerScore?.value?.let {
-            when(run){
-                1 ->{
-                    it.run ++
-                    changeStrike()
-                }
-                2 ->
-                    it.run +=2
-                3 ->{
-                    it.run +=3
-                    changeStrike()
-                }
-
-                4 ->{
-                    it.run +=4
-                    it.fours ++
-                }
-                6 ->{
-                    it.run +=6
-                    it.sixes ++
-                }
-
-                else ->
-                    it.run +=5
+    @ExperimentalCoroutinesApi
+    val bowlersScore :LiveData<PlayersScore> = bowler.switchMap {player->
+        player.id.let {
+            match.switchMap { match->
+                repository.getPlayerScore(it,match.matchId).asLiveData()
             }
         }
     }
-    fun updateTeamScore(){
+    /**
+     * getting the batting team  score
+     */
+    @ExperimentalCoroutinesApi
+    val battingTeamScore :LiveData<TeamsScore> = battingTeamWithPlayers.switchMap { it ->
+        it.team.teamId.let { teamId->
+            match.switchMap {
+                repository.getTeamScore(teamId,it.matchId).asLiveData()
+            }
+        }
+    }
+    /**
+     * getting the bowling team  score
+     */
+    @ExperimentalCoroutinesApi
+    val bowlingTeamScore :LiveData<TeamsScore> = bowlingTeamWithPlayers.switchMap { it ->
+        it.team.teamId.let { teamId->
+            match.switchMap {
+                repository.getTeamScore(teamId,it.matchId).asLiveData()
+            }
+        }
+    }
+
+
+
+    @ExperimentalCoroutinesApi
+    fun updateScore(runsTaken:Int){
+
+        strikerScore.value?.let {
+            val playerId =it.playerId
+            val matchId =it.matchId
+
+            val fours =it.fours +1
+            val sixes =it.sixes +1
+            val run =it.run +runsTaken
+            val ballFaced =it.ballFaced +1
+            val runGiven  =it.runGiven
+            val overBowled =it.wicketTaken
+            val wicketTaken =it.overBowled
+
+            //val newScore =it.copy(run = it.run+runsTaken) /
+            val newScore =PlayersScore(playerId,matchId,fours,sixes,run,ballFaced,runGiven,overBowled,wicketTaken)
+            updatePlayerScore(newScore)
+
+        }
+
+
+        battingTeamScore.value?.let {
+            val newScore =it.copy(totalRun = it.totalRun+runsTaken)
+            updateTeamScore(newScore)
+        }
+
 
     }
+
+
+
+
+    //update player score...by making new object every time
+    private fun updatePlayerScore(newScore:PlayersScore) {
+        viewModelScope.launch {
+            repository.updatePlayerScore(newScore)
+        }
+    }
+
+    private fun updateTeamScore(newScore:TeamsScore){
+        viewModelScope.launch {
+            repository.updateTeamScore(newScore)
+        }
+    }
+    fun onOut(){
+
+    }
+
+
+    fun changeStrike(){
+        val temp = onStrike.value
+        _onStrike.value =nonStrike.value
+        _nonStrike.value =temp!!
+    }
+
 
 
     fun setMatchId(id:String){

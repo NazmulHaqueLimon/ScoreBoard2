@@ -21,6 +21,19 @@
     <string name="player_image">player Image</string>
     <string name="over_played">Over Played</string>
     <string name="total_score">Total Score</string>
+    <string name="over">Over :</string>
+    <string name="score">Score</string>
+    <string name="team_name">Team Name</string>
+    <string name="batsman">Batsman:</string>
+    <string name="r">R</string>
+    <string name="b">B</string>
+    <string name="_4_s">4\'s</string>
+    <string name="_6_s">6\'s</string>
+    <string name="out">Out</string>
+    <string name="wide">wide</string>
+    <string name="lb">LB</string>
+    <string name="nb">NB</string>
+    <string name="bowler">Bowler</string>
 
     <string-array name="formats">
         <item>T10</item>
