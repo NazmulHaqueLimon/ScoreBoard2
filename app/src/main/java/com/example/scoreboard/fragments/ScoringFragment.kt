@@ -33,6 +33,7 @@ class ScoringFragment : Fragment() {
     private val args:ScoringFragmentArgs by navArgs()
 
 
+    @ExperimentalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,26 +53,19 @@ class ScoringFragment : Fragment() {
             }
 
         }
+        observeTeamAndPlayers()
+        //scoringViewModel._isScoreSheetCreated.value=true
 
 
         return binding.root
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(MATCH_ID_KEY,args.matchId)
     }
 
-
-
-    @ExperimentalCoroutinesApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        scoringViewModel.openScoreSheet()
-        observeTeamAndPlayers()
-
-
-    }
 
 
 
@@ -82,6 +76,15 @@ class ScoringFragment : Fragment() {
                 player.name
             }
             setBatsmanDropDown(batsmanNames)
+            //create the scoreSheet if not created once
+            if (scoringViewModel.isScoreSheetCreated.value == false){
+                it.playerList.map { player->
+                    scoringViewModel.openPlayerScoreSheet(player.id)
+                }
+                scoringViewModel.openTeamScoreSheet(it.team.teamId)
+
+            }
+
         }
         scoringViewModel.bowlingTeamWithPlayers.observe(viewLifecycleOwner){
             //val bowlersNames = mutableListOf<String>()
@@ -89,6 +92,11 @@ class ScoringFragment : Fragment() {
                 player.name
             }
             setBowlerDropDown(bowlersNames)
+
+            it.playerList.map { player->
+                scoringViewModel.openPlayerScoreSheet(player.id)
+            }
+            scoringViewModel.openTeamScoreSheet(it.team.teamId)
         }
     }
 

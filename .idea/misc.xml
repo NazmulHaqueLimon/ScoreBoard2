@@ -32,14 +32,15 @@
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_trash__1_.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_trophy.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/outline_undo_24.xml" value="0.3828125" />
-        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/dropdown_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_match_details.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_match_list.xml" value="0.17525773195876287" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_match_list.xml" value="0.25" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_new_match.xml" value="0.25" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_scoring.xml" value="0.33" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_team.xml" value="0.25" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_top_players.xml" value="0.1" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/match_item.xml" value="0.33" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/player_item.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>

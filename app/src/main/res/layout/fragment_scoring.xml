@@ -360,7 +360,7 @@
                         android:id="@+id/textView17"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.strikerScore.sixes)}"
+                        android:text="@{Integer.toString(viewModel.nonStrikerScore.sixes)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
