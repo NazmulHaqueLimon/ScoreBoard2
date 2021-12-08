@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.content.ContentProviderCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -15,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
+import com.example.scoreboard.data.objects.Player
 import com.example.scoreboard.databinding.FragmentNewMatchBinding
 import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
@@ -33,7 +36,6 @@ class ScoringFragment : Fragment() {
     private val args:ScoringFragmentArgs by navArgs()
 
 
-    @ExperimentalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,21 +55,24 @@ class ScoringFragment : Fragment() {
             }
 
         }
-        observeTeamAndPlayers()
-        //scoringViewModel._isScoreSheetCreated.value=true
 
 
         return binding.root
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observeTeamAndPlayers()
+        setNoBallPopup()
+
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(MATCH_ID_KEY,args.matchId)
     }
-
-
-
 
     @ExperimentalCoroutinesApi
     fun observeTeamAndPlayers(){
@@ -101,34 +106,38 @@ class ScoringFragment : Fragment() {
     }
 
     @ExperimentalCoroutinesApi
-    private fun setBatsmanDropDown(nameList: List<String>) {
-        val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, nameList)
+    private fun setBatsmanDropDown(playerList: List<String>) {
+
+        val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, playerList)
+
         (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
 
         binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
             scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
                 it.playerList.map { player ->
                     if (batsmanAdapter.getItem(i).equals(player.name)){
-                        scoringViewModel._onStrike.value=player
+                        scoringViewModel._batsmanA.value=player
                         Toast.makeText(requireContext(),"player updated", Toast.LENGTH_SHORT).show()
 
                     }
                 }
             }
-            scoringViewModel.battingTeamWithPlayers.value?.playerList?.forEach { player ->
-                if (batsmanAdapter.getItem(i).equals(player.name)){
-                    scoringViewModel._nonStrike.value=player
-                }
-            }
+
         }
 
         (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
+
         binding.batsmanSelection2.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.battingTeamWithPlayers.value?.playerList?.forEach { player ->
-                if (batsmanAdapter.getItem(i).equals(player.name)){
-                    scoringViewModel._nonStrike.value=player
+            scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
+                it.playerList.map { player ->
+                    if (batsmanAdapter.getItem(i).equals(player.name)){
+                        scoringViewModel._batsmanB.value=player
+                        Toast.makeText(requireContext(),"another batsman steps on the crease ready", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
+
         }
     }
     @ExperimentalCoroutinesApi
@@ -137,12 +146,48 @@ class ScoringFragment : Fragment() {
         (binding.bowlerSelection as? AutoCompleteTextView)?.setAdapter(bowlersAdapter)
 
         binding.bowlerSelection.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.bowlingTeamWithPlayers.value?.playerList?.forEach {player ->
+            scoringViewModel.bowlingTeamWithPlayers.observe(viewLifecycleOwner){
+                it.playerList.map { player ->
                     if (bowlersAdapter.getItem(i).equals(player.name)){
                         scoringViewModel._bowler.value=player
+                        Toast.makeText(requireContext(),"Bowler ready to deliver", Toast.LENGTH_SHORT).show()
+
                     }
                 }
+            }
+
         }
+    }
+
+    fun setNoBallPopup(){
+        // val listPopupWindowButton = view.findViewById<Button>(R.id.list_popup_button)
+        val listPopupWindow = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+
+        // Set button as the list popup's anchor
+        listPopupWindow.anchorView = binding.popupNb
+        listPopupWindow.anchorView =binding.popupLb
+        listPopupWindow.anchorView =binding.popupOut
+        listPopupWindow.anchorView =binding.popupWide
+
+        // Set list popup's content
+        val items = listOf("+O", "+Lb", "+bat")
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+        listPopupWindow.setAdapter(adapter)
+
+        // Set list popup's item click listener
+        listPopupWindow.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            // Respond to list popup window item click.
+
+            // Dismiss popup.
+            // listPopupWindow.dismiss()
+        }
+        // Show list popup window on button click.
+        binding.popupNb.setOnClickListener { listPopupWindow.show() }
+        binding.popupLb.setOnClickListener { listPopupWindow.show() }
+        binding.popupOut.setOnClickListener { listPopupWindow.show() }
+        binding.popupWide.setOnClickListener { listPopupWindow.show() }
+        //listPopupWindowButton.setOnClickListener { v: View? -> listPopupWindow.show() }
+
     }
 
     companion object {

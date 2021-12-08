@@ -240,6 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
+                    android:background="@{viewModel.batsmanAOnStrike ? @color/teal_200 : @color/themeB2}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -270,7 +271,7 @@
                         android:id="@+id/textView10"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.strikerScore.run)}"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.run)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -278,7 +279,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.strikerScore.ballFaced)}"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.ballFaced)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -286,7 +287,7 @@
                         android:id="@+id/textView12"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.strikerScore.fours)}"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.fours)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -294,7 +295,7 @@
                         android:id="@+id/textView13"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.strikerScore.sixes)}"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.sixes)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -306,6 +307,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:background="@{viewModel.batsmanAOnStrike ? @color/themeB2 : @color/teal_200 }"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
@@ -336,7 +338,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.nonStrikerScore.run)}"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.run)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -344,7 +346,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.nonStrikerScore.ballFaced)}"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.ballFaced)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -352,7 +354,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.nonStrikerScore.fours)}"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.fours)}"
                         android:textAlignment="center"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -360,7 +362,7 @@
                         android:id="@+id/textView17"
                         android:layout_width="42dp"
                         android:layout_height="match_parent"
-                        android:text="@{Integer.toString(viewModel.nonStrikerScore.sixes)}"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.sixes)}"
                         android:textAlignment="center"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -566,7 +568,6 @@
                     android:backgroundTint="@color/buttons"
                     android:padding="0dp"
                     android:text="@string/out"
-                    android:onClick="@{()-> viewModel.onOut()}"
                     android:textColor="#0B8075"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

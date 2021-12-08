@@ -129,13 +129,17 @@ class ScoringViewModel @Inject internal constructor(
     val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
     val isScoreSheetCreated:LiveData<Boolean> =_isScoreSheetCreated
 
-    val _onStrike = MutableLiveData<Player>()
-    val onStrike:LiveData<Player> =_onStrike
+    val _batsmanAOnStrike = MutableLiveData<Boolean>(true)
+    val batsmanAOnStrike:LiveData<Boolean> =_batsmanAOnStrike
+
+    val _batsmanA = MutableLiveData<Player>()
+    val batsmanA:LiveData<Player> =_batsmanA
     /**
      * nonStriker from batsman2 dropdowns
      */
-    val _nonStrike = MutableLiveData<Player>()
-    val nonStrike:LiveData<Player> =_nonStrike
+
+    val _batsmanB = MutableLiveData<Player>()
+    val batsmanB:LiveData<Player> =_batsmanB
     /**
      * bowler from bowlerList dropdowns
      */
@@ -146,7 +150,7 @@ class ScoringViewModel @Inject internal constructor(
      * Striker score
      */
     @ExperimentalCoroutinesApi
-    val strikerScore :LiveData<PlayersScore> = onStrike.switchMap {player->
+    val batsmanAScore :LiveData<PlayersScore> = batsmanA.switchMap {player->
         player.id.let {
             match.switchMap { match->
                 repository.getPlayerScore(it,match.matchId).asLiveData()
@@ -158,7 +162,7 @@ class ScoringViewModel @Inject internal constructor(
      * nonStriker score
      */
     @ExperimentalCoroutinesApi
-    val nonStrikerScore :LiveData<PlayersScore> = nonStrike.switchMap {player->
+    val batsmanBScore :LiveData<PlayersScore> = batsmanB.switchMap {player->
         player.id.let {
             match.switchMap { match->
                 repository.getPlayerScore(it,match.matchId).asLiveData()
@@ -201,40 +205,47 @@ class ScoringViewModel @Inject internal constructor(
     }
 
 
+    private fun updatePlayerScore(playerScore:PlayersScore, runsTaken:Int){
+        val newScore :PlayersScore
+        when (runsTaken) {
+            1 -> {
+                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                //updatePlayerScore(newScore)
+                changeStrike()
+            }
+            2 -> {
+                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                // updatePlayerScore(newScore)
+
+            }
+            3 -> {
+                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                //updatePlayerScore(newScore)
+                changeStrike()
+            }
+            4 -> {
+                newScore = playerScore.copy(run = playerScore.run+runsTaken, fours = playerScore.fours+1, ballFaced = playerScore.ballFaced+1)
+                // updatePlayerScore(newScore)
+            }
+            else ->{
+                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1, sixes = playerScore.sixes+1)
+                //updatePlayerScore(newScore)
+            }
+
+        }
+        updatePlayerScore(newScore)
+    }
 
     @ExperimentalCoroutinesApi
     fun updateScore(runsTaken:Int){
 
-        strikerScore.value?.let {
-            val playerScore :PlayersScore
-            when (runsTaken) {
-                1 -> {
-                    playerScore = it.copy(run = it.run+runsTaken, ballFaced = it.ballFaced+1)
-                    //updatePlayerScore(newScore)
-                    changeStrike()
-                }
-                2 -> {
-                    playerScore = it.copy(run = it.run+runsTaken, ballFaced = it.ballFaced+1)
-                   // updatePlayerScore(newScore)
-
-                }
-                3 -> {
-                    playerScore = it.copy(run = it.run+runsTaken, ballFaced = it.ballFaced+1)
-                    //updatePlayerScore(newScore)
-                    changeStrike()
-                }
-                4 -> {
-                    playerScore = it.copy(run = it.run+runsTaken, fours = it.fours+1, ballFaced = it.ballFaced+1)
-                   // updatePlayerScore(newScore)
-                }
-               else ->{
-                   playerScore = it.copy(run = it.run+runsTaken, ballFaced = it.ballFaced+1, sixes = it.sixes+1)
-                   //updatePlayerScore(newScore)
-               }
-
+        when(batsmanAOnStrike.value){
+            true ->{
+                batsmanAScore.value?.let { updatePlayerScore(it,runsTaken) }
             }
-            updatePlayerScore(playerScore)
-
+            false ->{
+                batsmanBScore.value?.let { updatePlayerScore(it,runsTaken) }
+            }
         }
 
         battingTeamScore.value?.let {
@@ -247,9 +258,6 @@ class ScoringViewModel @Inject internal constructor(
         }
 
     }
-
-
-
 
     //update player score...by making new object every time
     private fun updatePlayerScore(newScore:PlayersScore) {
@@ -270,9 +278,12 @@ class ScoringViewModel @Inject internal constructor(
 
 
     fun changeStrike(){
-        val temp = onStrike.value
-        _onStrike.value =nonStrike.value
-        _nonStrike.value =temp!!
+        if (batsmanAOnStrike.value == true){
+            _batsmanAOnStrike.value = false
+        }
+        else if (batsmanAOnStrike.value ==false){
+            _batsmanAOnStrike.value =true
+        }
     }
 
 
