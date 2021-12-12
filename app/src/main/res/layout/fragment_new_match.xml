@@ -25,13 +25,13 @@
                 android:id="@+id/textView3"
                 android:layout_width="144dp"
                 android:layout_height="29dp"
-                android:layout_marginStart="60dp"
                 android:layout_marginBottom="4dp"
                 android:text="@string/start_a_new_match"
                 android:textColor="#0B5951"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

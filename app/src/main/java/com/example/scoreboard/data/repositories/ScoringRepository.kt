@@ -1,6 +1,5 @@
 package com.example.scoreboard.data.repositories
 
-import androidx.lifecycle.LiveData
 import com.example.scoreboard.data.dao.*
 import com.example.scoreboard.data.objects.*
 import javax.inject.Inject
@@ -30,8 +29,9 @@ class ScoringRepository @Inject constructor(
     suspend fun updatePlayerScore(playerScore: PlayersScore) =scoreDao.updatePlayerScore(playerScore)
 
     suspend fun updateTeamScore(teamScore: TeamsScore) =scoreDao.updateTeamScore(teamScore)
-
-
+    suspend fun updatePlayer(batsman: Player) {
+        scoreDao.updatePlayer(batsman)
+    }
 
 
 }

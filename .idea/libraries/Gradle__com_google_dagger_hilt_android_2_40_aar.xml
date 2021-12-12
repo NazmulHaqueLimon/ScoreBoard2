@@ -2,9 +2,10 @@
   <library name="Gradle: com.google.dagger:hilt-android:2.40@aar">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b4a64fe27291cea05009e907ea85d006/transformed/hilt-android-2.40/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/b9698c85ec97684e15a63a8fad4bc6d7/transformed/hilt-android-2.40/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b9698c85ec97684e15a63a8fad4bc6d7/transformed/hilt-android-2.40/AndroidManifest.xml" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b9698c85ec97684e15a63a8fad4bc6d7/transformed/hilt-android-2.40/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/770e8f2986d4e918ff6dffc396cd35b1/transformed/hilt-android-2.40/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/770e8f2986d4e918ff6dffc396cd35b1/transformed/hilt-android-2.40/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/770e8f2986d4e918ff6dffc396cd35b1/transformed/hilt-android-2.40/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-android/2.40/fb77129d6888f6b955ba608a200c6c2144234421/hilt-android-2.40-javadoc.jar!/" />

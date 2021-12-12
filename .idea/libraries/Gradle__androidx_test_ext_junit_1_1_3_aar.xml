@@ -7,8 +7,9 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/28650a114a2add45badd29a0b7b83760/transformed/junit-1.1.3/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/1864908d8877cf2b09984b8b48c433ac/transformed/junit-1.1.3/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/00295a7c49b94142f85d4198658fd55e/transformed/junit-1.1.3/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/00295a7c49b94142f85d4198658fd55e/transformed/junit-1.1.3/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/00295a7c49b94142f85d4198658fd55e/transformed/junit-1.1.3/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/0637187c4ec47ef6e99fb37813fd55a3/transformed/junit-1.1.3/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/0637187c4ec47ef6e99fb37813fd55a3/transformed/junit-1.1.3/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/0637187c4ec47ef6e99fb37813fd55a3/transformed/junit-1.1.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/androidx.test.ext/junit/1.1.3/f138cf897cc1e024dd714073df04f2425d845104/junit-1.1.3-javadoc.jar!/" />

@@ -21,6 +21,10 @@ class ScoringViewModel @Inject internal constructor(
     private val savedState: SavedStateHandle
 
 ): ViewModel(){
+    fun setMatchId(id:String){
+        matchId.value =id
+    }
+
     val scoringTitleText :String ="teamA won the toss and elected to bat First"
     /**
      * matchId...need to save in savedStateHandle*/
@@ -62,6 +66,7 @@ class ScoringViewModel @Inject internal constructor(
 
     @ExperimentalCoroutinesApi
     fun openTeamScoreSheet(teamId: String) {
+        _isScoreSheetCreated.value=false
         match.value?.let {
             val score =TeamsScore(teamId ,it.matchId)
             createTeamScoreSheet(score)
@@ -73,6 +78,7 @@ class ScoringViewModel @Inject internal constructor(
         match.value?.let {
             val score =PlayersScore(playerId ,it.matchId)
             createPlayersScoreSheet(score)
+            _isScoreSheetCreated.value=true
         }
     }
     private fun createTeamScoreSheet(score: TeamsScore){
@@ -210,28 +216,21 @@ class ScoringViewModel @Inject internal constructor(
         when (runsTaken) {
             1 -> {
                 newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
-                //updatePlayerScore(newScore)
                 changeStrike()
             }
             2 -> {
                 newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
-                // updatePlayerScore(newScore)
-
             }
             3 -> {
                 newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
-                //updatePlayerScore(newScore)
                 changeStrike()
             }
             4 -> {
                 newScore = playerScore.copy(run = playerScore.run+runsTaken, fours = playerScore.fours+1, ballFaced = playerScore.ballFaced+1)
-                // updatePlayerScore(newScore)
             }
             else ->{
                 newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1, sixes = playerScore.sixes+1)
-                //updatePlayerScore(newScore)
             }
-
         }
         updatePlayerScore(newScore)
     }
@@ -243,7 +242,7 @@ class ScoringViewModel @Inject internal constructor(
             true ->{
                 batsmanAScore.value?.let { updatePlayerScore(it,runsTaken) }
             }
-            false ->{
+            else -> {
                 batsmanBScore.value?.let { updatePlayerScore(it,runsTaken) }
             }
         }
@@ -272,10 +271,6 @@ class ScoringViewModel @Inject internal constructor(
         }
     }
 
-    fun onOut(){
-
-    }
-
 
     fun changeStrike(){
         if (batsmanAOnStrike.value == true){
@@ -287,11 +282,69 @@ class ScoringViewModel @Inject internal constructor(
     }
 
 
-
-    fun setMatchId(id:String){
-        matchId.value =id
+    fun onStrikerOut() {
+        when(batsmanAOnStrike.value){
+            true ->{
+                onBatsmanAOut()
+            }
+            else ->
+                onBatsmanBOut()
+        }
     }
 
+    fun onBatsmanAOut() {
+        val batsman = batsmanA.value?.copy(isOut = true)
+        if (batsman != null) {
+            updatePlayer(batsman)
+        }
+    }
+
+    private fun updatePlayer(batsman: Player) {
+        viewModelScope.launch {
+            repository.updatePlayer(batsman)
+        }
+    }
+
+    fun onBatsmanBOut() {
+        val batsman = batsmanB.value?.copy(isOut = true)
+        if (batsman != null) {
+            updatePlayer(batsman)
+        }
+    }
+
+    fun updateExtra(score: Int, type: String) {
+        when(type){
+            "nbBAT" ->{
+                //teamScore +extra 1
+                //strikerScore +score
+                //bowlerScore +extra+score
+            }
+            "nbBYE" ->{
+                //bowlerScore +extra1
+                //battingTeamScore +extra1+score
+
+            }
+            "nbLB" ->{
+                //bowlerScore +extra +score
+                //battingTeam +extra+score
+                //striker +score
+            }
+            "LB" ->{
+                //bowlerScore +extra +score
+                //battingTeam +extra+score
+                //striker +score
+            }
+
+            "wideBYE" ->{
+
+            }
+            "BYE" ->{
+
+            }
+
+        }
+
+    }
 
 
     companion object {

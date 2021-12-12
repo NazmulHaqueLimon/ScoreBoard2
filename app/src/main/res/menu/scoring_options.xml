@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/add_one"
+        android:enabled="true"
+        android:title="@string/one"
+      />
+
+    <item
+        android:id="@+id/add_two"
+        android:enabled="true"
+        android:title="@string/two"
+       />
+
+    <item
+        android:id="@+id/add_three"
+        android:title="@string/three"
+        android:enabled="true"
+       />
+    <item
+        android:id="@+id/add_four"
+        android:enabled="true"
+        android:title="@string/four"
+       />
+    <item
+        android:id="@+id/add_six"
+        android:enabled="true"
+        android:title="@string/six"
+        />
+</menu>

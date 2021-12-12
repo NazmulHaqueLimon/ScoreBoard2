@@ -34,6 +34,12 @@
     <string name="lb">LB</string>
     <string name="nb">NB</string>
     <string name="bowler">Bowler</string>
+    <string name="byeRun">BYE</string>
+    <string name="one">+1</string>
+    <string name="two">+2</string>
+    <string name="three">+3</string>
+    <string name="four">+4</string>
+    <string name="six">+6</string>
 
     <string-array name="formats">
         <item>T10</item>

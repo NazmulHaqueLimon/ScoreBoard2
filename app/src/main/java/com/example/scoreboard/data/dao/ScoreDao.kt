@@ -1,6 +1,7 @@
 package com.example.scoreboard.data.dao
 
 import androidx.room.*
+import com.example.scoreboard.data.objects.Player
 import com.example.scoreboard.data.objects.PlayersScore
 import com.example.scoreboard.data.objects.TeamsScore
 import kotlinx.coroutines.flow.Flow
@@ -22,12 +23,14 @@ interface ScoreDao {
     @Update(entity = TeamsScore::class)
     suspend fun updateTeamScore(score: TeamsScore)
 
-
+    @Update(entity = Player::class)
+    suspend fun updatePlayer(batsman: Player)
 
     @Query("SELECT * FROM playerScore WHERE  playerId=:id AND matchId=:mId")
     fun getPlayerScore(id:String,mId:String): Flow<PlayersScore>
 
     @Query("SELECT * FROM teamScore WHERE  teamId=:tid AND matchId=:mId")
     fun getTeamScore(tid:String,mId:String): Flow<TeamsScore>
+
 
 }

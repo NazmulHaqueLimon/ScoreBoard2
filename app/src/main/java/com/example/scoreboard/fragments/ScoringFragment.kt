@@ -1,5 +1,6 @@
 package com.example.scoreboard.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.widget.ListPopupWindow
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContentProviderCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -56,7 +58,6 @@ class ScoringFragment : Fragment() {
 
         }
 
-
         return binding.root
     }
 
@@ -65,7 +66,11 @@ class ScoringFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeTeamAndPlayers()
-        setNoBallPopup()
+        setListPopupOut()
+        setListPopupLb()
+        setListPopupBye()
+        setListPopupNb()
+        setListPopupWide()
 
     }
 
@@ -75,10 +80,16 @@ class ScoringFragment : Fragment() {
     }
 
     @ExperimentalCoroutinesApi
-    fun observeTeamAndPlayers(){
+    private fun observeTeamAndPlayers(){
         scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
             val batsmanNames = it.playerList.map { player ->
-                player.name
+                if (!player.isOut){
+                    player.name
+                }
+                else{
+                    "Out"
+                }
+
             }
             setBatsmanDropDown(batsmanNames)
             //create the scoreSheet if not created once
@@ -97,6 +108,15 @@ class ScoringFragment : Fragment() {
                 player.name
             }
             setBowlerDropDown(bowlersNames)
+
+            //create the scoreSheet if not created once
+            if (scoringViewModel.isScoreSheetCreated.value == false){
+                it.playerList.map { player->
+                    scoringViewModel.openPlayerScoreSheet(player.id)
+                }
+                scoringViewModel.openTeamScoreSheet(it.team.teamId)
+
+            }
 
             it.playerList.map { player->
                 scoringViewModel.openPlayerScoreSheet(player.id)
@@ -159,34 +179,192 @@ class ScoringFragment : Fragment() {
         }
     }
 
-    fun setNoBallPopup(){
-        // val listPopupWindowButton = view.findViewById<Button>(R.id.list_popup_button)
-        val listPopupWindow = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+    private fun setListPopupOut(){
+        val listPopupWindowOut = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+
+        val items = listOf("Bold", "LBW", "Caught","RunOut")
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+
+        listPopupWindowOut.anchorView =binding.popupOut
+        listPopupWindowOut.setAdapter(adapter)
+
+        // Set list popup's item click listener
+        listPopupWindowOut.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            // Respond to list popup window item click.
+            when(adapter.getItem(position).toString()){
+                "Bold"->
+                    scoringViewModel.onStrikerOut()
+                "LBW" ->
+                    scoringViewModel.onStrikerOut()
+                "Caught" ->
+                    scoringViewModel.onStrikerOut()
+                "RunOut" ->
+                    openPlayersPopup()
+            }
+            // Dismiss popup.
+           // listPopupWindowOut.dismiss()
+        }
+        binding.popupOut.setOnClickListener { listPopupWindowOut.show() }
+    }
+    private fun openPlayersPopup(){
+        val popupPlayers = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+        // Set list popup's content
+        var batsmanA :String ="BatsmanA"
+        scoringViewModel.batsmanA.observe(viewLifecycleOwner){
+            batsmanA =it.name
+        }
+        var batsmanB :String ="BatsmanB"
+        scoringViewModel.batsmanB.observe(viewLifecycleOwner){
+            batsmanB=it.name
+        }
+        // Set list popup's content
+        val items = listOf(batsmanA, batsmanB)
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+
+        popupPlayers.anchorView =binding.popupOut
+        popupPlayers.setAdapter(adapter)
+
+        // Set list popup's item click listener
+        popupPlayers.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            // Respond to list popup window item click.
+            when(adapter.getItem(position)){
+                batsmanA->
+                    scoringViewModel.onBatsmanAOut()
+                batsmanB ->
+                    scoringViewModel.onBatsmanBOut()
+            }
+            // Dismiss popup.
+            popupPlayers.dismiss()
+        }
+        popupPlayers.show()
+    }
+    @SuppressLint("ResourceAsColor")
+    private fun openScoringOptions(view: View, type:String){
+        val listPopupScores = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+
+        // Set list popup's content
+        val items = listOf("+1", "+2", "+3","+4","+6")
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+
+        when(type){
+            "nbBAT" ->{
+                listPopupScores.anchorView =binding.popupNb
+            }
+            "nbBYE" ->{
+                listPopupScores.anchorView =binding.popupBye
+            }
+            "nbLB" ->{
+                listPopupScores.anchorView =binding.popupLb
+            }
+            "LB" ->{
+                listPopupScores.anchorView =binding.popupLb
+            }
+
+            "wideBYE" ->{
+                listPopupScores.anchorView =binding.popupBye
+            }
+            "BYE" ->{
+                listPopupScores.anchorView =binding.popupBye
+            }
+
+        }
+
+        listPopupScores.setAdapter(adapter)
+
+        // Set list popup's item click listener
+        listPopupScores.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            // Respond to list popup window item click.
+            when(adapter.getItem(position)){
+                "+1" ->
+                    scoringViewModel.updateExtra(1,type)
+                "+2" ->
+                    scoringViewModel.updateExtra(2,type)
+                "+3" ->
+                    scoringViewModel.updateExtra(3,type)
+                "+4" ->
+                    scoringViewModel.updateExtra(4,type)
+                "+6" ->
+                    scoringViewModel.updateExtra(6,type)
+
+            }
+            // Dismiss popup.
+            listPopupScores.dismiss()
+        }
+
+       listPopupScores.show()
+
+    }
+
+
+    private fun setListPopupWide(){
+        val listPopupWindowWide = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+
+        // Set list popup's content
+        val items = listOf("+O", "+Bye")
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+
+        listPopupWindowWide.anchorView =binding.popupWide
+        listPopupWindowWide.setAdapter(adapter)
+
+        // Set list popup's item click listener
+        listPopupWindowWide.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            // Respond to list popup window item click.
+            when(adapter.getItem(position)){
+                "+0" ->
+                    scoringViewModel.updateExtra(1,"EXTRA")
+                "Bye" ->
+                    view?.let { openScoringOptions(it,"wideBYE") }
+
+            }
+            // Dismiss popup.
+            listPopupWindowWide.dismiss()
+        }
+
+        binding.popupWide.setOnClickListener { listPopupWindowWide.show() }
+    }
+
+    private fun setListPopupBye(){
+        binding.popupBye.setOnClickListener {
+            openScoringOptions(it,"BYE")
+        }
+    }
+    private fun setListPopupLb(){
+
+        binding.popupLb.setOnClickListener {
+            openScoringOptions(it ,"LB")
+        }
+
+    }
+    private fun setListPopupNb(){
+        val listPopupWindowNb = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
         // Set button as the list popup's anchor
-        listPopupWindow.anchorView = binding.popupNb
-        listPopupWindow.anchorView =binding.popupLb
-        listPopupWindow.anchorView =binding.popupOut
-        listPopupWindow.anchorView =binding.popupWide
+        listPopupWindowNb.anchorView = binding.popupNb
 
         // Set list popup's content
         val items = listOf("+O", "+Lb", "+bat")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
-        listPopupWindow.setAdapter(adapter)
-
+        listPopupWindowNb.setAdapter(adapter)
         // Set list popup's item click listener
-        listPopupWindow.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+        listPopupWindowNb.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
+            when(adapter.getItem(position)){
+                "+O" ->
+                    scoringViewModel.updateExtra(1,"EXTRA")
+                "+Lb" ->
+                    view?.let { openScoringOptions(it,"nbLB") }
+                "+bat" ->
+                    view?.let { openScoringOptions(it,"nbBAT") }
 
+
+            }
             // Dismiss popup.
-            // listPopupWindow.dismiss()
+            listPopupWindowNb.dismiss()
         }
+
         // Show list popup window on button click.
-        binding.popupNb.setOnClickListener { listPopupWindow.show() }
-        binding.popupLb.setOnClickListener { listPopupWindow.show() }
-        binding.popupOut.setOnClickListener { listPopupWindow.show() }
-        binding.popupWide.setOnClickListener { listPopupWindow.show() }
-        //listPopupWindowButton.setOnClickListener { v: View? -> listPopupWindow.show() }
+        binding.popupNb.setOnClickListener { listPopupWindowNb.show() }
+
 
     }
 

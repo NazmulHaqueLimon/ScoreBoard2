@@ -24,6 +24,7 @@
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/baseline_looks_3_24.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_cricket__4_vs.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_cricket__5_bat.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_loop.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_note__1_.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_scoreboard.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_scoreboard__1_.xml" value="0.3828125" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_toss.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_trash__1_.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_trophy.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/outline_loop_24.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/outline_undo_24.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/dropdown_item.xml" value="0.36666666666666664" />
@@ -43,6 +45,7 @@
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/match_item.xml" value="0.33" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/player_item.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/menu/scoring_options.xml" value="0.31666666666666665" />
       </map>
     </option>
   </component>
