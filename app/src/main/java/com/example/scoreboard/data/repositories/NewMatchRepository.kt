@@ -25,4 +25,7 @@ class NewMatchRepository  @Inject constructor(
         teamPlayerDao.insertTeamPlayer(teamPlayer)
     }
 
+    suspend fun createTeamScore(score: TeamsScore) = scoreDao.insertTeamScore(score)
+    suspend fun createPlayerScore(score: PlayersScore) = scoreDao.insertPlayerScore(score)
+
 }

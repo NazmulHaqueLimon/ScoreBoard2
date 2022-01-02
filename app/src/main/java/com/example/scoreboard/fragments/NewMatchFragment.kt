@@ -14,6 +14,7 @@ import com.example.scoreboard.R
 import com.example.scoreboard.databinding.FragmentNewMatchBinding
 import com.example.scoreboard.viewmodels.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
 /**
@@ -26,6 +27,7 @@ class NewMatchFragment : Fragment() {
     private lateinit var binding: FragmentNewMatchBinding
     private val matchViewModel: MatchViewModel by activityViewModels()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,23 +48,22 @@ class NewMatchFragment : Fragment() {
             // Get input text
             //matchViewModel._ground.value=binding.textInputGround.editText?.text.toString()
 
+        }
+        binding.createMatchButton.setOnClickListener {
+            matchViewModel.createMatch()
+            matchViewModel.savePlayers()
+            matchViewModel.saveTeams()
+            matchViewModel.saveTeamPlayers()
+            matchViewModel.saveMatch()
+            matchViewModel.createScoreSheet()
+            navigateToScoringFragment()
 
-            createMatchButton.setOnClickListener {
-                    matchViewModel.createMatch()
-                    matchViewModel.savePlayers()
-                    matchViewModel.saveTeams()
-                    matchViewModel.saveTeamPlayers()
-                    matchViewModel.saveMatch()
-                    navigateToScoringFragment()
 
-            }
         }
 
 
         return binding.root
     }
-
-
 
 
     override fun onResume() {

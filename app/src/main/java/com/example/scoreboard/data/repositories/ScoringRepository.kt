@@ -22,10 +22,6 @@ class ScoringRepository @Inject constructor(
     fun getTeamScore(teamId: String, matchId:String) =scoreDao.getTeamScore(teamId,matchId)
 
 
-    suspend fun createTeamScore(score: TeamsScore) = scoreDao.insertTeamScore(score)
-    suspend fun createPlayerScore(score: PlayersScore) = scoreDao.insertPlayerScore(score)
-
-
     suspend fun updatePlayerScore(playerScore: PlayersScore) =scoreDao.updatePlayerScore(playerScore)
 
     suspend fun updateTeamScore(teamScore: TeamsScore) =scoreDao.updateTeamScore(teamScore)

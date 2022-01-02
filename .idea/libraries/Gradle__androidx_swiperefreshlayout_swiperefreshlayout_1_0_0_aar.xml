@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/cfbe837d2a7ca72f38f3ce91db65486d/transformed/swiperefreshlayout-1.0.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/031d3dd13b102971bcea3f15de0105cb/transformed/swiperefreshlayout-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/64a1f0a8c8323bb0bc366bb56683c844/transformed/swiperefreshlayout-1.0.0/res" />
@@ -10,9 +10,10 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/f81b8cd08c9e277538b50b1e1e2e62d4/transformed/swiperefreshlayout-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/59ab090e600d144b860f4b6188d1f12f/transformed/swiperefreshlayout-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/0b94a6b6bd8bf7d6dff08b48d506a465/transformed/swiperefreshlayout-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/cfbe837d2a7ca72f38f3ce91db65486d/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/cfbe837d2a7ca72f38f3ce91db65486d/transformed/swiperefreshlayout-1.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/cfbe837d2a7ca72f38f3ce91db65486d/transformed/swiperefreshlayout-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/031d3dd13b102971bcea3f15de0105cb/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/031d3dd13b102971bcea3f15de0105cb/transformed/swiperefreshlayout-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/031d3dd13b102971bcea3f15de0105cb/transformed/swiperefreshlayout-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

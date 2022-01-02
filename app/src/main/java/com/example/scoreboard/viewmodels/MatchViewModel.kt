@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.scoreboard.data.objects.*
 import com.example.scoreboard.data.repositories.NewMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -143,6 +144,48 @@ class MatchViewModel @Inject internal constructor(
     private fun insertTeamPlayers(teamPlayers: TeamPlayers){
         viewModelScope.launch {
             repository.saveTeamPlayers(teamPlayers)
+        }
+    }
+    @ExperimentalCoroutinesApi
+    fun createScoreSheet() {
+        teamAplayers.value?.map {
+            openPlayerScoreSheet(it.id)
+        }
+        teamBplayers.value?.map {
+            openPlayerScoreSheet(it.id)
+        }
+        teamA.value?.let {
+            openTeamScoreSheet(it.teamId)
+        }
+        teamB.value?.let {
+            openTeamScoreSheet(it.teamId)
+        }
+
+    }
+
+    @ExperimentalCoroutinesApi
+    fun openTeamScoreSheet(teamId: String) {
+        match.value?.let {
+            val score =TeamsScore(teamId ,it.matchId)
+            createTeamScoreSheet(score)
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun openPlayerScoreSheet(playerId: String) {
+        match.value?.let {
+            val score =PlayersScore(playerId ,it.matchId)
+            createPlayersScoreSheet(score)
+        }
+    }
+    private fun createTeamScoreSheet(score: TeamsScore){
+        viewModelScope.launch {
+            repository.createTeamScore(score)
+        }
+    }
+    private fun createPlayersScoreSheet(score: PlayersScore){
+        viewModelScope.launch {
+            repository.createPlayerScore(score)
         }
     }
 

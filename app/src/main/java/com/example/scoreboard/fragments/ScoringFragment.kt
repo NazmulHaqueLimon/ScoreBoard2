@@ -1,6 +1,5 @@
 package com.example.scoreboard.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,21 +10,13 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.widget.ListPopupWindow
-import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContentProviderCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.databinding.FragmentNewMatchBinding
 import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
 /**
  * Fragment that takes and display live scoring inputs
@@ -37,7 +28,7 @@ class ScoringFragment : Fragment() {
     private val scoringViewModel : ScoringViewModel by activityViewModels()
     private val args:ScoringFragmentArgs by navArgs()
 
-
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,20 +48,25 @@ class ScoringFragment : Fragment() {
             }
 
         }
+        setBatsmanDropDown()
+        setBowlerDropDown()
+        //scoringViewModel.createScoreSheet()
+
+
 
         return binding.root
     }
 
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        observeTeamAndPlayers()
         setListPopupOut()
         setListPopupLb()
         setListPopupBye()
         setListPopupNb()
         setListPopupWide()
+
 
     }
 
@@ -80,103 +76,66 @@ class ScoringFragment : Fragment() {
     }
 
     @ExperimentalCoroutinesApi
-    private fun observeTeamAndPlayers(){
-        scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
-            val batsmanNames = it.playerList.map { player ->
+    private fun setBatsmanDropDown() {
+
+        scoringViewModel.batsmans.observe(viewLifecycleOwner){ players ->
+            val batsmanNames = mutableListOf<String>()
+            players.map { player ->
                 if (!player.isOut){
-                    player.name
+                    batsmanNames.add(player.name)
                 }
                 else{
-                    "Out"
+                    binding.batsmanSelection1.showDropDown()
                 }
-
             }
-            setBatsmanDropDown(batsmanNames)
-            //create the scoreSheet if not created once
-            if (scoringViewModel.isScoreSheetCreated.value == false){
-                it.playerList.map { player->
-                    scoringViewModel.openPlayerScoreSheet(player.id)
-                }
-                scoringViewModel.openTeamScoreSheet(it.team.teamId)
+            val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, batsmanNames)
+            (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
+            (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
 
-            }
-
-        }
-        scoringViewModel.bowlingTeamWithPlayers.observe(viewLifecycleOwner){
-            //val bowlersNames = mutableListOf<String>()
-            val bowlersNames=it.playerList.map { player ->
-                player.name
-            }
-            setBowlerDropDown(bowlersNames)
-
-            //create the scoreSheet if not created once
-            if (scoringViewModel.isScoreSheetCreated.value == false){
-                it.playerList.map { player->
-                    scoringViewModel.openPlayerScoreSheet(player.id)
-                }
-                scoringViewModel.openTeamScoreSheet(it.team.teamId)
-
-            }
-
-            it.playerList.map { player->
-                scoringViewModel.openPlayerScoreSheet(player.id)
-            }
-            scoringViewModel.openTeamScoreSheet(it.team.teamId)
-        }
-    }
-
-    @ExperimentalCoroutinesApi
-    private fun setBatsmanDropDown(playerList: List<String>) {
-
-        val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, playerList)
-
-        (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
-
-        binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
-                it.playerList.map { player ->
+            binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
+                players.map { player ->
                     if (batsmanAdapter.getItem(i).equals(player.name)){
                         scoringViewModel._batsmanA.value=player
                         Toast.makeText(requireContext(),"player updated", Toast.LENGTH_SHORT).show()
-
                     }
                 }
             }
 
-        }
-
-        (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
-
-        binding.batsmanSelection2.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.battingTeamWithPlayers.observe(viewLifecycleOwner){
-                it.playerList.map { player ->
+            binding.batsmanSelection2.setOnItemClickListener{_, _, i, _ ->
+                players.map { player ->
                     if (batsmanAdapter.getItem(i).equals(player.name)){
                         scoringViewModel._batsmanB.value=player
                         Toast.makeText(requireContext(),"another batsman steps on the crease ready", Toast.LENGTH_SHORT).show()
-
                     }
                 }
-            }
 
+
+            }
         }
+
+
     }
     @ExperimentalCoroutinesApi
-    private fun setBowlerDropDown(nameList: List<String>) {
-        val bowlersAdapter =ArrayAdapter(requireContext(),R.layout.dropdown_item,nameList)
-        (binding.bowlerSelection as? AutoCompleteTextView)?.setAdapter(bowlersAdapter)
+    private fun setBowlerDropDown() {
+        scoringViewModel.bowlers.observe(viewLifecycleOwner){ players ->
+            val nameList = mutableListOf<String>()
+            players.map { player ->
+                nameList.add(player.name)
+            }
+            val bowlersAdapter =ArrayAdapter(requireContext(),R.layout.dropdown_item,nameList)
+            (binding.bowlerSelection as? AutoCompleteTextView)?.setAdapter(bowlersAdapter)
 
-        binding.bowlerSelection.setOnItemClickListener{_, _, i, _ ->
-            scoringViewModel.bowlingTeamWithPlayers.observe(viewLifecycleOwner){
-                it.playerList.map { player ->
-                    if (bowlersAdapter.getItem(i).equals(player.name)){
-                        scoringViewModel._bowler.value=player
-                        Toast.makeText(requireContext(),"Bowler ready to deliver", Toast.LENGTH_SHORT).show()
-
+            binding.bowlerSelection.setOnItemClickListener{_, _, i, _ ->
+                players.map { player ->
+                    if (bowlersAdapter.getItem(i).equals(player.name)) {
+                        scoringViewModel._bowler.value = player
+                        Toast.makeText(requireContext(), "Bowler ready to deliver", Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
 
+            }
         }
+
     }
 
     private fun setListPopupOut(){
@@ -238,8 +197,8 @@ class ScoringFragment : Fragment() {
         }
         popupPlayers.show()
     }
-    @SuppressLint("ResourceAsColor")
-    private fun openScoringOptions(view: View, type:String){
+
+    private fun openScoringOptions(type:String){
         val listPopupScores = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
         // Set list popup's content
@@ -313,11 +272,11 @@ class ScoringFragment : Fragment() {
                 "+0" ->
                     scoringViewModel.updateExtra(1,"EXTRA")
                 "Bye" ->
-                    view?.let { openScoringOptions(it,"wideBYE") }
+                     openScoringOptions("wideBYE")
 
             }
             // Dismiss popup.
-            listPopupWindowWide.dismiss()
+           // listPopupWindowWide.dismiss()
         }
 
         binding.popupWide.setOnClickListener { listPopupWindowWide.show() }
@@ -325,16 +284,17 @@ class ScoringFragment : Fragment() {
 
     private fun setListPopupBye(){
         binding.popupBye.setOnClickListener {
-            openScoringOptions(it,"BYE")
+            openScoringOptions("BYE")
         }
     }
     private fun setListPopupLb(){
 
         binding.popupLb.setOnClickListener {
-            openScoringOptions(it ,"LB")
+            openScoringOptions("LB")
         }
 
     }
+    @ExperimentalCoroutinesApi
     private fun setListPopupNb(){
         val listPopupWindowNb = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
@@ -352,14 +312,14 @@ class ScoringFragment : Fragment() {
                 "+O" ->
                     scoringViewModel.updateExtra(1,"EXTRA")
                 "+Lb" ->
-                    view?.let { openScoringOptions(it,"nbLB") }
+                     openScoringOptions("nbLB")
                 "+bat" ->
-                    view?.let { openScoringOptions(it,"nbBAT") }
+                    openScoringOptions("nbBAT")
 
 
             }
             // Dismiss popup.
-            listPopupWindowNb.dismiss()
+            //listPopupWindowNb.dismiss()
         }
 
         // Show list popup window on button click.

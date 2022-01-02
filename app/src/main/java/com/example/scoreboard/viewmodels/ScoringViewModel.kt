@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
-import java.lang.StringBuilder
 
 import javax.inject.Inject
 
@@ -35,7 +34,9 @@ class ScoringViewModel @Inject internal constructor(
         viewModelScope.launch {
             matchId.collect { mid->
                 savedState.set(MATCH_ID, mid )
+
             }
+
         }
 
     }
@@ -54,53 +55,29 @@ class ScoringViewModel @Inject internal constructor(
     /**
      * get the teams from the database
      * */
+
      @ExperimentalCoroutinesApi
      private val teamA = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamA_id).asLiveData()
     }
+
     @ExperimentalCoroutinesApi
-    private val teamB = match.switchMap {match ->
+    private val teamB = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamB_id).asLiveData()
     }
-
-
-    @ExperimentalCoroutinesApi
-    fun openTeamScoreSheet(teamId: String) {
-        _isScoreSheetCreated.value=false
-        match.value?.let {
-            val score =TeamsScore(teamId ,it.matchId)
-            createTeamScoreSheet(score)
-        }
-    }
-
-    @ExperimentalCoroutinesApi
-    fun openPlayerScoreSheet(playerId: String) {
-        match.value?.let {
-            val score =PlayersScore(playerId ,it.matchId)
-            createPlayersScoreSheet(score)
-            _isScoreSheetCreated.value=true
-        }
-    }
-    private fun createTeamScoreSheet(score: TeamsScore){
-        viewModelScope.launch {
-            repository.createTeamScore(score)
-        }
-    }
-    private fun createPlayersScoreSheet(score: PlayersScore){
-        viewModelScope.launch {
-            repository.createPlayerScore(score)
-        }
-    }
-
-
 
 
     /**
      * get the batting team with players
      */
-
     @ExperimentalCoroutinesApi
     val battingTeamWithPlayers :LiveData<TeamWithPlayers> = getBattingTeam()
+
+    @ExperimentalCoroutinesApi
+    val batsmans: LiveData<List<Player>> = Transformations.map(battingTeamWithPlayers) {
+        it.playerList
+
+    }
 
     @ExperimentalCoroutinesApi
     private fun getBattingTeam():LiveData<TeamWithPlayers>{
@@ -115,6 +92,12 @@ class ScoringViewModel @Inject internal constructor(
      */
     @ExperimentalCoroutinesApi
     val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = getBowlingTeam()
+
+    @ExperimentalCoroutinesApi
+    val bowlers: LiveData<List<Player>> = Transformations.map(bowlingTeamWithPlayers) {
+        it.playerList
+
+    }
 
     @ExperimentalCoroutinesApi
     private fun getBowlingTeam():LiveData<TeamWithPlayers>{
@@ -132,8 +115,8 @@ class ScoringViewModel @Inject internal constructor(
     val _isFirstInningsDone = MutableLiveData<Boolean>(false)
     val isFirstInningsDone:LiveData<Boolean> =_isFirstInningsDone
 
-    val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
-    val isScoreSheetCreated:LiveData<Boolean> =_isScoreSheetCreated
+    private val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
+    private val isScoreSheetCreated:LiveData<Boolean> =_isScoreSheetCreated
 
     val _batsmanAOnStrike = MutableLiveData<Boolean>(true)
     val batsmanAOnStrike:LiveData<Boolean> =_batsmanAOnStrike
@@ -312,34 +295,51 @@ class ScoringViewModel @Inject internal constructor(
         }
     }
 
+    @ExperimentalCoroutinesApi
+    private fun updateBattingTeamExtra(score: Int,extra:Int) {
+        battingTeamScore.value?.let {
+            val newScore =it.copy(totalRun = it.totalRun+score+extra, extra = it.extra+extra)
+            updateTeamScore(newScore)
+        }
+    }
+    @ExperimentalCoroutinesApi
     fun updateExtra(score: Int, type: String) {
         when(type){
             "nbBAT" ->{
                 //teamScore +extra 1
+                updateBattingTeamExtra(score,0)
                 //strikerScore +score
+
                 //bowlerScore +extra+score
             }
             "nbBYE" ->{
                 //bowlerScore +extra1
                 //battingTeamScore +extra1+score
+                updateBattingTeamExtra(score,1)
 
             }
             "nbLB" ->{
                 //bowlerScore +extra +score
                 //battingTeam +extra+score
+                updateBattingTeamExtra(score,1)
                 //striker +score
             }
             "LB" ->{
                 //bowlerScore +extra +score
                 //battingTeam +extra+score
+                updateBattingTeamExtra(score,0)
                 //striker +score
             }
 
             "wideBYE" ->{
+                //battingTeam +byeRun+extra
+                updateBattingTeamExtra(score,1)
+                //bowlerScore +extra1
 
             }
             "BYE" ->{
-
+                //battingTeam +score
+                updateBattingTeamExtra(score,0)
             }
 
         }
