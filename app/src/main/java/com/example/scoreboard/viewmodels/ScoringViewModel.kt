@@ -253,6 +253,11 @@ class ScoringViewModel @Inject internal constructor(
             repository.updateTeamScore(newScore)
         }
     }
+    private fun updateTeam(team: Team){
+        viewModelScope.launch {
+            repository.updateTeam(team)
+        }
+    }
 
 
     fun changeStrike(){
@@ -261,6 +266,18 @@ class ScoringViewModel @Inject internal constructor(
         }
         else if (batsmanAOnStrike.value ==false){
             _batsmanAOnStrike.value =true
+        }
+    }
+    @ExperimentalCoroutinesApi
+    fun inningsBreak(){
+        //batting team and bowling teams update with changes
+        battingTeamWithPlayers.value?.team?.let {
+            val team =it.copy(batFirst = false)
+            updateTeam(team)
+        }
+        bowlingTeamWithPlayers.value?.team?.let {
+            val team =it.copy(batFirst = true)
+            updateTeam(team)
         }
     }
 
@@ -280,6 +297,7 @@ class ScoringViewModel @Inject internal constructor(
         if (batsman != null) {
             updatePlayer(batsman)
         }
+        inningsBreak()
     }
 
     private fun updatePlayer(batsman: Player) {
@@ -312,7 +330,7 @@ class ScoringViewModel @Inject internal constructor(
 
                 //bowlerScore +extra+score
             }
-            "nbBYE" ->{
+            "nbB YE" ->{
                 //bowlerScore +extra1
                 //battingTeamScore +extra1+score
                 updateBattingTeamExtra(score,1)

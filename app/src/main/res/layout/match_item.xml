@@ -6,106 +6,120 @@
     <data>
         <variable
             name="MatchInfo"
-            type="com.example.scoreboard.data.objects.MatchInfo" />
+            type="com.example.scoreboard.data.objects.Match" />
+        <variable
+            name="teamScoreA"
+            type="com.example.scoreboard.data.objects.TeamsScore" />
+        <variable
+            name="teamScoreB"
+            type="com.example.scoreboard.data.objects.TeamsScore" />
+
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/themeB2">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/ground_name_id"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@{MatchInfo.ground}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="college field open ground" />
+            android:background="@color/themeB2">
+
+            <TextView
+                android:id="@+id/ground_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="college field open ground" />
 
 
-        <ImageView
-            android:id="@+id/teamIcon_id"
-            android:layout_width="43dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/player_image"
-            app:layout_constraintEnd_toStartOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ground_name_id"
-            app:srcCompat="@drawable/ic_group" />
+            <ImageView
+                android:id="@+id/teamIcon_id"
+                android:layout_width="43dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/player_image"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ground_name_id"
+                app:srcCompat="@drawable/ic_group" />
 
-        <TextView
-            android:id="@+id/team_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{MatchInfo.teamA_name}"
-            app:layout_constraintEnd_toStartOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teamIcon_id"
-            tools:text="Team Name" />
+            <TextView
+                android:id="@+id/team_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="text"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/teamIcon_id"
+                tools:text="Team Name" />
 
-        <TextView
-            android:id="@+id/totalScore_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="bindingAdapter with multiple parameter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/team_name_id"
-            tools:text="Total Score" />
-
-
-        <ImageView
-            android:id="@+id/teamIcon2_id"
-            android:layout_width="44dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/player_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/ground_name_id"
-            app:srcCompat="@drawable/ic_group" />
-
-        <TextView
-            android:id="@+id/team_name2_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{MatchInfo.teamB_name}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/teamIcon2_id"
-            tools:text="Team Name" />
-
-        <TextView
-            android:id="@+id/totalScore2_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="apply binding adapter with multiple parameter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/team_name2_id"
-            tools:text="Total Score" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="1dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ground_name_id" />
+            <TextView
+                android:id="@+id/totalScore_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="bindingAdapter with multiple parameter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/team_name_id"
+                tools:text="Total Score" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/teamIcon2_id"
+                android:layout_width="44dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/player_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/ground_name_id"
+                app:srcCompat="@drawable/ic_group" />
+
+            <TextView
+                android:id="@+id/team_name2_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/teamIcon2_id"
+                tools:text="Team Name" />
+
+            <TextView
+                android:id="@+id/totalScore2_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="apply binding adapter with multiple parameter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/team_name2_id"
+                tools:text="Total Score" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ground_name_id" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
 </layout>

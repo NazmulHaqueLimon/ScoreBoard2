@@ -8,8 +8,9 @@ import java.util.*
 data class Team(
     @PrimaryKey
     val teamId :String = UUID.randomUUID().toString(),
+
     val name: String,
-    var batFirst:Boolean=false,
+    var batFirst: Boolean=false,
     var totalMatch:Int=0,
     var totalWin: Int=0,
     var totalLoses: Int=0

@@ -16,4 +16,9 @@ interface MatchDao {
 
     @Query("SELECT * FROM matches WHERE matchId =:id")
     fun getMatch(id: String):Flow<Match>
+
+    @Query("SELECT * FROM matches")
+    fun getMatches(): Flow<List<Match>>
+
+
 }

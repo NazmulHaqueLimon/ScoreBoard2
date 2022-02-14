@@ -13,5 +13,4 @@ data class Match(
     var format: Int =0,
     var ground: String,
     var toss : String
-
     )

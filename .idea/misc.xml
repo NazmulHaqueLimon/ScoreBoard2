@@ -22,6 +22,7 @@
         <entry key="..\:/ScoreBoard/app/src/main/res/layout/match_formats.xml" value="0.2078125" />
         <entry key="..\:/ScoreBoard/app/src/main/res/layout/player_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/baseline_looks_3_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/baseline_looks_two_24.xml" value="0.1" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_cricket__4_vs.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_cricket__5_bat.xml" value="0.3828125" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/drawable/ic_loop.xml" value="0.3828125" />
@@ -42,7 +43,7 @@
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_scoring.xml" value="0.33" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_team.xml" value="0.25" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/fragment_top_players.xml" value="0.1" />
-        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/match_item.xml" value="0.33" />
+        <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/match_item.xml" value="0.25" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/layout/player_item.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/User/ScoreBoard-main/app/src/main/res/menu/scoring_options.xml" value="0.31666666666666665" />

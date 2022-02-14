@@ -32,6 +32,9 @@
             android:name="match_id"
             app:argType="string"
             android:defaultValue="NO_ID"/>
+        <action
+            android:id="@+id/action_scoringFragment_to_matchDetailsFragment"
+            app:destination="@id/matchDetailsFragment" />
     </fragment>
 
     <fragment
@@ -55,10 +58,19 @@
         tools:layout="@layout/fragment_match_list" >
         <action
             android:id="@+id/action_matchListFragment_to_matchDetailsFragment"
-            app:destination="@id/matchDetailsFragment" />
+            app:destination="@id/matchDetailsFragment" >
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/matchDetailsFragment"
         android:name="com.example.scoreboard.fragments.MatchDetailsFragment"
-        android:label="MatchDetailsFragment" />
+        android:label="MatchDetailsFragment" >
+        <action
+            android:id="@+id/action_matchDetailsFragment_to_scoringFragment"
+            app:destination="@id/scoringFragment" />
+        <argument
+            android:name="matchId"
+            app:argType="string" />
+    </fragment>
 </navigation>

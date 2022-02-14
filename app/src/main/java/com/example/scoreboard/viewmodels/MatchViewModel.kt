@@ -166,7 +166,7 @@ class MatchViewModel @Inject internal constructor(
     @ExperimentalCoroutinesApi
     fun openTeamScoreSheet(teamId: String) {
         match.value?.let {
-            val score =TeamsScore(teamId ,it.matchId)
+            val score = TeamsScore(teamId = teamId , matchId = it.matchId)
             createTeamScoreSheet(score)
         }
     }
@@ -174,7 +174,7 @@ class MatchViewModel @Inject internal constructor(
     @ExperimentalCoroutinesApi
     fun openPlayerScoreSheet(playerId: String) {
         match.value?.let {
-            val score =PlayersScore(playerId ,it.matchId)
+            val score =PlayersScore(playerId = playerId, matchId = it.matchId)
             createPlayersScoreSheet(score)
         }
     }

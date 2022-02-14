@@ -10,7 +10,8 @@ class ScoringRepository @Inject constructor(
     private val matchDao: MatchDao,
     private val playerDao: PlayerDao,
     private val teamPlayersDao: TeamPlayersDao,
-    private val scoreDao: ScoreDao
+    private val scoreDao: ScoreDao,
+    private val teamDao: TeamDao
 ){
 
     fun getMatch(id:String) = matchDao.getMatch(id)
@@ -27,6 +28,10 @@ class ScoringRepository @Inject constructor(
     suspend fun updateTeamScore(teamScore: TeamsScore) =scoreDao.updateTeamScore(teamScore)
     suspend fun updatePlayer(batsman: Player) {
         scoreDao.updatePlayer(batsman)
+    }
+
+    suspend fun updateTeam(team: Team) {
+        teamDao.updateTeam(team)
     }
 
 

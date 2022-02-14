@@ -16,7 +16,7 @@ import com.example.scoreboard.utils.DATABASE_NAME
  */
 
 @Database(entities = [Player::class, Team::class, TeamPlayers::class, Match::class, PlayersScore::class, TeamsScore::class],
-           version =9, exportSchema = false)
+           version =11, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun playerDao(): PlayerDao

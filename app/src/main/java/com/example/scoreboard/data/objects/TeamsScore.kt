@@ -2,9 +2,13 @@ package com.example.scoreboard.data.objects
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
-@Entity(tableName = "teamScore",primaryKeys = ["teamId","matchId"])
+@Entity(tableName = "teamScore")
 data class TeamsScore(
+    @PrimaryKey
+    val scoreId :String= UUID.randomUUID().toString(),
+
     val teamId :String,
     val matchId : String,
 
