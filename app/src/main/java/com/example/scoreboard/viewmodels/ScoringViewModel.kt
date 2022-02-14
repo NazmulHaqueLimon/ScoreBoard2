@@ -91,6 +91,9 @@ class ScoringViewModel @Inject internal constructor(
      * get the bowling team with players
      */
     @ExperimentalCoroutinesApi
+    private val _bowlingTeamWithPlayers  = MutableLiveData(getBowlingTeam())
+
+    @ExperimentalCoroutinesApi
     val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = getBowlingTeam()
 
     @ExperimentalCoroutinesApi
@@ -100,7 +103,7 @@ class ScoringViewModel @Inject internal constructor(
     }
 
     @ExperimentalCoroutinesApi
-    private fun getBowlingTeam():LiveData<TeamWithPlayers>{
+    private fun getBowlingTeam(): LiveData<TeamWithPlayers> {
         return if (teamA.value?.team?.batFirst == true){
             teamB
         }else{
@@ -112,13 +115,13 @@ class ScoringViewModel @Inject internal constructor(
     /**
      * selected batsman from the dropdowns
      * */
-    val _isFirstInningsDone = MutableLiveData<Boolean>(false)
+    private val _isFirstInningsDone = MutableLiveData<Boolean>(false)
     val isFirstInningsDone:LiveData<Boolean> =_isFirstInningsDone
 
     private val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
     private val isScoreSheetCreated:LiveData<Boolean> =_isScoreSheetCreated
 
-    val _batsmanAOnStrike = MutableLiveData<Boolean>(true)
+    private val _batsmanAOnStrike = MutableLiveData<Boolean>(true)
     val batsmanAOnStrike:LiveData<Boolean> =_batsmanAOnStrike
 
     val _batsmanA = MutableLiveData<Player>()

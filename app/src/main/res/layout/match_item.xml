@@ -5,19 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
             name="MatchInfo"
             type="com.example.scoreboard.data.objects.Match" />
         <variable
-            name="teamScoreA"
-            type="com.example.scoreboard.data.objects.TeamsScore" />
+            name="ScoreAndTeamA"
+            type="com.example.scoreboard.data.objects.TeamAndTeamScore" />
         <variable
-            name="teamScoreB"
-            type="com.example.scoreboard.data.objects.TeamsScore" />
+            name="ScoreAndTeamB"
+            type="com.example.scoreboard.data.objects.TeamAndTeamScore" />
+
 
     </data>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="@{clickListener}"
+        android:layout_marginBottom="12dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="text"
+                android:text="@{}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="text"
+                android:text="@{ScoreAndTeamA.team.name.toString()}"
                 app:layout_constraintEnd_toStartOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/teamIcon_id"
@@ -63,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="bindingAdapter with multiple parameter"
+                android:text="@{Integer.toString(ScoreAndTeamA.score.totalRun)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="apply binding adapter with multiple parameter"
+                android:text="@{Integer.toString(ScoreAndTeamB.score.totalRun)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/team_name2_id"

@@ -16,18 +16,7 @@ class MatchInfoViewModel @Inject internal constructor(
 
 ): ViewModel() {
 
-    private val matchList = repository.getMatches().asLiveData()
+    val matchTeamScoreList = repository.getTeamMatchAndScore().asLiveData()
 
-    private val matchTeamScoreList = repository.getTeamMatchAndScore().asLiveData()
-
-
-
-    private fun getTeamScore(matchId: String, teamId: String): LiveData<TeamsScore> {
-        return repository.getTeamScore(teamId,matchId).asLiveData()
-    }
-
-    private fun getTeam(id: String): Flow<Team> {
-        return repository.getTeam(id)
-    }
 
 }

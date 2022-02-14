@@ -36,7 +36,8 @@ class MatchListAdapter : ListAdapter<MatchTeamTeamScore, RecyclerView.ViewHolder
         fun bind(item: MatchTeamTeamScore) {
             binding.apply {
                 matchInfo = item.match
-
+                scoreAndTeamA =item.teamAndTeamScore.first()
+                scoreAndTeamB =item.teamAndTeamScore.last()
                 executePendingBindings()
             }
         }

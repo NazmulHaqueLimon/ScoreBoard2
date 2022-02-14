@@ -25,14 +25,15 @@ class MatchListFragment : Fragment() {
     ): View {
 
         binding = FragmentMatchListBinding.inflate(inflater, container, false)
-
+        context ?: return binding.root
 
         //viewModel.createMatchInfoList()
 
         val adapter = MatchListAdapter()
         binding.matchList.adapter = adapter
-        //adapter.submitList(viewModel.matchInfoList)
-
+        viewModel.matchTeamScoreList.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
 
 
