@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="bowler"
+            type="com.example.scoreboard.data.objects.Player" />
+        <variable
+            name="bowlerScore"
+            type="com.example.scoreboard.data.objects.PlayersScore" />
+    </data>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<TableLayout
+    android:id="@+id/table_heading_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/bowler_name"
+            style="@style/table_row_item"
+            android:layout_width="wrap_content"
+            android:layout_column="0"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:text="@{}"
+            tools:text="Players Name"
+            android:background="@color/white"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/total_over"
+            style="@style/table_row_item"
+            android:layout_width="0dp"
+            android:layout_column="1"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            tools:text="over"
+            android:background="@color/white"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/wicket"
+            style="@style/table_row_item"
+            android:layout_width="0dp"
+            android:layout_column="2"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            tools:text="wicket"
+            android:background="@color/white"
+            android:baselineAligned="false"
+            android:textAlignment="center" />
+        <TextView
+            android:id="@+id/economy"
+            style="@style/table_row_item"
+            android:layout_width="0dp"
+            android:layout_column="2"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            tools:text="economy"
+            android:background="@color/white"
+            android:baselineAligned="false"
+            android:textAlignment="center" />
+
+    </TableRow>
+</TableLayout>
+
+</LinearLayout>
+</layout>

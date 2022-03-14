@@ -3,14 +3,14 @@ package com.example.scoreboard.data.objects
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class MatchTeamTeamScore(
+data class MatchPlayerScorePlayer(
     @Embedded val match: Match,
 
     @Relation(
-        entity = TeamsScore ::class,
+        entity = PlayersScore ::class,
         parentColumn = "matchId",
         entityColumn = "matchId"
     )
 
-    val teamAndTeamScore: List<TeamAndTeamScore>
+    val playerScoreAndPlayer : List<PlayerScoreAndPlayer>
 )

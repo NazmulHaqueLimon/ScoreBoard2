@@ -14,10 +14,10 @@ data class TeamsScore(
 
     var totalRun : Int=0,
     var wickLost : Int=0,
-    var sr : Double = 0.0,
+
     var extra :Int =0,
 
-    var overPlayed: Int=0,
+    var ballPlayed: Int=0,
     var wicketTaken :Int=0
 
 )

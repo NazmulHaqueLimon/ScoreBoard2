@@ -45,8 +45,7 @@ class NewMatchFragment : Fragment() {
                 navigateToTeamFragment("B")
             }
             matchViewModel._ground.value = textInputGround.editText?.text.toString()
-            // Get input text
-            //matchViewModel._ground.value=binding.textInputGround.editText?.text.toString()
+
 
         }
         binding.createMatchButton.setOnClickListener {
@@ -105,10 +104,10 @@ class NewMatchFragment : Fragment() {
         (binding.batFirst as? AutoCompleteTextView)?.setAdapter(teamsAdapter)
         binding.batFirst.setOnItemClickListener{_, _, i, _ ->
             if(teamsAdapter.getItem(i).toString() == teamA){
-                matchViewModel._teamA.value?.batFirst=true
+                matchViewModel._teamA.value?.isBat=true
             }
             else if(teamsAdapter.getItem(i).toString() == teamB){
-                matchViewModel.teamB.value?.batFirst=true
+                matchViewModel.teamB.value?.isBat=true
             }
 
         }

@@ -10,7 +10,8 @@ data class Match(
     val matchId:String = UUID.randomUUID().toString(),
     val teamA_id: String,
     val teamB_id:String,
-    var format: Int =0,
-    var ground: String,
-    var toss : String
+    val format: Int =0,
+    val isFinished :Boolean =false,
+    val ground: String,
+    val toss : String
     )

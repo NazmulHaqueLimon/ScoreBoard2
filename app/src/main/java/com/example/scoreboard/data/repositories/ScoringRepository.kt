@@ -15,7 +15,8 @@ class ScoringRepository @Inject constructor(
 ){
 
     fun getMatch(id:String) = matchDao.getMatch(id)
-    fun getPlayers() =playerDao.getPlayers()
+
+
     fun getTeamWithPlayers(teamId: String) =teamPlayersDao.getTeamWithPlayers(teamId)
 
 

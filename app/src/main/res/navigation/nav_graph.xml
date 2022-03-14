@@ -32,9 +32,7 @@
             android:name="match_id"
             app:argType="string"
             android:defaultValue="NO_ID"/>
-        <action
-            android:id="@+id/action_scoringFragment_to_matchDetailsFragment"
-            app:destination="@id/matchDetailsFragment" />
+
     </fragment>
 
     <fragment
@@ -51,6 +49,7 @@
         android:id="@+id/topPlayersFragment"
         android:name="com.example.scoreboard.fragments.TopPlayersFragment"
         android:label="TopPlayersFragment" />
+
     <fragment
         android:id="@+id/matchListFragment"
         android:name="com.example.scoreboard.fragments.MatchListFragment"
@@ -59,7 +58,10 @@
         <action
             android:id="@+id/action_matchListFragment_to_matchDetailsFragment"
             app:destination="@id/matchDetailsFragment" >
-
+            <argument
+                android:name="match_id"
+                app:argType="string"
+                />
         </action>
     </fragment>
     <fragment
@@ -70,7 +72,8 @@
             android:id="@+id/action_matchDetailsFragment_to_scoringFragment"
             app:destination="@id/scoringFragment" />
         <argument
-            android:name="matchId"
-            app:argType="string" />
+            android:name="match_id"
+            app:argType="string"
+            android:defaultValue="NO_ID"/>
     </fragment>
 </navigation>

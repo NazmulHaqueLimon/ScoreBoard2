@@ -45,56 +45,42 @@ class ScoringViewModel @Inject internal constructor(
      * */
     @ExperimentalCoroutinesApi
     val match :LiveData<Match> =matchId.flatMapLatest {
-        if (it == MATCH_ID){
             repository.getMatch(it)
-        }else{
-            repository.getMatch(it)
-        }
+
     }.asLiveData()
     
     /**
      * get the teams from the database
      * */
-
      @ExperimentalCoroutinesApi
-     private val teamA = match.switchMap { match ->
+      val teamA = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamA_id).asLiveData()
-    }
+     }
 
     @ExperimentalCoroutinesApi
-    private val teamB = match.switchMap { match ->
+     val teamB = match.switchMap { match ->
         repository.getTeamWithPlayers(match.teamB_id).asLiveData()
     }
-
 
     /**
      * get the batting team with players
      */
-    @ExperimentalCoroutinesApi
-    val battingTeamWithPlayers :LiveData<TeamWithPlayers> = getBattingTeam()
+    val _battingTeamWithPlayers = MutableLiveData<TeamWithPlayers>()
+    val battingTeamWithPlayers:LiveData<TeamWithPlayers> =_battingTeamWithPlayers
 
     @ExperimentalCoroutinesApi
     val batsmans: LiveData<List<Player>> = Transformations.map(battingTeamWithPlayers) {
         it.playerList
-
     }
 
-    @ExperimentalCoroutinesApi
-    private fun getBattingTeam():LiveData<TeamWithPlayers>{
-        return if (teamA.value?.team?.batFirst == true){
-            teamA
-        }else{
-            teamB
-        }
-    }
+
     /**
      * get the bowling team with players
      */
     @ExperimentalCoroutinesApi
-    private val _bowlingTeamWithPlayers  = MutableLiveData(getBowlingTeam())
-
+    val _bowlingTeamWithPlayers  = MutableLiveData<TeamWithPlayers>()
     @ExperimentalCoroutinesApi
-    val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = getBowlingTeam()
+    val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> = _bowlingTeamWithPlayers
 
     @ExperimentalCoroutinesApi
     val bowlers: LiveData<List<Player>> = Transformations.map(bowlingTeamWithPlayers) {
@@ -102,20 +88,11 @@ class ScoringViewModel @Inject internal constructor(
 
     }
 
-    @ExperimentalCoroutinesApi
-    private fun getBowlingTeam(): LiveData<TeamWithPlayers> {
-        return if (teamA.value?.team?.batFirst == true){
-            teamB
-        }else{
-            teamA
-        }
-    }
-
 
     /**
      * selected batsman from the dropdowns
      * */
-    private val _isFirstInningsDone = MutableLiveData<Boolean>(false)
+    val _isFirstInningsDone = MutableLiveData<Boolean>(false)
     val isFirstInningsDone:LiveData<Boolean> =_isFirstInningsDone
 
     private val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
@@ -201,21 +178,21 @@ class ScoringViewModel @Inject internal constructor(
         val newScore :PlayersScore
         when (runsTaken) {
             1 -> {
-                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                newScore = playerScore.copy(totalRun = playerScore.totalRun+runsTaken, ballFaced = playerScore.ballFaced+1)
                 changeStrike()
             }
             2 -> {
-                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                newScore = playerScore.copy(totalRun = playerScore.totalRun+runsTaken, ballFaced = playerScore.ballFaced+1)
             }
             3 -> {
-                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1)
+                newScore = playerScore.copy(totalRun = playerScore.totalRun+runsTaken, ballFaced = playerScore.ballFaced+1)
                 changeStrike()
             }
             4 -> {
-                newScore = playerScore.copy(run = playerScore.run+runsTaken, fours = playerScore.fours+1, ballFaced = playerScore.ballFaced+1)
+                newScore = playerScore.copy(totalRun = playerScore.totalRun+runsTaken, fours = playerScore.fours+1, ballFaced = playerScore.ballFaced+1)
             }
             else ->{
-                newScore = playerScore.copy(run = playerScore.run+runsTaken, ballFaced = playerScore.ballFaced+1, sixes = playerScore.sixes+1)
+                newScore = playerScore.copy(totalRun = playerScore.totalRun+runsTaken, ballFaced = playerScore.ballFaced+1, sixes = playerScore.sixes+1)
             }
         }
         updatePlayerScore(newScore)
@@ -234,7 +211,7 @@ class ScoringViewModel @Inject internal constructor(
         }
 
         battingTeamScore.value?.let {
-            val newScore =it.copy(totalRun = it.totalRun+runsTaken, overPlayed = (it.overPlayed +1)%6)
+            val newScore =it.copy(totalRun = it.totalRun+runsTaken, ballPlayed = it.ballPlayed +1)
             updateTeamScore(newScore)
         }
         bowlersScore.value?.let {
@@ -273,13 +250,13 @@ class ScoringViewModel @Inject internal constructor(
     }
     @ExperimentalCoroutinesApi
     fun inningsBreak(){
-        //batting team and bowling teams update with changes
+
         battingTeamWithPlayers.value?.team?.let {
-            val team =it.copy(batFirst = false)
+            val team =it.copy(isBat = false)
             updateTeam(team)
         }
         bowlingTeamWithPlayers.value?.team?.let {
-            val team =it.copy(batFirst = true)
+            val team =it.copy(isBat = true)
             updateTeam(team)
         }
     }
@@ -295,12 +272,12 @@ class ScoringViewModel @Inject internal constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onBatsmanAOut() {
         val batsman = batsmanA.value?.copy(isOut = true)
         if (batsman != null) {
             updatePlayer(batsman)
         }
-        inningsBreak()
     }
 
     private fun updatePlayer(batsman: Player) {

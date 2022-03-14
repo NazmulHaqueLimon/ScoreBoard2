@@ -12,14 +12,15 @@
             type="com.example.scoreboard.data.objects.Match" />
         <variable
             name="ScoreAndTeamA"
-            type="com.example.scoreboard.data.objects.TeamAndTeamScore" />
+            type="com.example.scoreboard.data.objects.TeamScoreAndTeam" />
         <variable
             name="ScoreAndTeamB"
-            type="com.example.scoreboard.data.objects.TeamAndTeamScore" />
+            type="com.example.scoreboard.data.objects.TeamScoreAndTeam" />
 
 
     </data>
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/matchItemCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

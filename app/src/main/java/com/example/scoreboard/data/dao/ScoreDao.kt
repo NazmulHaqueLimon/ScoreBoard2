@@ -1,10 +1,7 @@
 package com.example.scoreboard.data.dao
 
 import androidx.room.*
-import com.example.scoreboard.data.objects.MatchTeamTeamScore
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.data.objects.PlayersScore
-import com.example.scoreboard.data.objects.TeamsScore
+import com.example.scoreboard.data.objects.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -33,8 +30,6 @@ interface ScoreDao {
     @Query("SELECT * FROM teamScore WHERE  teamId=:tid AND matchId=:mId")
     fun getTeamScore(tid:String,mId:String): Flow<TeamsScore>
 
-    @Transaction
-    @Query("SELECT * FROM matches")
-    fun getMatchTeamAndScore():Flow<List<MatchTeamTeamScore>>
+
 
 }

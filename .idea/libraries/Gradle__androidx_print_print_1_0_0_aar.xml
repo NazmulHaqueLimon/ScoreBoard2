@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.print:print:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/d2539af7bd18bcd4b9893131cbb1cee2/transformed/print-1.0.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/141a6fa1a20e7eb37e7e5302a2fed1d9/transformed/print-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/67302238c0ccb2e9376add22c9a23d5d/transformed/print-1.0.0/res" />
@@ -12,9 +12,10 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/4893eb9cfd4c7648c67a534f76f162d8/transformed/print-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/2bb336fa61ebd2f058af0eb57bc3d044/transformed/print-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/8a2901673fc68fb833361de0aa4a9086/transformed/print-1.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/d2539af7bd18bcd4b9893131cbb1cee2/transformed/print-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/d2539af7bd18bcd4b9893131cbb1cee2/transformed/print-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/d2539af7bd18bcd4b9893131cbb1cee2/transformed/print-1.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/141a6fa1a20e7eb37e7e5302a2fed1d9/transformed/print-1.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/141a6fa1a20e7eb37e7e5302a2fed1d9/transformed/print-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/141a6fa1a20e7eb37e7e5302a2fed1d9/transformed/print-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

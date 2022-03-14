@@ -14,7 +14,7 @@ data class PlayersScore(
 
     var fours :Int=0,
     var sixes :Int =0,
-    var run : Int=0,
+    var totalRun : Int=0,
     var ballFaced : Int=0,
 
     var runGiven :Int =0,

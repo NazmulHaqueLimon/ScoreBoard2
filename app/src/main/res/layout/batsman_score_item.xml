@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="batsman"
+            type="com.example.scoreboard.data.objects.Player" />
+        <variable
+            name="batsmanScore"
+            type="com.example.scoreboard.data.objects.PlayersScore" />
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/table_heading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/bowler_name"
+                style="@style/table_row_item"
+                android:layout_width="wrap_content"
+                android:layout_column="0"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="Players Name"
+                android:text="@{batsman.name.toString()}"
+
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/total_run"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="run"
+                android:text="@{Integer.toString(batsmanScore.totalRun)}"
+
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/total_balls"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="balls"
+                android:text="@{Integer.toString(batsmanScore.ballFaced)}"
+                android:baselineAligned="false"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/total_fours"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="4's"
+                android:text="@{Integer.toString(batsmanScore.fours)}"
+                android:baselineAligned="false"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/total_sixes"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="6's"
+                android:text="@{Integer.toString(batsmanScore.sixes)}"
+                android:baselineAligned="false"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/strike_rate"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                tools:text="SR"
+                android:baselineAligned="false"
+                android:textAlignment="center" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
+</layout>

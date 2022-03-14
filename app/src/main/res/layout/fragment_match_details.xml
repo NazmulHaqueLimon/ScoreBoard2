@@ -1,17 +1,422 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <FrameLayout
+
+     <data>
+            <import type="com.example.scoreboard.data.objects.Team"/>
+            <import type="com.example.scoreboard.data.objects.Match"/>
+            <import type="com.example.scoreboard.data.objects.Player"/>
+            <import type="com.example.scoreboard.data.objects.TeamWithPlayers"/>
+            <import type="com.example.scoreboard.data.objects.PlayerScoreAndPlayer"/>
+             <import type="com.example.scoreboard.data.objects.MatchTeamScoreTeam"/>
+             <variable
+                   name="viewModel"
+                   type="com.example.scoreboard.viewmodels.MatchDetailsViewmodel" />
+     </data>
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.MatchDetailsFragment">
+        android:background="@color/themeB2">
 
-        <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.ScoringFragment">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="TeamA won the toss and elected to bat first. teamB won by 5 wickets"
+            android:textAlignment="center"
+            android:textColorHint="#0B7168"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </FrameLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/themeB2"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView3"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="29dp">
+
+                <ImageView
+                    android:id="@+id/team_logo1"
+                    android:layout_width="44dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Team Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_group" />
+
+                <TextView
+                    android:id="@+id/team_1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/team_name"
+                    android:text="@{viewModel.battingTeamAndScore.team.name.toString()}"
+                    android:textColor="#0A6E64"
+                    android:textColorHint="#0B7168"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/team_1_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/team_logo1" />
+
+
+                <TextView
+                    android:id="@+id/team_1_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/total_score"
+                    android:text="@{Integer.toString(viewModel.battingTeamAndScore.score.totalRun)}"
+                    android:textColorHint="#0B7168"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/imageView"
+            android:layout_width="43dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="6dp"
+            android:text="VS"
+            android:textAlignment="center"
+            android:textColor="#096159"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView3"
+            app:layout_constraintEnd_toStartOf="@+id/materialCardView2"
+            app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:backgroundTint="@color/themeB2"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="29dp">
+
+                <ImageView
+                    android:id="@+id/team_logo2"
+                    android:layout_width="44dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_group" />
+
+                <TextView
+                    android:id="@+id/team_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/team_name"
+                    android:text="@{viewModel.bowlingTeamAndScore.team.name.toString()}"
+                    android:textColor="#0A6E64"
+                    android:textColorHint="#0B7168"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/team_2_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/team_logo2" />
+
+
+                <TextView
+                    android:id="@+id/team_2_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/total_score"
+                    android:text="@{Integer.toString(viewModel.bowlingTeamAndScore.score.totalRun)}"
+                    android:textColorHint="#0B7168"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/themeB2"
+            app:cardElevation="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="215dp">
+
+                <TableLayout
+                    android:id="@+id/table_heading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:stretchColumns="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_column="0"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Player Name"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="1"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="run"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="balls"
+                            android:textAlignment="center" />
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="4's"
+                            android:textAlignment="center" />
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="6's"
+                            android:textAlignment="center" />
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="SR"
+                            android:textAlignment="center" />
+                    </TableRow>
+                </TableLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/batsman_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    tools:listitem="@layout/batsman_score_item"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/table_heading_layout">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/themeB2"
+            app:cardElevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="215dp">
+
+                <TableLayout
+                    android:id="@+id/table_heading_layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_column="0"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Player Name"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="1"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="over"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="run"
+                            android:textAlignment="center" />
+                        <TextView
+                            style="@style/table_header"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_column="2"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingEnd="5dp"
+                            android:text="wicket"
+                            android:textAlignment="center" />
+
+                    </TableRow>
+                </TableLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bowlers_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    tools:listitem="@layout/bowler_score_item"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/table_heading_layout2">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
 </layout>

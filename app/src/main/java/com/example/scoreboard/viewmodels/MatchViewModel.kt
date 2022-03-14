@@ -60,8 +60,8 @@ class MatchViewModel @Inject internal constructor(
                     teamA_id = id!!,
                     teamB_id = id2!!,
                     format = frmt!!,
-                    ground = grnd.toString(),
-                    toss = toss.toString()
+                    ground = grnd!!,
+                    toss = toss!!
       )
         _match.value=match
     }

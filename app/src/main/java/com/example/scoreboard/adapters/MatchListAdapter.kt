@@ -7,12 +7,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scoreboard.data.objects.MatchTeamTeamScore
+import com.example.scoreboard.data.objects.MatchTeamScoreTeam
 import com.example.scoreboard.databinding.MatchItemBinding
 import com.example.scoreboard.fragments.MatchListFragmentDirections
 
 
-class MatchListAdapter : ListAdapter<MatchTeamTeamScore, RecyclerView.ViewHolder>(PlantDiffCallback()) {
+class MatchListAdapter : ListAdapter<MatchTeamScoreTeam, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MatchViewHolder(
@@ -33,21 +33,25 @@ class MatchListAdapter : ListAdapter<MatchTeamTeamScore, RecyclerView.ViewHolder
         private val binding: MatchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MatchTeamTeamScore) {
+        fun bind(item: MatchTeamScoreTeam) {
             binding.apply {
                 matchInfo = item.match
-                scoreAndTeamA =item.teamAndTeamScore.first()
-                scoreAndTeamB =item.teamAndTeamScore.last()
+                scoreAndTeamA =item.teamScoreAndTeam.first()
+                scoreAndTeamB =item.teamScoreAndTeam.last()
+
                 executePendingBindings()
+            }
+            binding.matchItemCard.setOnClickListener {
+                navigateToMatchDetails(item.match.matchId,it)
             }
         }
 
 
         private fun navigateToMatchDetails(
-            matchId: String,
+            id: String,
             view: View
         ) {
-            val direction = MatchListFragmentDirections.actionMatchListFragmentToMatchDetailsFragment(matchId)
+            val direction = MatchListFragmentDirections.actionMatchListFragmentToMatchDetailsFragment(id)
             view.findNavController().navigate(direction)
         }
 
@@ -55,13 +59,13 @@ class MatchListAdapter : ListAdapter<MatchTeamTeamScore, RecyclerView.ViewHolder
     }
 }
 
-private class PlantDiffCallback : DiffUtil.ItemCallback<MatchTeamTeamScore>() {
+private class PlantDiffCallback : DiffUtil.ItemCallback<MatchTeamScoreTeam>() {
 
-    override fun areItemsTheSame(oldItem: MatchTeamTeamScore, newItem: MatchTeamTeamScore): Boolean {
+    override fun areItemsTheSame(oldItem: MatchTeamScoreTeam, newItem: MatchTeamScoreTeam): Boolean {
         return oldItem.match.matchId == newItem.match.matchId
     }
 
-    override fun areContentsTheSame(oldItem: MatchTeamTeamScore, newItem: MatchTeamTeamScore): Boolean {
+    override fun areContentsTheSame(oldItem: MatchTeamScoreTeam, newItem: MatchTeamScoreTeam): Boolean {
         return oldItem == newItem
     }
 }

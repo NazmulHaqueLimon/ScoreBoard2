@@ -1,6 +1,7 @@
 package com.example.scoreboard.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +52,44 @@ class ScoringFragment : Fragment() {
         setBatsmanDropDown()
         setBowlerDropDown()
         //scoringViewModel.createScoreSheet()
+        scoringViewModel.teamA.observe(viewLifecycleOwner){
+            it.team.isBat.let { Bat->
+                if (Bat){
+                    scoringViewModel._battingTeamWithPlayers.value=it
+                }
+                else{
+                    scoringViewModel._bowlingTeamWithPlayers.value =it
+                }
+            }
+        }
+        scoringViewModel.teamB.observe(viewLifecycleOwner){
+            it.team.isBat.let { Bat->
+                if (Bat){
+                    scoringViewModel._battingTeamWithPlayers.value=it
+                }
+                else{
+                    scoringViewModel._bowlingTeamWithPlayers.value=it
+                }
+            }
+        }
+        scoringViewModel.isFirstInningsDone.observe(viewLifecycleOwner){
+            if (it){
+                scoringViewModel.inningsBreak()
+                setBatsmanDropDown()
+                setBowlerDropDown()
+            }
+        }
+        scoringViewModel.battingTeamScore.observe(viewLifecycleOwner){
 
+            val over =it.ballPlayed/6
+            scoringViewModel.match.value?.let { match ->
+                if ( over == match.format ){
+                    scoringViewModel._isFirstInningsDone.value=true
+                }
+            }
+
+            //Log.d("LaunchList", "Success $over")
+        }
 
 
         return binding.root
@@ -91,6 +129,7 @@ class ScoringFragment : Fragment() {
             val batsmanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, batsmanNames)
             (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
             (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
+
 
             binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
                 players.map { player ->

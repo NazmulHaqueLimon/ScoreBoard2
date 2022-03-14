@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import com.example.scoreboard.R
 import com.example.scoreboard.adapters.MatchListAdapter
 import com.example.scoreboard.databinding.FragmentMatchListBinding
-import com.example.scoreboard.databinding.FragmentNewMatchBinding
 import com.example.scoreboard.viewmodels.MatchInfoViewModel
 
 /**

@@ -118,7 +118,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginBottom="4dp"
                         android:hint="@string/over_played"
-                        android:text="@{Integer.toString(viewModel.battingTeamScore.overPlayed)}"
+                        android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
                         android:textColor="#171616"
                         android:textColorHint="#0B7168"
                         android:textStyle="bold"
@@ -134,7 +134,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"
                 android:layout_width="350dp"
-                android:layout_height="33dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/purple_200"
@@ -143,14 +143,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="215dp">
+                <androidx.recyclerview.widget.RecyclerView
+                     android:layout_height="match_parent"
+                     android:layout_width="match_parent"
+                     android:orientation="horizontal"
+                    android:layout_margin="2dp"
+                     tools:listitem="@layout/last_score"/>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -275,7 +274,7 @@
                             android:id="@+id/textView10"
                             android:layout_width="55dp"
                             android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanAScore.run)}"
+                            android:text="@{Integer.toString(viewModel.batsmanAScore.totalRun)}"
                             android:textAlignment="center"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -344,7 +343,7 @@
                             android:id="@+id/textView14"
                             android:layout_width="55dp"
                             android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanBScore.run)}"
+                            android:text="@{Integer.toString(viewModel.batsmanBScore.totalRun)}"
                             android:textAlignment="center"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -412,7 +411,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:onClick="@{()-> viewModel.changeStrike()}"
                         android:text="Undo "
                         android:textAlignment="center"
@@ -521,7 +520,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:text="@string/nb"
                         android:textColor="#0D736A"
                         android:textStyle="bold"
@@ -534,7 +533,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:text="@string/lb"
                         android:textColor="#0F7168"
                         android:textStyle="bold"
@@ -547,7 +546,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:padding="0dp"
                         android:text="@string/wide"
                         android:textColor="#0B786E"
@@ -562,7 +561,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="4dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:padding="0dp"
                         android:text="@string/byeRun"
                         android:textColor="#0B786E"
@@ -576,7 +575,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/themeA1"
                         android:padding="0dp"
                         android:text="@string/out"
                         android:textColor="#0B8075"
@@ -632,7 +631,7 @@
 
                           <TextView
                               android:id="@+id/textViewB1"
-                              android:layout_width="110dp"
+                              android:layout_width="115dp"
                               android:layout_height="match_parent"
                               android:text="@string/bowler"
                               android:textAlignment="center"

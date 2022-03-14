@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MatchInfoViewModel @Inject internal constructor(
 
     private val repository: MatchInfoRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedState: SavedStateHandle
 
 ): ViewModel() {
 
