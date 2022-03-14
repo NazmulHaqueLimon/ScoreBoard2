@@ -34,16 +34,11 @@ class MatchDetailsFragment : Fragment() {
 
         binding = FragmentMatchDetailsBinding.inflate(inflater,container,false).apply {
             viewModel = detailsViewModel
-            args.matchId.let {id->
-                if (id == "NO_ID"){
-                    savedInstanceState?.getString(MATCH_ID_KEY)?.let {
-                        detailsViewModel.setMatchId(it)
-                    }
-                }else{
-                    detailsViewModel.setMatchId(args.matchId)
+            lifecycleOwner=viewLifecycleOwner
 
-                }
-            }
+        }
+        args.matchId.let {
+            detailsViewModel.setMatchId(it)
 
         }
 
@@ -125,10 +120,12 @@ class MatchDetailsFragment : Fragment() {
                     }
 
                 }
+
             }
+            batsmanScoreAdapter.submitList(batsmanAndScore)
+            bowlerScoreAdapter.submitList(bowlerAndScore)
         }
-        batsmanScoreAdapter.submitList(batsmanAndScore)
-        bowlerScoreAdapter.submitList(bowlerAndScore)
+
 
     }
     companion object {

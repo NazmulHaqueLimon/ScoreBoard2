@@ -37,17 +37,16 @@ class ScoringFragment : Fragment() {
         binding= FragmentScoringBinding.inflate(inflater,container,false).apply {
             viewModel=scoringViewModel
             lifecycleOwner=viewLifecycleOwner
-            args.matchId.let { id ->
-                if (id == "NO_ID"){
-                    savedInstanceState?.getString(MATCH_ID_KEY)?.let {
-                        scoringViewModel.setMatchId(it)
-                    }
-                }else{
-                    scoringViewModel.setMatchId(args.matchId)
-
+        }
+        args.matchId.let { id ->
+            if (id == "NO_ID"){
+                savedInstanceState?.getString(MATCH_ID_KEY)?.let {
+                    scoringViewModel.setMatchId(it)
                 }
-            }
+            }else{
+                scoringViewModel.setMatchId(args.matchId)
 
+            }
         }
         setBatsmanDropDown()
         setBowlerDropDown()
@@ -368,7 +367,7 @@ class ScoringFragment : Fragment() {
     }
 
     companion object {
-        private const val MATCH_ID_KEY = "MATCH_ID"
+        private const val MATCH_ID_KEY = "match_id"
     }
 
 }

@@ -33,16 +33,18 @@ class MatchListAdapter : ListAdapter<MatchTeamScoreTeam, RecyclerView.ViewHolder
         private val binding: MatchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+
         fun bind(item: MatchTeamScoreTeam) {
             binding.apply {
                 matchInfo = item.match
-                scoreAndTeamA =item.teamScoreAndTeam.first()
-                scoreAndTeamB =item.teamScoreAndTeam.last()
-
+                scoreAndTeamA = item.teamScoreAndTeam[0]
+                scoreAndTeamB =item.teamScoreAndTeam[1]
+                setClickListener {
+                    item.match.matchId.let { id->
+                        navigateToMatchDetails(id,it)
+                    }
+                }
                 executePendingBindings()
-            }
-            binding.matchItemCard.setOnClickListener {
-                navigateToMatchDetails(item.match.matchId,it)
             }
         }
 

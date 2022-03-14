@@ -111,6 +111,6 @@ class MatchDetailsViewmodel @Inject internal constructor(
 
     companion object {
         private const val NO_MATCH_ID = "NO_MATCH_ID"
-        private const val MATCH_ID = "MATCH_ID"
+        private const val MATCH_ID = "match_id"
     }
 }

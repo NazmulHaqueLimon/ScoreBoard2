@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scoreboard.data.objects.PlayerScoreAndPlayer
+import com.example.scoreboard.databinding.BatsmanScoreItemBinding
 import com.example.scoreboard.databinding.BowlerScoreItemBinding
 
 
@@ -13,7 +14,7 @@ class BatsmanScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlayerScoreViewHolder(
-            BowlerScoreItemBinding.inflate(
+            BatsmanScoreItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,13 +30,13 @@ class BatsmanScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewH
 
 
     class PlayerScoreViewHolder(
-        private val binding: BowlerScoreItemBinding
+        private val binding: BatsmanScoreItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PlayerScoreAndPlayer) {
             binding.apply {
-                bowler =item.player
-                bowlerScore =item.score
+                batsman =item.player
+                batsmanScore =item.score
                 executePendingBindings()
             }
         }

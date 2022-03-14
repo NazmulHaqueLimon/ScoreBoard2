@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scoreboard.data.objects.PlayerScoreAndPlayer
 import com.example.scoreboard.databinding.BatsmanScoreItemBinding
+import com.example.scoreboard.databinding.BowlerScoreItemBinding
 
 
-class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHolder>(bowlerScoreDiffUtilCallback()) {
+class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHolder>(BowlerScoreDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlayerScoreViewHolder(
-            BatsmanScoreItemBinding.inflate(
+            BowlerScoreItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,20 +30,20 @@ class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHo
 
 
     class PlayerScoreViewHolder(
-        private val binding: BatsmanScoreItemBinding
+        private val binding: BowlerScoreItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PlayerScoreAndPlayer) {
             binding.apply {
-                batsman =item.player
-                batsmanScore =item.score
+                bowler =item.player
+                bowlerScore =item.score
                 executePendingBindings()
             }
         }
     }
 
 }
-private class bowlerScoreDiffUtilCallback : DiffUtil.ItemCallback<PlayerScoreAndPlayer>() {
+private class BowlerScoreDiffUtilCallback : DiffUtil.ItemCallback<PlayerScoreAndPlayer>() {
 
     override fun areItemsTheSame(oldItem: PlayerScoreAndPlayer, newItem: PlayerScoreAndPlayer): Boolean {
         return oldItem.player.id == newItem.player.id
