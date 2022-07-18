@@ -20,7 +20,7 @@ interface PlayerDao {
    // @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
     //fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): Flow<List<Plant>>
 
-    @Query("SELECT * FROM players WHERE id = :playerId")
+    @Query("SELECT * FROM players WHERE playerId = :playerId")
     fun getPlayer(playerId: String): Flow<Player>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

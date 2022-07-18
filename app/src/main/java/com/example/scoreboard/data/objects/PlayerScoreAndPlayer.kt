@@ -7,7 +7,7 @@ data class PlayerScoreAndPlayer(
     @Embedded val score:PlayersScore,
     @Relation(
         parentColumn = "playerId",
-        entityColumn = "id",
+        entityColumn = "playerId",
     )
     val player :Player
 )

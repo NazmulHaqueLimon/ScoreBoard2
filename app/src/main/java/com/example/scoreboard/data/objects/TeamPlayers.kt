@@ -2,8 +2,8 @@ package com.example.scoreboard.data.objects
 
 import androidx.room.Entity
 
-@Entity(primaryKeys = ["teamId","id"])
+@Entity(primaryKeys = ["teamId","playerId"])
 data class TeamPlayers(
     val teamId: String,
-    val id: String
+    val playerId: String
     )

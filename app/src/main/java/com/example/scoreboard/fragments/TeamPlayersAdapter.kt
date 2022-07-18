@@ -38,7 +38,7 @@ class TeamPlayersAdapter : ListAdapter<Player, RecyclerView.ViewHolder>(PlayerDi
 private class PlayerDiffCallback : DiffUtil.ItemCallback<Player>() {
 
     override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.playerId == newItem.playerId
     }
 
     override fun areContentsTheSame(oldItem: Player, newItem: Player): Boolean {

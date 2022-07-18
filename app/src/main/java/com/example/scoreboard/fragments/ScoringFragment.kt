@@ -236,6 +236,7 @@ class ScoringFragment : Fragment() {
         popupPlayers.show()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun openScoringOptions(type:String){
         val listPopupScores = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
@@ -357,7 +358,7 @@ class ScoringFragment : Fragment() {
 
             }
             // Dismiss popup.
-            //listPopupWindowNb.dismiss()
+            listPopupWindowNb.dismiss()
         }
 
         // Show list popup window on button click.

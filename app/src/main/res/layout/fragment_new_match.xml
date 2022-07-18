@@ -12,336 +12,336 @@
 
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/themeB2">
 
+        <TextView
+            android:id="@+id/titleText_tv"
+            android:layout_width="0dp"
+            android:layout_height="29dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/start_a_new_match"
+            android:textAlignment="center"
+            android:textColor="#0B5951"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="144dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="4dp"
-                android:text="@string/start_a_new_match"
-                android:textColor="#0B5951"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="wrap_content"
+            android:id="@+id/teamsCl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/titleText_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/teamACv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/themeB2"
+                android:clickable="true"
+                android:focusable="true"
+                android:elevation="6dp"
+                android:layout_margin="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@id/icon_top"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <ImageView
+                        android:id="@+id/team_logo1"
+                        android:layout_width="50dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/teamImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_group" />
+                    <TextView
+                        android:id="@+id/team_1_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/add_team"
+                        android:textColorHint="#04675E"
+                        android:text="@{viewModel.teamA.name}"
+                        android:textColor="#04675E"
+                        android:textSize="14sp"
+                        android:layout_margin="8dp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/team_logo1" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView1"
-                    android:layout_width="90dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardElevation="6dp"
-                    android:backgroundTint="@color/themeB2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+            </com.google.android.material.card.MaterialCardView>
 
-                        <ImageView
-                            android:id="@+id/teamImage1"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_margin="5dp"
-                            app:srcCompat="@drawable/ic_cricket_batting" />
-
-                        <TextView
-                            android:id="@+id/team_txt"
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:hint="@string/add_team"
-                            android:text="@{viewModel.teamA.name}"
-                            android:textAlignment="center"
-                            android:textColor="#191616"
-                            android:textColorHint="#04675E"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="90dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="@color/themeB2"
-                    app:cardElevation="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/teamImage2"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_margin="5dp"
-                            app:srcCompat="@drawable/ic_cricket_batting" />
-
-                        <TextView
-                            android:id="@+id/teamB_txt"
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:hint="@string/add_team"
-                            android:text="@{viewModel.teamB.name}"
-                            android:textAlignment="center"
-                            android:textColor="#191616"
-                            android:textColorHint="#086C63"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:id="@+id/imageView"
-                    android:layout_width="43dp"
-                    android:layout_height="39dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:elevation="6dp"
-                    android:text="VS"
-                    android:textAlignment="center"
-                    android:textColor="#096159"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView2"
-                    app:layout_constraintStart_toEndOf="@+id/cardView1"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="309dp"
-                android:layout_height="324dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ImageView
+                android:id="@+id/icon_top"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_cricket__11_crossbat"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/image_ground"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-
-                    android:elevation="6dp"
-                    android:focusable="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_cricket_ground">
-
-                </ImageView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInput_ground"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:elevation="6dp"
-                    android:hint="@string/name_of_ur_cricket_ground"
-                    android:textColorHint="#0F655D"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/image_ground"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/groundText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="true"
-                        android:inputType="text"
-                        android:textStyle="bold"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <ImageView
-                    android:id="@+id/image_over"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="28dp"
-                    android:elevation="6dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_ground"
-                    app:srcCompat="@drawable/ic_cricket__red_ball">
-
-                </ImageView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputOvers"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:hint="@string/select_over"
-                    android:textColorHint="#0A675E"
-                    app:helperTextEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/image_over"
-                    app:layout_constraintTop_toBottomOf="@+id/textInput_ground">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/format_selection"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="true"
-                        android:inputType="none"
-                        android:textStyle="bold" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/image_toss"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="28dp"
-
-                    android:elevation="6dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_over"
-                    app:srcCompat="@drawable/ic_coin_toss">
-
-                </ImageView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInput_toss"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:hint="@string/toss_won_by"
-                    android:textColorHint="#0B7168"
-                    app:helperTextEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/image_toss"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputOvers">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/toss_selection"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="true"
-                        android:inputType="none"
-                        android:textStyle="bold" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <ImageView
-                    android:id="@+id/image_bat_first"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
-
-                    android:elevation="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_toss"
-                    app:srcCompat="@drawable/ic_cricket__2_stump">
-
-                </ImageView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInput_bat_first"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:hint="@string/bat_first"
-                    android:textColorHint="#0E786E"
-                    app:helperTextEnabled="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/image_bat_first"
-                    app:layout_constraintTop_toBottomOf="@+id/textInput_toss">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/bat_first"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="true"
-                        android:inputType="none"
-                        android:textStyle="bold"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/create_match_button"
-                android:layout_width="176dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/buttons"
-                android:text="@string/start_scoring"
-                android:textColor="#1D756D"
-                android:textSize="16sp"
-                android:textStyle="bold"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/teamBCv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/themeB2"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:elevation="6dp"
+                app:layout_constraintStart_toEndOf="@id/icon_top"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.541"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="0.0"
-                app:strokeColor="#009688" />
+                app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <ImageView
+                        android:id="@+id/team_logo2"
+                        android:layout_width="50dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_group" />
+                    <TextView
+                        android:id="@+id/team_name2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:textAlignment="center"
+                        android:hint="@string/add_team"
+                        android:textColorHint="#04675E"
+                        android:text="@{viewModel.teamB.name}"
+                        android:textColor="#0A6E64"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/team_logo2" />
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/teamsCl"
+            app:layout_constraintStart_toStartOf="@+id/teamsCl"
+            app:layout_constraintTop_toBottomOf="@+id/teamsCl">
+
+            <ImageView
+                android:id="@+id/image_ground"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cricket_ground">
+
+            </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_ground"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/name_of_ur_cricket_ground"
+                android:textColorHint="#0F655D"
+                app:layout_constraintBottom_toBottomOf="@+id/image_ground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_ground"
+                app:layout_constraintTop_toTopOf="@+id/image_ground">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/groundText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:id="@+id/image_over"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                android:elevation="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_ground"
+                app:srcCompat="@drawable/ic_cricket__red_ball">
+
+            </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputOvers"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/select_over"
+                android:textColorHint="#0A675E"
+                app:helperTextEnabled="false"
+                app:layout_constraintBottom_toBottomOf="@+id/image_over"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_over"
+                app:layout_constraintTop_toTopOf="@+id/image_over">
+
+                <AutoCompleteTextView
+                    android:id="@+id/format_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:inputType="none"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/image_toss"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                android:elevation="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_over"
+                app:srcCompat="@drawable/ic_coin_toss">
+
+            </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_toss"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/toss_won_by"
+                android:textColorHint="#0B7168"
+                app:helperTextEnabled="false"
+                app:layout_constraintBottom_toBottomOf="@+id/image_toss"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_toss"
+                app:layout_constraintTop_toTopOf="@+id/image_toss">
+
+                <AutoCompleteTextView
+                    android:id="@+id/toss_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:inputType="none"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:id="@+id/image_bat_first"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_toss"
+                app:srcCompat="@drawable/ic_cricket__2_stump">
+
+            </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_bat_first"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/bat_first"
+
+                android:textColorHint="#0E786E"
+                app:helperTextEnabled="false"
+                app:layout_constraintBottom_toBottomOf="@+id/image_bat_first"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_bat_first"
+                app:layout_constraintTop_toTopOf="@+id/image_bat_first">
+
+                <AutoCompleteTextView
+                    android:id="@+id/bat_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:inputType="none"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/create_match_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:backgroundTint="@color/buttons"
+            android:drawableEnd="@drawable/ic_sports_cricket_black_24dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/start_scoring"
+            android:textColor="#0B5951"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

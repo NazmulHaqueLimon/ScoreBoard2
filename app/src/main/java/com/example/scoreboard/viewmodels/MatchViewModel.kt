@@ -89,13 +89,13 @@ class MatchViewModel @Inject internal constructor(
          val teamAId = teamA.value?.teamId
          val teamBId = teamB.value?.teamId
          teamAplayers.value?.map { player ->
-             val teamPlayer= teamAId?.let { TeamPlayers(it,player.id) }
+             val teamPlayer= teamAId?.let { TeamPlayers(it,player.playerId) }
              if (teamPlayer != null) {
                  insertTeamPlayers(teamPlayer)
              }
          }
          teamBplayers.value?.map {player->
-             val teamPlayer= teamBId?.let { TeamPlayers(it,player.id) }
+             val teamPlayer= teamBId?.let { TeamPlayers(it,player.playerId) }
              if (teamPlayer != null) {
                  insertTeamPlayers(teamPlayer)
 
@@ -149,10 +149,10 @@ class MatchViewModel @Inject internal constructor(
     @ExperimentalCoroutinesApi
     fun createScoreSheet() {
         teamAplayers.value?.map {
-            openPlayerScoreSheet(it.id)
+            openPlayerScoreSheet(it.playerId)
         }
         teamBplayers.value?.map {
-            openPlayerScoreSheet(it.id)
+            openPlayerScoreSheet(it.playerId)
         }
         teamA.value?.let {
             openTeamScoreSheet(it.teamId)

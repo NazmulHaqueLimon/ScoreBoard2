@@ -47,7 +47,7 @@ class BatsmanScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewH
 private class BatsManScoreDiffUtilCallback : DiffUtil.ItemCallback<PlayerScoreAndPlayer>() {
 
     override fun areItemsTheSame(oldItem: PlayerScoreAndPlayer, newItem: PlayerScoreAndPlayer): Boolean {
-        return oldItem.player.id == newItem.player.id
+        return oldItem.player.playerId == newItem.player.playerId
     }
 
     override fun areContentsTheSame(oldItem: PlayerScoreAndPlayer, newItem: PlayerScoreAndPlayer): Boolean {

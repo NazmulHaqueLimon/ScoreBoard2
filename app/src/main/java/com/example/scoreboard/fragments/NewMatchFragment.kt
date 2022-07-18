@@ -37,11 +37,11 @@ class NewMatchFragment : Fragment() {
             viewModel=matchViewModel
             lifecycleOwner=viewLifecycleOwner
 
-            cardView1.setOnClickListener {
+            teamACv.setOnClickListener {
                 navigateToTeamFragment("A")
             }
 
-            cardView2.setOnClickListener {
+            teamBCv.setOnClickListener {
                 navigateToTeamFragment("B")
             }
             matchViewModel._ground.value = textInputGround.editText?.text.toString()

@@ -5,22 +5,17 @@
         android:id="@+id/matchListFragment"
         android:enabled="true"
         android:title="@string/match_list"
-        android:icon="@drawable/ic_cricket"/>
+        android:icon="@drawable/ic_ball"/>
 
     <item
         android:id="@+id/newMatchFragment"
         android:enabled="true"
         android:title="@string/newMatch"
-        android:icon="@drawable/ic_sports_cricket_black_24dp"/>
+        android:icon="@drawable/ic_cricket"/>
 
     <item
-        android:id="@+id/scoringFragment"
-        android:title="@string/scoring"
-        android:enabled="true"
-        android:icon="@drawable/ic_scoreboard"/>
-    <item
-        android:id="@+id/topPlayersFragment"
+        android:id="@+id/statisticsFragment"
         android:enabled="true"
         android:title="@string/top_players"
-        android:icon="@drawable/ic_cricket_batsman_dark"/>
+        android:icon="@drawable/ic_scoreboard"/>
 </menu>

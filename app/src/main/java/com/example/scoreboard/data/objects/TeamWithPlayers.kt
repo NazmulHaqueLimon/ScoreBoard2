@@ -8,7 +8,7 @@ data class TeamWithPlayers(
     @Embedded val team: Team,
     @Relation(
         parentColumn = "teamId",
-        entityColumn = "id",
+        entityColumn = "playerId",
         associateBy = Junction(TeamPlayers::class)
     )
     val playerList: List<Player>

@@ -21,15 +21,15 @@ class MatchDetailsViewmodel @Inject internal constructor(
 ): ViewModel() {
 
 
-    fun setMatchId(id:String){
-        matchId.value =id
-    }
-
     /**
      * matchId...need to save in savedStateHandle*/
     private val matchId: MutableStateFlow<String> = MutableStateFlow(
         savedState.get(MATCH_ID) ?:NO_MATCH_ID
     )
+
+    fun setMatchId(id:String){
+        matchId.value =id
+    }
     init {
         viewModelScope.launch {
             matchId.collect { mid->
@@ -50,62 +50,70 @@ class MatchDetailsViewmodel @Inject internal constructor(
      * get the teams from the database
      * */
     @ExperimentalCoroutinesApi
-    val teamA = match.switchMap { match ->
+    val teamAWithPlayers = match.switchMap { match ->
         scoringRepo.getTeamWithPlayers(match.teamA_id).asLiveData()
     }
 
     @ExperimentalCoroutinesApi
-    val teamB = match.switchMap { match ->
+    val teamBWithPlayers = match.switchMap { match ->
         scoringRepo.getTeamWithPlayers(match.teamB_id).asLiveData()
     }
 
-    @ExperimentalCoroutinesApi
-    val teamAplayers: LiveData<List<Player>> = Transformations.map(teamA) {
-        it.playerList
-    }
-    @ExperimentalCoroutinesApi
-    val teamBplayers: LiveData<List<Player>> = Transformations.map(teamB) {
-        it.playerList
-
-    }
-
-
-    @ExperimentalCoroutinesApi
-    val matchPlayerScoreAndPlayers =matchId.flatMapLatest {
-        repository.getMatchPlayerScorePlayer(it)
-    }.asLiveData()
-
-
-    @ExperimentalCoroutinesApi
-    val matchTeamScoreTeam = matchId.flatMapLatest {
-        repository.getMatchTeamScoreTeam(it)
-    }.asLiveData()
-
-
-
     val _battingTeamAndScore = MutableLiveData<TeamScoreAndTeam>()
-    val battingTeamAndScore :LiveData<TeamScoreAndTeam> =_battingTeamAndScore
+    val battingTeamAndScore  :LiveData<TeamScoreAndTeam> =_battingTeamAndScore
 
     val _bowlingTeamAndScore = MutableLiveData<TeamScoreAndTeam>()
     val bowlingTeamAndScore :LiveData<TeamScoreAndTeam> =_bowlingTeamAndScore
 
 
+    /**getting the batting and bowling players in order to display batting teams score by default*/
     val _battingTeamWithPlayers = MutableLiveData<TeamWithPlayers>()
-    val battingTeamWithPlayers:LiveData<TeamWithPlayers> =_battingTeamWithPlayers
+    val battingTeamWithPlayers  :LiveData<TeamWithPlayers> =_battingTeamWithPlayers
+
     val _bowlingTeamWithPlayers= MutableLiveData<TeamWithPlayers>()
-    val bowlingTeamWithPlayers:LiveData<TeamWithPlayers> =_bowlingTeamWithPlayers
+    val bowlingTeamWithPlayers :LiveData<TeamWithPlayers> =_bowlingTeamWithPlayers
+
+    private val _batsmanAndScores =MutableLiveData<List<PlayerScoreAndPlayer>>()
+    val batsmanAndScores:LiveData<List<PlayerScoreAndPlayer>> =_batsmanAndScores
+
+    private val _bowlerAndScores =MutableLiveData<List<PlayerScoreAndPlayer>>()
+    val bowlerAndScores:LiveData<List<PlayerScoreAndPlayer>> =_bowlerAndScores
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val matchPlayerScoreAndPlayer= match.switchMap { match ->
+        match.matchId.let {
+            repository.getMatchPlayerScorePlayer(it)
+        }.asLiveData()
+    }
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val matchTeamScoreTeam =match.switchMap { it ->
+        it.matchId.let {
+            repository.getMatchTeamScoreTeam(it)
+        }.asLiveData()
+    }
 
 
-
-
-    private val _batsmanwithScoreList= MutableLiveData<List<PlayerScoreAndPlayer>>()
-    val batsmanwithScoreList:LiveData<List<PlayerScoreAndPlayer>> =_batsmanwithScoreList
-
-    private val _bowlerWithScoreList= MutableLiveData<List<PlayerScoreAndPlayer>>()
-    val bowlerWithScoreList:LiveData<List<PlayerScoreAndPlayer>> =_bowlerWithScoreList
-
+    fun selectBatsmanAndBowlerScores(list:List<PlayerScoreAndPlayer>){
+        val playerIds = battingTeamWithPlayers.value?.playerList?.map {
+            it.playerId
+        }
+        val batsmanAndScores = mutableListOf<PlayerScoreAndPlayer>()
+        val bowlerAndScores = mutableListOf<PlayerScoreAndPlayer>()
+        list.map {playerScoreAndPlayer->
+            if (playerIds != null) {
+                if(playerIds.contains(playerScoreAndPlayer.player.playerId)){
+                    batsmanAndScores.add(playerScoreAndPlayer)
+                }
+                else{
+                    bowlerAndScores.add(playerScoreAndPlayer)
+                }
+            }
+        }
+        _batsmanAndScores.value =batsmanAndScores
+        _bowlerAndScores.value =bowlerAndScores
+    }
 
 
 

@@ -13,7 +13,7 @@ import com.example.scoreboard.databinding.BowlerScoreItemBinding
 class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHolder>(BowlerScoreDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlayerScoreViewHolder(
+        return BowlerScoreViewHolder(
             BowlerScoreItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -24,12 +24,10 @@ class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder as PlayerScoreViewHolder).bind(item)
+        (holder as BowlerScoreViewHolder).bind(item)
     }
 
-
-
-    class PlayerScoreViewHolder(
+    class BowlerScoreViewHolder(
         private val binding: BowlerScoreItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -46,7 +44,7 @@ class BowlerScoreAdapter : ListAdapter<PlayerScoreAndPlayer, RecyclerView.ViewHo
 private class BowlerScoreDiffUtilCallback : DiffUtil.ItemCallback<PlayerScoreAndPlayer>() {
 
     override fun areItemsTheSame(oldItem: PlayerScoreAndPlayer, newItem: PlayerScoreAndPlayer): Boolean {
-        return oldItem.player.id == newItem.player.id
+        return oldItem.player.playerId == newItem.player.playerId
     }
 
     override fun areContentsTheSame(oldItem: PlayerScoreAndPlayer, newItem: PlayerScoreAndPlayer): Boolean {

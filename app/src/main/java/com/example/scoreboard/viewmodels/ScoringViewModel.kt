@@ -120,7 +120,7 @@ class ScoringViewModel @Inject internal constructor(
      */
     @ExperimentalCoroutinesApi
     val batsmanAScore :LiveData<PlayersScore> = batsmanA.switchMap {player->
-        player.id.let {
+        player.playerId.let {
             match.switchMap { match->
                 repository.getPlayerScore(it,match.matchId).asLiveData()
             }
@@ -132,7 +132,7 @@ class ScoringViewModel @Inject internal constructor(
      */
     @ExperimentalCoroutinesApi
     val batsmanBScore :LiveData<PlayersScore> = batsmanB.switchMap {player->
-        player.id.let {
+        player.playerId.let {
             match.switchMap { match->
                 repository.getPlayerScore(it,match.matchId).asLiveData()
             }
@@ -144,7 +144,7 @@ class ScoringViewModel @Inject internal constructor(
      */
     @ExperimentalCoroutinesApi
     val bowlersScore :LiveData<PlayersScore> = bowler.switchMap {player->
-        player.id.let {
+        player.playerId.let {
             match.switchMap { match->
                 repository.getPlayerScore(it,match.matchId).asLiveData()
             }

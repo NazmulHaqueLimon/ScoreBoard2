@@ -26,6 +26,12 @@ class MatchDetailsFragment : Fragment() {
     private lateinit var batsmanScoreAdapter: BatsmanScoreAdapter
     private lateinit var bowlerScoreAdapter: BowlerScoreAdapter
 
+    private  var teamAPlayers = mutableListOf<Player>()
+    private  var teamBPlayers = mutableListOf<Player>()
+
+    private  var teamAPlayersAndScores = mutableListOf<PlayerScoreAndPlayer>()
+    private  var teamBPlayersAndScores = mutableListOf<PlayerScoreAndPlayer>()
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,53 +43,37 @@ class MatchDetailsFragment : Fragment() {
             lifecycleOwner=viewLifecycleOwner
 
         }
-        args.matchId.let {
-            detailsViewModel.setMatchId(it)
-
-        }
+        detailsViewModel.setMatchId(args.matchId)
 
         batsmanScoreAdapter = BatsmanScoreAdapter()
         bowlerScoreAdapter = BowlerScoreAdapter()
         binding.batsmanRecyclerView.adapter = batsmanScoreAdapter
-        binding.bowlersRecyclerView.adapter =bowlerScoreAdapter
+        //binding.bowlersRecyclerView.adapter =bowlerScoreAdapter
 
-        var teamAplayers = listOf<Player>()
-        var teamBplayers = listOf<Player>()
 
-        detailsViewModel.teamA.observe(viewLifecycleOwner){
-            it.team.isBat.let { Bat->
-                if (Bat){
-                    detailsViewModel._battingTeamWithPlayers.value=it
+        detailsViewModel.teamAWithPlayers.observe(viewLifecycleOwner){teamWithPlayers ->
+            teamWithPlayers.team.isBat.let {
+                if (!it){
+                    detailsViewModel._bowlingTeamWithPlayers.value=teamWithPlayers
                 }
                 else{
-                    detailsViewModel._bowlingTeamWithPlayers.value =it
+                    detailsViewModel._battingTeamWithPlayers.value=teamWithPlayers
                 }
             }
-            teamAplayers =it.playerList
         }
-
-        detailsViewModel.teamB.observe(viewLifecycleOwner){
-            it.team.isBat.let { Bat->
-                if (Bat){
-                    detailsViewModel._battingTeamWithPlayers.value=it
+        detailsViewModel.teamBWithPlayers.observe(viewLifecycleOwner){teamWithPlayers ->
+            teamWithPlayers.team.isBat.let {
+                if (!it){
+                    detailsViewModel._bowlingTeamWithPlayers.value=teamWithPlayers
                 }
                 else{
-                    detailsViewModel._bowlingTeamWithPlayers.value=it
+                    detailsViewModel._battingTeamWithPlayers.value=teamWithPlayers
                 }
             }
-            teamBplayers =it.playerList
         }
 
 
-        setAdapters(teamAplayers,teamBplayers)
-        binding.materialCardView.setOnClickListener {
-            setAdapters(teamAplayers,teamBplayers)
-        }
-        binding.materialCardView2.setOnClickListener {
-            setAdapters(teamBplayers,teamAplayers)
-        }
-
-
+        /**observing the match-team-teamScore to extract batting and bowling team scores*/
         detailsViewModel.matchTeamScoreTeam.observe(viewLifecycleOwner){
             it.teamScoreAndTeam.map { teamScoreTeam ->
                 when(teamScoreTeam.team.isBat){
@@ -96,38 +86,23 @@ class MatchDetailsFragment : Fragment() {
                 }
             }
         }
+        detailsViewModel.matchPlayerScoreAndPlayer.observe(viewLifecycleOwner){
+            it.playerScoreAndPlayer.let { playerAndScores ->
+                detailsViewModel.selectBatsmanAndBowlerScores(playerAndScores)
+            }
+        }
+        detailsViewModel.batsmanAndScores.observe(viewLifecycleOwner){
+            batsmanScoreAdapter.submitList(it)
+        }
+        detailsViewModel.bowlerAndScores.observe(viewLifecycleOwner){
+            bowlerScoreAdapter.submitList(it)
+        }
+
 
         return binding.root
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private fun setAdapters(batsman: List<Player>,bowler:List<Player>) {
 
-        val batsmanAndScore = mutableListOf<PlayerScoreAndPlayer>()
-        val bowlerAndScore = mutableListOf<PlayerScoreAndPlayer>()
-        detailsViewModel.matchPlayerScoreAndPlayers.observe(viewLifecycleOwner){
-            lifecycleScope.launch {
-                it.playerScoreAndPlayer.map { playerAndScore->
-                    batsman.map {player->
-                        if (playerAndScore.player.id == player.id){
-                            batsmanAndScore.add(playerAndScore)
-                        }
-                    }
-                    bowler.map { player ->
-                        if (playerAndScore.player.id == player.id){
-                            bowlerAndScore.add(playerAndScore)
-                        }
-                    }
-
-                }
-
-            }
-            batsmanScoreAdapter.submitList(batsmanAndScore)
-            bowlerScoreAdapter.submitList(bowlerAndScore)
-        }
-
-
-    }
     companion object {
         private const val MATCH_ID_KEY = "MATCH_ID"
     }

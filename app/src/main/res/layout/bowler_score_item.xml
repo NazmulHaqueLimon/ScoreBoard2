@@ -12,69 +12,70 @@
             type="com.example.scoreboard.data.objects.PlayersScore" />
     </data>
 
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
-
-<TableLayout
-    android:id="@+id/table_heading_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
-
-    <TableRow
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_batsmanScore"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
         <TextView
-            android:id="@+id/bowler_name"
+            android:id="@+id/bowler_nameTv"
             style="@style/table_row_item"
-            android:layout_width="wrap_content"
-            android:layout_column="0"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:text="@{}"
+            android:layout_width="150dp"
+            android:layout_margin="2dp"
             tools:text="Players Name"
-            android:background="@color/white"
-            android:textAlignment="center" />
+            android:padding="2dp"
+            android:text="@{bowler.name.toString()}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/total_over"
             style="@style/table_row_item"
-            android:layout_width="0dp"
-            android:layout_column="1"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            tools:text="over"
-            android:background="@color/white"
-            android:textAlignment="center" />
+            android:layout_width="50dp"
+            android:layout_margin="2dp"
+            tools:text="10.5"
+            android:text="@{Integer.toString(bowlerScore.overBowled)}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/bowler_nameTv"
+            app:layout_constraintBottom_toBottomOf="@id/bowler_nameTv"
+            app:layout_constraintTop_toTopOf="@id/bowler_nameTv"
+            />
 
         <TextView
-            android:id="@+id/wicket"
+            android:id="@+id/total_run"
             style="@style/table_row_item"
-            android:layout_width="0dp"
-            android:layout_column="2"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            tools:text="wicket"
-            android:background="@color/white"
-            android:baselineAligned="false"
-            android:textAlignment="center" />
+            android:layout_width="50dp"
+            tools:text="56"
+            android:text="@{Integer.toString(bowlerScore.runGiven)}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/total_over"
+            app:layout_constraintBottom_toBottomOf="@id/total_over"
+            app:layout_constraintTop_toTopOf="@id/total_over"/>
         <TextView
-            android:id="@+id/economy"
+            android:id="@+id/wicketsTv"
             style="@style/table_row_item"
-            android:layout_width="0dp"
-            android:layout_column="2"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            tools:text="economy"
-            android:background="@color/white"
-            android:baselineAligned="false"
-            android:textAlignment="center" />
+            android:layout_width="50dp"
+            tools:text="06"
+            android:text="@{Integer.toString(bowlerScore.wicketTaken)}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/economy_rate"
+            app:layout_constraintStart_toEndOf="@id/total_run"
+            app:layout_constraintBottom_toBottomOf="@id/total_run"
+            app:layout_constraintTop_toTopOf="@id/total_run"/>
+        <TextView
+            android:id="@+id/economy_rate"
+            style="@style/table_row_item"
+            android:layout_width="60dp"
+            tools:text="100.80"
+            android:layout_marginEnd="4dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/wicketsTv"
+            app:layout_constraintTop_toTopOf="@id/wicketsTv"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    </TableRow>
-</TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
 </layout>

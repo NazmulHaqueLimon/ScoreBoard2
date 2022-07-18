@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.example.scoreboard.data.objects.Player"/>
+        <import type="com.example.scoreboard.data.objects.PlayersScore"/>
+        <import type="com.example.scoreboard.data.objects.PlayerScoreAndPlayer"/>
         <variable
             name="batsman"
             type="com.example.scoreboard.data.objects.Player" />
@@ -12,89 +15,85 @@
             type="com.example.scoreboard.data.objects.PlayersScore" />
     </data>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TableLayout
-        android:id="@+id/table_heading_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_batsmanScore"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+            android:id="@+id/batsman_nameTv"
+            style="@style/table_row_item"
+            android:layout_width="150dp"
+            android:layout_margin="2dp"
+            tools:text="Players Name"
+            android:padding="2dp"
+            android:text="@{batsman.name.toString()}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/total_run"
+            style="@style/table_row_item"
+            android:layout_width="50dp"
+            android:layout_marginStart="8dp"
+            tools:text="run"
+            android:textAlignment="center"
+            android:text="@{Integer.toString(batsmanScore.totalRun)}"
+            app:layout_constraintStart_toEndOf="@id/batsman_nameTv"
+            app:layout_constraintBottom_toBottomOf="@id/batsman_nameTv"
+            app:layout_constraintTop_toTopOf="@id/batsman_nameTv"
+            />
 
-            <TextView
-                android:id="@+id/bowler_name"
-                style="@style/table_row_item"
-                android:layout_width="wrap_content"
-                android:layout_column="0"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="Players Name"
-                android:text="@{batsman.name.toString()}"
+        <TextView
+            android:id="@+id/total_balls"
+            style="@style/table_row_item"
+            android:layout_width="45dp"
+            android:layout_margin="2dp"
+            tools:text="balls"
+            android:text="@{Integer.toString(batsmanScore.ballFaced)}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/total_run"
+            app:layout_constraintBottom_toBottomOf="@id/total_run"
+            app:layout_constraintTop_toTopOf="@id/total_run"
+            />
+        <TextView
+            android:id="@+id/total_fours"
+            style="@style/table_row_item"
+            android:layout_width="45dp"
+            android:layout_margin="2dp"
+            tools:text="4's"
+            android:text="@{Integer.toString(batsmanScore.fours)}"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/total_balls"
+            app:layout_constraintBottom_toBottomOf="@id/total_balls"
+            app:layout_constraintTop_toTopOf="@id/total_balls"/>
+        <TextView
+            android:id="@+id/total_sixes"
+            style="@style/table_row_item"
+            android:layout_width="45dp"
+            android:layout_margin="2dp"
+            tools:text="6's"
+            android:text="@{Integer.toString(batsmanScore.sixes)}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/strike_rate"
+            app:layout_constraintStart_toEndOf="@id/total_fours"
+            app:layout_constraintBottom_toBottomOf="@id/total_fours"
+            app:layout_constraintTop_toTopOf="@id/total_fours"/>
+        <TextView
+            android:id="@+id/strike_rate"
+            style="@style/table_row_item"
+            android:layout_width="50dp"
+            android:layout_marginStart="2dp"
+            tools:text="100.80"
+            android:layout_marginEnd="2dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/total_sixes"
+            app:layout_constraintTop_toTopOf="@id/total_sixes"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-                android:textAlignment="center" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/total_run"
-                style="@style/table_row_item"
-                android:layout_width="0dp"
-                android:layout_column="1"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="run"
-                android:text="@{Integer.toString(batsmanScore.totalRun)}"
-
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/total_balls"
-                style="@style/table_row_item"
-                android:layout_width="0dp"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="balls"
-                android:text="@{Integer.toString(batsmanScore.ballFaced)}"
-                android:baselineAligned="false"
-                android:textAlignment="center" />
-            <TextView
-                android:id="@+id/total_fours"
-                style="@style/table_row_item"
-                android:layout_width="0dp"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="4's"
-                android:text="@{Integer.toString(batsmanScore.fours)}"
-                android:baselineAligned="false"
-                android:textAlignment="center" />
-            <TextView
-                android:id="@+id/total_sixes"
-                style="@style/table_row_item"
-                android:layout_width="0dp"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="6's"
-                android:text="@{Integer.toString(batsmanScore.sixes)}"
-                android:baselineAligned="false"
-                android:textAlignment="center" />
-            <TextView
-                android:id="@+id/strike_rate"
-                style="@style/table_row_item"
-                android:layout_width="0dp"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                tools:text="SR"
-                android:baselineAligned="false"
-                android:textAlignment="center" />
-        </TableRow>
-    </TableLayout>
-
-</LinearLayout>
 </layout>

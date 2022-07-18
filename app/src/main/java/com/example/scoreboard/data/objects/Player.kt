@@ -8,7 +8,7 @@ import java.util.*
 @Entity(tableName = "players")
 data class Player(
     @PrimaryKey
-    val id : String = UUID.randomUUID().toString(),
+    val playerId : String = UUID.randomUUID().toString(),
     val name: String,
     var isOut : Boolean =false,
     var totalRun:Int=0,
