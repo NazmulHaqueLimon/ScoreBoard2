@@ -325,7 +325,6 @@
             android:id="@+id/create_match_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:backgroundTint="@color/buttons"
             android:drawableEnd="@drawable/ic_sports_cricket_black_24dp"
             android:paddingTop="10dp"

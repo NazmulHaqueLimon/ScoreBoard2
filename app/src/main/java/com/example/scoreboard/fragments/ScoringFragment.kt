@@ -294,6 +294,7 @@ class ScoringFragment : Fragment() {
     }
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun setListPopupWide(){
         val listPopupWindowWide = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
@@ -354,7 +355,6 @@ class ScoringFragment : Fragment() {
                      openScoringOptions("nbLB")
                 "+bat" ->
                     openScoringOptions("nbBAT")
-
 
             }
             // Dismiss popup.
