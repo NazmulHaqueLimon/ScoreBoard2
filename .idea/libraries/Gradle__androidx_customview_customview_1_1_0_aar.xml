@@ -1,27 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.customview:customview:1.1.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/07194e25e7564375f22b068d602d42df/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/5d1b8c6ea0ddcff339dab549a3fad7b2/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9a20052aa634e103f27201182ba5547c/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/235e599f7900e9863442a88df45f5c05/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/ffd03c07b2c076c9c26a91b378b41a1e/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/2465d0060cfea88bf7d8e77b280b01bd/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/98099442345bbec6f55e2b72a8eb9bbb/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/5417d802dbbce83ba792fd89a545eac2/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/8f01012fd17e18571757e965c78fb402/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/ef8887895bf2c4de58b78056f5caafe7/transformed/customview-1.1.0/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/fada1b9521a61943f81ba73d03cb1073/transformed/customview-1.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/fada1b9521a61943f81ba73d03cb1073/transformed/customview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/fada1b9521a61943f81ba73d03cb1073/transformed/customview-1.1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fada1b9521a61943f81ba73d03cb1073/transformed/customview-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0f32b34cb5aec0f5a404b0659b7b286c/transformed/customview-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0f32b34cb5aec0f5a404b0659b7b286c/transformed/customview-1.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0f32b34cb5aec0f5a404b0659b7b286c/transformed/customview-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0251fa4a1f99d44255ef0e90896f4818/transformed/customview-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/404746ddf8a6dbbc5fd677437073943b/transformed/customview-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/404746ddf8a6dbbc5fd677437073943b/transformed/customview-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/404746ddf8a6dbbc5fd677437073943b/transformed/customview-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/androidx.customview/customview/1.1.0/be631aafb1eb3f64c9cc57083a21a3321cf2e2e1/customview-1.1.0-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.customview/customview/1.1.0/be631aafb1eb3f64c9cc57083a21a3321cf2e2e1/customview-1.1.0-sources.jar!/" />
     </SOURCES>
   </library>

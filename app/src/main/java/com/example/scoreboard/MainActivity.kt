@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.scoreboard.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,24 +24,29 @@ import dagger.hilt.android.AndroidEntryPoint
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHost : BottomNavigationView =binding.bottomNav
+        val bottomNav : BottomNavigationView =binding.bottomNav
         navController =findNavController(R.id.nav_host)
 
-        // Setup the ActionBar with navController and 4 top level destinations
-        /**
-         *
+        NavigationUI.setupWithNavController(bottomNav, navController)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.newMatchFragment,
-                R.id.scoringFragment,
-                R.id.matchListFragment,
-                R.id.topPlayersFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-         */
-        navHost.setupWithNavController(navController)
+//        val finalHost = NavHostFragment.create(R.navigation.nav_graph)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.nav_host, finalHost)
+//            .setPrimaryNavigationFragment(finalHost) // equivalent to app:defaultNavHost="true"
+//            .commit()
+
+        // Setup the ActionBar with navController and 4 top level destinations
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.matchListFragment,
+//                R.id.matchListFragment,
+//                R.id.statisticsFragment
+//            )
+//        )
+//
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        //bottomNav.setupWithNavController(navController)
 
     }
      /**

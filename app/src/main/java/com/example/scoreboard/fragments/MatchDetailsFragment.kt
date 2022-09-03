@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.adapters.BatsmanScoreAdapter
 import com.example.scoreboard.adapters.BowlerScoreAdapter
@@ -20,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class MatchDetailsFragment : Fragment() {
 
-    private lateinit var binding : FragmentMatchDetailsBinding
+    private  var binding : FragmentMatchDetailsBinding? =null
+
     private val detailsViewModel : MatchDetailsViewmodel by activityViewModels()
     private val args:MatchDetailsFragmentArgs by navArgs()
     private lateinit var batsmanScoreAdapter: BatsmanScoreAdapter
@@ -32,13 +32,14 @@ class MatchDetailsFragment : Fragment() {
     private  var teamAPlayersAndScores = mutableListOf<PlayerScoreAndPlayer>()
     private  var teamBPlayersAndScores = mutableListOf<PlayerScoreAndPlayer>()
 
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentMatchDetailsBinding.inflate(inflater,container,false).apply {
+         binding = FragmentMatchDetailsBinding.inflate(inflater,container,false).apply {
             viewModel = detailsViewModel
             lifecycleOwner=viewLifecycleOwner
 
@@ -47,7 +48,7 @@ class MatchDetailsFragment : Fragment() {
 
         batsmanScoreAdapter = BatsmanScoreAdapter()
         bowlerScoreAdapter = BowlerScoreAdapter()
-        binding.batsmanRecyclerView.adapter = batsmanScoreAdapter
+        binding!!.batsmanRecyclerView.adapter = batsmanScoreAdapter
         //binding.bowlersRecyclerView.adapter =bowlerScoreAdapter
 
 
@@ -99,11 +100,18 @@ class MatchDetailsFragment : Fragment() {
         }
 
 
-        return binding.root
+        return binding!!.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+       // findNavController().navigateUp()
+
     }
 
 
     companion object {
         private const val MATCH_ID_KEY = "MATCH_ID"
     }
+
 }

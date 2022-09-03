@@ -67,6 +67,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="C:\Users\User\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
@@ -79,7 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\User\xml_drawables\twotone_wifi_protected_setup_20.xml" />
+                                                <entry key="imagePath" value="C:\Users\User\Android Projects\two.png" />
+                                                <entry key="scalingPercent" value="74" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -111,7 +113,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_launcher_rotate" />
+                                      <entry key="outputName" value="ic_launcher_two" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -1,27 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-process:2.2.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/118555d7886c3c48f824ef3015de30e3/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/91f868a3804518b76cf84a8e3dadf723/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/0ec4d37016e2d6080af5d2045207d7cc/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/5413c0b6cd3d32b7b1ff0c8c0fd131d3/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b9d5ab06a293f3cf8ccd4fa9f8f0196c/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/ceee32eab51259f29d4bbd40afb0fb0d/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/da444ea8c47dde3cf8e5923db5e5bb6f/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/09e8f14c7a309ed934c40ffff7f449fe/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/96933f872a18420ff14ff623805bc157/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/e4d0de9223ee9baa43b6d74f8c86b31d/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/fa15c8ffe7dcf2178a671e33ea26c411/transformed/lifecycle-process-2.2.0/res" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/fa15c8ffe7dcf2178a671e33ea26c411/transformed/lifecycle-process-2.2.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/fa15c8ffe7dcf2178a671e33ea26c411/transformed/lifecycle-process-2.2.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fa15c8ffe7dcf2178a671e33ea26c411/transformed/lifecycle-process-2.2.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9a3f0373e2ce0d6bf970b0bcd968dc6e/transformed/lifecycle-process-2.2.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9a3f0373e2ce0d6bf970b0bcd968dc6e/transformed/lifecycle-process-2.2.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9a3f0373e2ce0d6bf970b0bcd968dc6e/transformed/lifecycle-process-2.2.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/264a507bf2bd22c61f7761deefb8f3ff/transformed/lifecycle-process-2.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9aadea7e0d8a2ab89e6359ac0a444014/transformed/lifecycle-process-2.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9aadea7e0d8a2ab89e6359ac0a444014/transformed/lifecycle-process-2.2.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9aadea7e0d8a2ab89e6359ac0a444014/transformed/lifecycle-process-2.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.2.0/87ad54b3a3ab3e83595fd66749e92beaf8123dd9/lifecycle-process-2.2.0-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.2.0/87ad54b3a3ab3e83595fd66749e92beaf8123dd9/lifecycle-process-2.2.0-sources.jar!/" />
     </SOURCES>
   </library>

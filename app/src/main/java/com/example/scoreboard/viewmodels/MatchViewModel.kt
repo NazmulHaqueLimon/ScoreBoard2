@@ -18,6 +18,8 @@ class MatchViewModel @Inject internal constructor(
 
     val _teamFlag = MutableLiveData<String>()
     val teamFlag :LiveData<String> = _teamFlag
+    var teamAadded :Boolean =false
+    var teamBadded :Boolean =false
 
     val _teamA = MutableLiveData<Team>()
     val teamA : LiveData<Team> =_teamA

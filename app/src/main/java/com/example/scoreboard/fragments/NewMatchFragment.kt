@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.scoreboard.R
 import com.example.scoreboard.databinding.FragmentNewMatchBinding
 import com.example.scoreboard.viewmodels.MatchViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -26,6 +29,9 @@ class NewMatchFragment : Fragment() {
 
     private lateinit var binding: FragmentNewMatchBinding
     private val matchViewModel: MatchViewModel by activityViewModels()
+    private var inputsValid :Boolean = false
+    private val teamsAdded = false
+
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
@@ -40,30 +46,43 @@ class NewMatchFragment : Fragment() {
             teamACv.setOnClickListener {
                 navigateToTeamFragment("A")
             }
-
+            root.fitsSystemWindows =true
             teamBCv.setOnClickListener {
                 navigateToTeamFragment("B")
             }
+
             matchViewModel._ground.value = textInputGround.editText?.text.toString()
 
-
         }
+
         binding.createMatchButton.setOnClickListener {
-            matchViewModel.createMatch()
-            matchViewModel.savePlayers()
-            matchViewModel.saveTeams()
-            matchViewModel.saveTeamPlayers()
-            matchViewModel.saveMatch()
-            matchViewModel.createScoreSheet()
-            navigateToScoringFragment()
-
+            if (matchViewModel.teamAadded && matchViewModel.teamBadded){
+                lifecycleScope.launch {
+                    matchViewModel.createMatch()
+                    matchViewModel.savePlayers()
+                    matchViewModel.saveTeams()
+                    matchViewModel.saveTeamPlayers()
+                    matchViewModel.saveMatch()
+                    matchViewModel.createScoreSheet()
+                    navigateToScoringFragment()
+                }
+            }else{
+                showToastMessage("Add 2 teams and players to start a match ")
+            }
 
         }
-
 
         return binding.root
     }
 
+    private fun inputsValidated():Boolean{
+        return if (binding.formatSelection.isSelected && binding.batFirst.isSelected ){
+            true
+        }else{
+            showToastMessage("please select the team to bat first")
+            false
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -71,8 +90,9 @@ class NewMatchFragment : Fragment() {
     }
 
     private fun navigateToTeamFragment(flag: String) {
+        val action =NewMatchFragmentDirections.actionNewMatchFragmentToTeamFragment(flag)
         matchViewModel._teamFlag.value =flag
-        findNavController().navigate(R.id.action_newMatchFragment_to_teamFragment)
+        findNavController().navigate(action)
     }
     private fun navigateToScoringFragment() {
         matchViewModel.match.value?.let {
@@ -82,11 +102,22 @@ class NewMatchFragment : Fragment() {
 
     }
 
+    private fun showMessage(message: String?) {
+        Snackbar.make(
+            requireActivity().findViewById(android.R.id.content),
+            "" + message,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+    private fun showToastMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
 
     private fun setDropDowns() {
         setOverSelection()
         val teamA = matchViewModel.teamA.value?.name.toString()
-        val teamB= matchViewModel.teamB.value?.name.toString()
+        val teamB = matchViewModel.teamB.value?.name.toString()
         //setting the dropdown options
         val teams = listOf(teamA, teamB)
         val teamsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, teams)

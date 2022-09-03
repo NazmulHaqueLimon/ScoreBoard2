@@ -40,6 +40,10 @@
         android:name="com.example.scoreboard.fragments.TeamFragment"
         android:label="fragment_team"
         tools:layout="@layout/fragment_team" >
+        <argument
+            android:name="teamCode"
+            app:argType="string"
+            />
         <action
             android:id="@+id/action_teamFragment_to_newMatchFragment"
             app:destination="@id/newMatchFragment" />
@@ -48,7 +52,8 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.scoreboard.fragments.StatisticsFragment"
-        android:label="TopPlayersFragment" />
+        android:label="TopPlayersFragment"
+        tools:layout="@layout/fragment_statistic"/>
 
     <fragment
         android:id="@+id/matchListFragment"
@@ -64,7 +69,8 @@
     <fragment
         android:id="@+id/matchDetailsFragment"
         android:name="com.example.scoreboard.fragments.MatchDetailsFragment"
-        android:label="MatchDetailsFragment" >
+        android:label="MatchDetailsFragment"
+        tools:layout="@layout/fragment_match_details">
         <action
             android:id="@+id/action_matchDetailsFragment_to_scoringFragment"
             app:destination="@id/scoringFragment" />

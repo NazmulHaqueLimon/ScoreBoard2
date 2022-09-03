@@ -1,7 +1,6 @@
 package com.example.scoreboard.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
+import com.example.scoreboard.data.MatchState
 import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +37,7 @@ class ScoringFragment : Fragment() {
         binding= FragmentScoringBinding.inflate(inflater,container,false).apply {
             viewModel=scoringViewModel
             lifecycleOwner=viewLifecycleOwner
+            
         }
         args.matchId.let { id ->
             if (id == "NO_ID"){
@@ -79,7 +80,6 @@ class ScoringFragment : Fragment() {
             }
         }
         scoringViewModel.battingTeamScore.observe(viewLifecycleOwner){
-
             val over =it.ballPlayed/6
             scoringViewModel.match.value?.let { match ->
                 if ( over == match.format ){
@@ -176,6 +176,7 @@ class ScoringFragment : Fragment() {
 
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun setListPopupOut(){
         val listPopupWindowOut = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
 
@@ -189,19 +190,28 @@ class ScoringFragment : Fragment() {
         listPopupWindowOut.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
             when(adapter.getItem(position).toString()){
-                "Bold"->
+                "Bold"->{
                     scoringViewModel.onStrikerOut()
-                "LBW" ->
+                    setBatsmanDropDown()
+                }
+
+                "LBW" ->{
                     scoringViewModel.onStrikerOut()
-                "Caught" ->
+                    setBatsmanDropDown()
+                }
+                "Caught" ->{
                     scoringViewModel.onStrikerOut()
-                "RunOut" ->
+                    setBatsmanDropDown()
+                }
+                "RunOut" ->{
                     openPlayersPopup()
+                }
+
             }
             // Dismiss popup.
            // listPopupWindowOut.dismiss()
         }
-        binding.popupOut.setOnClickListener { listPopupWindowOut.show() }
+        binding.popupOut.setOnClickListener { listPopupWindowOut.dismiss()}
     }
     private fun openPlayersPopup(){
         val popupPlayers = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
@@ -225,10 +235,14 @@ class ScoringFragment : Fragment() {
         popupPlayers.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
             when(adapter.getItem(position)){
-                batsmanA->
+                batsmanA->{
                     scoringViewModel.onBatsmanAOut()
-                batsmanB ->
+                    setBatsmanDropDown()
+                }
+                batsmanB ->{
                     scoringViewModel.onBatsmanBOut()
+                    setBatsmanDropDown()
+                }
             }
             // Dismiss popup.
             popupPlayers.dismiss()
@@ -236,61 +250,69 @@ class ScoringFragment : Fragment() {
         popupPlayers.show()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private fun openScoringOptions(type:String){
+    private fun openScoringOptions(state: MatchState){
         val listPopupScores = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
-
         // Set list popup's content
         val items = listOf("+1", "+2", "+3","+4","+6")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+        var newState: MatchState? =null
 
-        when(type){
-            "nbBAT" ->{
+        if (state.nb){
+            if (state.lb){
+                newState = MatchState(nb = true, lb = true, extra = 1)
+                listPopupScores.anchorView =binding.popupLb
+            }
+            else if(state.bye){
+                newState =MatchState(nb = true, bye = true, extra = 1)
+                listPopupScores.anchorView =binding.popupBye
+            }
+            else if (state.bat){
+                newState =MatchState(nb = true, bat = true, extra = 1)
                 listPopupScores.anchorView =binding.popupNb
+            }else{
+                newState = MatchState(nb = true, extra = 1)
             }
-            "nbBYE" ->{
-                listPopupScores.anchorView =binding.popupBye
-            }
-            "nbLB" ->{
-                listPopupScores.anchorView =binding.popupLb
-            }
-            "LB" ->{
-                listPopupScores.anchorView =binding.popupLb
-            }
+        }
+        else if (state.lb){
+            newState =MatchState(lb = true, ballCount = true)
+            listPopupScores.anchorView =binding.popupLb
 
-            "wideBYE" ->{
-                listPopupScores.anchorView =binding.popupBye
-            }
-            "BYE" ->{
-                listPopupScores.anchorView =binding.popupBye
-            }
+        }
+        else if (state.wide){
+            newState =MatchState(wide = true, extra = 1)
+            listPopupScores.anchorView =binding.popupWide
+        }
+        else if (state.bye){
+            newState =MatchState(bye = true, ballCount = true)
+            listPopupScores.anchorView =binding.popupBye
 
         }
 
         listPopupScores.setAdapter(adapter)
-
         // Set list popup's item click listener
         listPopupScores.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-            // Respond to list popup window item click.
-            when(adapter.getItem(position)){
-                "+1" ->
-                    scoringViewModel.updateExtra(1,type)
-                "+2" ->
-                    scoringViewModel.updateExtra(2,type)
-                "+3" ->
-                    scoringViewModel.updateExtra(3,type)
-                "+4" ->
-                    scoringViewModel.updateExtra(4,type)
-                "+6" ->
-                    scoringViewModel.updateExtra(6,type)
-
+            if (newState != null) {
+                when(adapter.getItem(position)){
+                    "+1" ->updateState(newState,1)
+                    "+2" ->updateState(newState,2)
+                    "+3" ->updateState(newState,3)
+                    "+4" ->updateState(newState,4)
+                    "+6" ->updateState(newState,6)
+                }
             }
-            // Dismiss popup.
+
             listPopupScores.dismiss()
         }
-
        listPopupScores.show()
-
+    }
+    private fun updateState(state: MatchState, run:Int){
+        val  lastState = if (state.bat){
+                state.copy(run_bat = 1)
+            }else {
+                 state.copy(extra = state.extra+run)
+            }
+        scoringViewModel.stateList.add(lastState)
+        scoringViewModel.updateMatchState(lastState)
     }
 
 
@@ -309,14 +331,18 @@ class ScoringFragment : Fragment() {
         listPopupWindowWide.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
             when(adapter.getItem(position)){
-                "+0" ->
-                    scoringViewModel.updateExtra(1,"EXTRA")
-                "Bye" ->
-                     openScoringOptions("wideBYE")
+                "+0" ->{
+                    val state = MatchState( wide = true)
+                    openScoringOptions(state)
+                }
+                "Bye" -> {
+                    val state = MatchState( bye = true, wide = true)
+                    openScoringOptions(state)
+                }
 
             }
             // Dismiss popup.
-           // listPopupWindowWide.dismiss()
+            listPopupWindowWide.dismiss()
         }
 
         binding.popupWide.setOnClickListener { listPopupWindowWide.show() }
@@ -324,15 +350,15 @@ class ScoringFragment : Fragment() {
 
     private fun setListPopupBye(){
         binding.popupBye.setOnClickListener {
-            openScoringOptions("BYE")
+            val state = MatchState( bye = true, ballCount = true)
+            openScoringOptions(state)
         }
     }
     private fun setListPopupLb(){
-
         binding.popupLb.setOnClickListener {
-            openScoringOptions("LB")
+            val state = MatchState( lb = true, ballCount = true)
+            openScoringOptions(state)
         }
-
     }
     @ExperimentalCoroutinesApi
     private fun setListPopupNb(){
@@ -348,22 +374,35 @@ class ScoringFragment : Fragment() {
         // Set list popup's item click listener
         listPopupWindowNb.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
+            val state :MatchState
             when(adapter.getItem(position)){
-                "+O" ->
-                    scoringViewModel.updateExtra(1,"EXTRA")
-                "+Lb" ->
-                     openScoringOptions("nbLB")
-                "+bat" ->
-                    openScoringOptions("nbBAT")
+                "+O" ->{
+                    state = MatchState(nb = true)
+                    scoringViewModel.updateMatchState(state)
+                    //scoringViewModel.updateExtra(1,"EXTRA")
+                }
+                "+Lb" ->{
+                    state = MatchState(nb = true, lb = true)
+                    openScoringOptions(state)
+                }
+                "+bat" ->{
+                    state = MatchState(nb = true, extra = 1, bat = true)
+                    openScoringOptions(state)
+                }
 
             }
             // Dismiss popup.
             listPopupWindowNb.dismiss()
         }
-
         // Show list popup window on button click.
-        binding.popupNb.setOnClickListener { listPopupWindowNb.show() }
+        binding.popupNb.setOnClickListener {
+            if (listPopupWindowNb.isShowing){
+                listPopupWindowNb.dismiss()
+            }else{
+                listPopupWindowNb.show()
+            }
 
+        }
 
     }
 
