@@ -4,6 +4,7 @@ import com.example.scoreboard.data.objects.Player
 import com.example.scoreboard.data.objects.PlayersScore
 
 data class MatchState(
+    val run :Int =0,
     val extra:Int =0,
     val run_bat : Int=0,
     val playerScore :PlayersScore?=null,

@@ -1,16 +1,14 @@
 package com.example.scoreboard.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.ListPopupWindow
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
 import com.example.scoreboard.data.MatchState
@@ -18,6 +16,7 @@ import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+
 
 /**
  * Fragment that takes and display live scoring inputs
@@ -89,6 +88,10 @@ class ScoringFragment : Fragment() {
 
             //Log.d("LaunchList", "Success $over")
         }
+        binding.arrowBack.setOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
+
 
 
         return binding.root
@@ -98,6 +101,7 @@ class ScoringFragment : Fragment() {
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setListPopupOut()
         setListPopupLb()
         setListPopupBye()
@@ -176,15 +180,23 @@ class ScoringFragment : Fragment() {
 
     }
 
+
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun setListPopupOut(){
-        val listPopupWindowOut = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
-
+        val listPopupWindowOut = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
         val items = listOf("Bold", "LBW", "Caught","RunOut")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
 
-        listPopupWindowOut.anchorView =binding.popupOut
-        listPopupWindowOut.setAdapter(adapter)
+        binding.popupOut.setOnClickListener {
+
+            listPopupWindowOut.setAdapter(adapter)
+            listPopupWindowOut.anchorView =binding.popupOut
+            listPopupWindowOut.show()
+
+            if (listPopupWindowOut.isShowing){
+                listPopupWindowOut.dismiss()
+            }
+        }
 
         // Set list popup's item click listener
         listPopupWindowOut.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
@@ -208,13 +220,13 @@ class ScoringFragment : Fragment() {
                 }
 
             }
-            // Dismiss popup.
-           // listPopupWindowOut.dismiss()
+
+            listPopupWindowOut.dismiss()
         }
-        binding.popupOut.setOnClickListener { listPopupWindowOut.dismiss()}
+
     }
     private fun openPlayersPopup(){
-        val popupPlayers = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+        val popupPlayers = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
         // Set list popup's content
         var batsmanA :String ="BatsmanA"
         scoringViewModel.batsmanA.observe(viewLifecycleOwner){
@@ -251,7 +263,7 @@ class ScoringFragment : Fragment() {
     }
 
     private fun openScoringOptions(state: MatchState){
-        val listPopupScores = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+        val listPopupScores = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
         // Set list popup's content
         val items = listOf("+1", "+2", "+3","+4","+6")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
@@ -260,11 +272,11 @@ class ScoringFragment : Fragment() {
         if (state.nb){
             if (state.lb){
                 newState = MatchState(nb = true, lb = true, extra = 1)
-                listPopupScores.anchorView =binding.popupLb
+                listPopupScores.anchorView =binding.popupNb
             }
             else if(state.bye){
                 newState =MatchState(nb = true, bye = true, extra = 1)
-                listPopupScores.anchorView =binding.popupBye
+                listPopupScores.anchorView =binding.popupNb
             }
             else if (state.bat){
                 newState =MatchState(nb = true, bat = true, extra = 1)
@@ -273,32 +285,31 @@ class ScoringFragment : Fragment() {
                 newState = MatchState(nb = true, extra = 1)
             }
         }
-        else if (state.lb){
-            newState =MatchState(lb = true, ballCount = true)
+         // counted the ball number in the viewmodel
+         else if (state.lb){
+            newState =MatchState(lb = true)
             listPopupScores.anchorView =binding.popupLb
 
         }
-        else if (state.wide){
-            newState =MatchState(wide = true, extra = 1)
-            listPopupScores.anchorView =binding.popupWide
+         else if (state.wide){
+             newState =state
+             listPopupScores.anchorView =binding.popupBye
         }
+        //counted the ball number in the viewmodel
         else if (state.bye){
-            newState =MatchState(bye = true, ballCount = true)
+            newState =MatchState(bye = true)
             listPopupScores.anchorView =binding.popupBye
-
         }
 
         listPopupScores.setAdapter(adapter)
         // Set list popup's item click listener
         listPopupScores.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-            if (newState != null) {
-                when(adapter.getItem(position)){
-                    "+1" ->updateState(newState,1)
-                    "+2" ->updateState(newState,2)
-                    "+3" ->updateState(newState,3)
-                    "+4" ->updateState(newState,4)
-                    "+6" ->updateState(newState,6)
-                }
+            when(adapter.getItem(position)){
+                "+1" -> newState?.let { updateState(it,1) }
+                "+2" -> newState?.let { updateState(it,2) }
+                "+3" -> newState?.let { updateState(it,3) }
+                "+4" -> newState?.let { updateState(it,4) }
+                "+6" -> newState?.let { updateState(it,6) }
             }
 
             listPopupScores.dismiss()
@@ -307,9 +318,9 @@ class ScoringFragment : Fragment() {
     }
     private fun updateState(state: MatchState, run:Int){
         val  lastState = if (state.bat){
-                state.copy(run_bat = 1)
+                state.copy(run_bat = run)
             }else {
-                 state.copy(extra = state.extra+run)
+                 state.copy(run = run)
             }
         scoringViewModel.stateList.add(lastState)
         scoringViewModel.updateMatchState(lastState)
@@ -318,34 +329,40 @@ class ScoringFragment : Fragment() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun setListPopupWide(){
-        val listPopupWindowWide = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+        val listPopupWindowWide = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
 
         // Set list popup's content
         val items = listOf("+O", "+Bye")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
-
         listPopupWindowWide.anchorView =binding.popupWide
         listPopupWindowWide.setAdapter(adapter)
 
         // Set list popup's item click listener
         listPopupWindowWide.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
+            val state :MatchState
             when(adapter.getItem(position)){
                 "+0" ->{
-                    val state = MatchState( wide = true)
+                    state = MatchState( wide = true, extra = 1)
+                    scoringViewModel.updateMatchState(state)
+                }
+                "+Bye" -> {
+                    state = MatchState( bye = true, wide = true, extra = 1)
                     openScoringOptions(state)
                 }
-                "Bye" -> {
-                    val state = MatchState( bye = true, wide = true)
-                    openScoringOptions(state)
-                }
-
             }
+
             // Dismiss popup.
             listPopupWindowWide.dismiss()
         }
+        binding.popupWide.setOnClickListener {
+            if (listPopupWindowWide.isShowing){
+                listPopupWindowWide.dismiss()
+            }else{
+                listPopupWindowWide.show()
+            }
 
-        binding.popupWide.setOnClickListener { listPopupWindowWide.show() }
+        }
     }
 
     private fun setListPopupBye(){
@@ -362,13 +379,13 @@ class ScoringFragment : Fragment() {
     }
     @ExperimentalCoroutinesApi
     private fun setListPopupNb(){
-        val listPopupWindowNb = ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+        val listPopupWindowNb = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
 
         // Set button as the list popup's anchor
         listPopupWindowNb.anchorView = binding.popupNb
 
         // Set list popup's content
-        val items = listOf("+O", "+Lb", "+bat")
+        val items = listOf("+O", "+Lb","+bye", "+bat")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
         listPopupWindowNb.setAdapter(adapter)
         // Set list popup's item click listener
@@ -377,12 +394,16 @@ class ScoringFragment : Fragment() {
             val state :MatchState
             when(adapter.getItem(position)){
                 "+O" ->{
-                    state = MatchState(nb = true)
+                    state = MatchState(nb = true,extra = 1)
                     scoringViewModel.updateMatchState(state)
                     //scoringViewModel.updateExtra(1,"EXTRA")
                 }
                 "+Lb" ->{
-                    state = MatchState(nb = true, lb = true)
+                    state = MatchState(nb = true,extra = 1, lb = true)
+                    openScoringOptions(state)
+                }
+                "+bye" ->{
+                    state = MatchState(nb = true,extra = 1, bye = true)
                     openScoringOptions(state)
                 }
                 "+bat" ->{
@@ -392,7 +413,7 @@ class ScoringFragment : Fragment() {
 
             }
             // Dismiss popup.
-            listPopupWindowNb.dismiss()
+           // listPopupWindowNb.dismiss()
         }
         // Show list popup window on button click.
         binding.popupNb.setOnClickListener {

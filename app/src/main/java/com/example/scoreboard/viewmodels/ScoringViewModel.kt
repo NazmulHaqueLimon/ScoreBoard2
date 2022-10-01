@@ -175,7 +175,13 @@ class ScoringViewModel @Inject internal constructor(
 
 
     private fun updateBatsmanScore(playerScore:PlayersScore, state: MatchState){
-        val newScore :PlayersScore
+        var newScore :PlayersScore
+        if (state.lb){
+            newScore = playerScore.copy( ballFaced = playerScore.ballFaced+1)
+            if (state.run ==1 || state.run==3){
+                changeStrike()
+            }
+        }
         when (state.run_bat) {
             1 -> {
                 newScore = if (state.nb){
@@ -234,6 +240,41 @@ class ScoringViewModel @Inject internal constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun updateMatchState(state: MatchState) {
+        stateList.add(state)
+        if (state.bye && !state.nb){
+
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+
+
+        if (state.lb && !state.nb){
+            updateBatsmanScore(getStrikerScore(),state)
+            bowlersScore.value?.let {
+                val newScore =it.copy(runGiven = it.runGiven+state.run, overBowled = it.overBowled+1)
+                updatePlayerScore(newScore)
+            }
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+
+
+        if (state.wide){
+            bowlersScore.value?.let {
+                val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
+                updatePlayerScore(newScore)
+            }
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+
+
         if (state.ballCount){
             //update player score
             updateBatsmanScore( getStrikerScore(),state)
@@ -250,17 +291,17 @@ class ScoringViewModel @Inject internal constructor(
         if (state.nb){
             if (state.lb){
                 bowlersScore.value?.let {
-                    val newScore =it.copy(runGiven = it.runGiven+state.extra)
+                    val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
                     updatePlayerScore(newScore)
                 }
                 battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.extra)
+                    val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
                     updateTeamScore(newScore)
                 }
             }
             else if (state.bye){
                 battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.run_bat+1)
+                    val newScore =it.copy(totalRun = it.totalRun+state.run+state.extra)
                     updateTeamScore(newScore)
                 }
             }
@@ -269,12 +310,12 @@ class ScoringViewModel @Inject internal constructor(
                 updateBatsmanScore( getStrikerScore(),state)
                 //update bowler score
                 bowlersScore.value?.let {
-                    val newScore =it.copy(runGiven = it.runGiven+state.run_bat)
+                    val newScore =it.copy(runGiven = it.runGiven+state.run_bat+state.extra+state.run)
                     updatePlayerScore(newScore)
                 }
                 //update batting team score
                 battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.run_bat)
+                    val newScore =it.copy(totalRun = it.totalRun+state.run_bat+state.extra+state.run)
                     updateTeamScore(newScore)
                 }
             }
@@ -287,44 +328,7 @@ class ScoringViewModel @Inject internal constructor(
             else -> batsmanBScore.value!!
         }
     }
-//    @ExperimentalCoroutinesApi
-//    fun updateBatsmanScore(runsTaken:Int){
-//        when(batsmanAOnStrike.value){
-//            true ->{
-//                batsmanAScore.value?.let {
-//                    updatePlayerScore(it,runsTaken) }
-//            }
-//            else -> {
-//                batsmanBScore.value?.let {
-//                    updatePlayerScore(it,runsTaken) }
-//            }
-//        }
-//
-//    }
 
-
-    @ExperimentalCoroutinesApi
-    fun updateScore(runsTaken:Int){
-
-        when(batsmanAOnStrike.value){
-            true ->{
-               // batsmanAScore.value?.let { updatePlayerScore(it,runsTaken) }
-            }
-            else -> {
-               // batsmanBScore.value?.let { updatePlayerScore(it,runsTaken) }
-            }
-        }
-
-        battingTeamScore.value?.let {
-            val newScore =it.copy(totalRun = it.totalRun+runsTaken, ballPlayed = it.ballPlayed +1)
-            updateTeamScore(newScore)
-        }
-        bowlersScore.value?.let {
-            val newScore =it.copy(runGiven = it.runGiven+runsTaken, overBowled = it.overBowled+1)
-            updatePlayerScore(newScore)
-        }
-
-    }
 
     //update player score...by making new object every time
     private fun updatePlayerScore(newScore:PlayersScore) {
@@ -401,49 +405,6 @@ class ScoringViewModel @Inject internal constructor(
             val newScore =it.copy(totalRun = it.totalRun+score+extra, extra = it.extra+extra)
             updateTeamScore(newScore)
         }
-    }
-    @ExperimentalCoroutinesApi
-    fun updateExtra(score: Int, type: String) {
-        when(type){
-            "nbBAT" ->{
-                //teamScore +extra 1
-                updateBattingTeamExtra(score,0)
-                //strikerScore +score
-
-                //bowlerScore +extra+score
-            }
-            "nbB YE" ->{
-                //bowlerScore +extra1
-                //battingTeamScore +extra1+score
-                updateBattingTeamExtra(score,1)
-
-            }
-            "nbLB" ->{
-                //bowlerScore +extra +score
-                //battingTeam +extra+score
-                updateBattingTeamExtra(score,1)
-                //striker +score
-            }
-            "LB" ->{
-                //bowlerScore +extra +score
-                //battingTeam +extra+score
-                updateBattingTeamExtra(score,0)
-                //striker +score
-            }
-
-            "wideBYE" ->{
-                //battingTeam +byeRun+extra
-                updateBattingTeamExtra(score,1)
-                //bowlerScore +extra1
-
-            }
-            "BYE" ->{
-                //battingTeam +score
-                updateBattingTeamExtra(score,0)
-            }
-
-        }
-
     }
 
 

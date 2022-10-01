@@ -14,678 +14,707 @@
             type="com.example.scoreboard.viewmodels.ScoringViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.ScoringFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/themeB2"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/arrow_back"
+                android:layout_width="40dp"
+                android:padding="8dp"
+                android:src="@drawable/arrow_back"
+                android:layout_height="match_parent"
+                app:tint="@color/buttons" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleGravity="center"
+                app:contentScrim="?attr/colorSurface"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="?attr/colorSurface"
+                app:title="@{viewModel.teamA.team.name}"
+                app:titleEnabled="true">
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white1">
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.scoringTitleText}"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+           />
 
-          <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              tools:context=".fragments.ScoringFragment">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="5dp"
-                app:cardBackgroundColor="@color/themeB2"
-                android:layout_marginHorizontal="50dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="@color/themeB2"
+            android:layout_marginHorizontal="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleText">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="29dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="44dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_group" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/team_name"
+                    android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
+                    android:textColor="#0A6E64"
+                    android:textColorHint="#0B7168"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                <ImageView
+                    android:id="@+id/textView20"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_cricket_batsman_dark"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                    app:layout_constraintStart_toStartOf="@+id/textView22"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/total_score"
+                    android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
+                    android:textAlignment="center"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/textView18"
+                    app:layout_constraintStart_toStartOf="@+id/textView18"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    tools:text="156/8" />
+                <ImageView
+                    android:id="@+id/textView21"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_ball"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/over_played"
+                    android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
+                    android:textAlignment="center"
+                    android:textColor="#171616"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView22"
+                    app:layout_constraintStart_toStartOf="@+id/textView22"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22"
+                    tools:text="12.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="@color/themeB2"
+            tools:backgroundTint="@color/themeB2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/matchStateRv"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="4dp"
+                tools:listitem="@layout/last_score"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            app:cardBackgroundColor="@color/themeB2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="135dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/batsman"
+                        tools:textAlignment="center"
+                        android:textColor="#087168"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/r"
+                        tools:textAlignment="center"
+                        android:textColor="#096A61"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="44dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/b"
+                        android:textAlignment="center"
+                        android:textColor="#0A756B"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/_4_s"
+                        android:textAlignment="center"
+                        android:textColor="#0A7369"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="42dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/_6_s"
+                        android:textAlignment="center"
+                        android:textColor="#0A7C71"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@{viewModel.batsmanAOnStrike ? @color/teal_200 : @color/themeB2}"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/selectBatsman1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        app:helperTextEnabled="false"
+                        app:hintEnabled="false">
+                        <AutoCompleteTextView
+                            android:id="@+id/batsman_selection1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:inputType="none"
+                            android:padding="0dp"
+                            android:text="select" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.totalRun)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="44dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.ballFaced)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.fours)}"
+                        android:textAlignment="center"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="42dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanAScore.sixes)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@{viewModel.batsmanAOnStrike ? @color/themeB2 : @color/teal_200 }"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout1"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout1"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/selectBatsman"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        app:helperTextEnabled="false"
+                        app:hintEnabled="false">
+                        <AutoCompleteTextView
+                            android:id="@+id/batsman_selection2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:inputType="none"
+                            android:padding="0dp"
+                            android:text="select" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.totalRun)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="44dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.ballFaced)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.fours)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="42dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.batsmanBScore.sixes)}"
+                        android:textAlignment="center"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/themeB2"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+            tools:backgroundTint="@color/themeB2">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+                <Button
+                    android:id="@+id/rotate_strike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="@color/themeA1"
+                    android:onClick="@{()-> viewModel.changeStrike()}"
+                    android:text="Undo "
+                    android:textColor="#167168"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/popup_wide"
+                    app:layout_constraintStart_toStartOf="@+id/popup_wide"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/button0"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(0)}"
+                    android:src="@drawable/zero"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="image_content" />
+
+                <ImageView
+                    android:id="@+id/button1"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(1)}"
+                    android:src="@drawable/one"
+                    app:layout_constraintBottom_toBottomOf="@+id/button0"
+                    app:layout_constraintStart_toEndOf="@+id/button0"
+                    app:layout_constraintTop_toTopOf="@+id/button0" />
+
+                <ImageView
+                    android:id="@+id/button2"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(2)}"
+                    android:src="@drawable/two"
+                    app:layout_constraintEnd_toEndOf="@+id/button0"
+                    app:layout_constraintStart_toStartOf="@+id/button0"
+                    app:layout_constraintTop_toBottomOf="@+id/button0" />
+
+                <ImageView
+                    android:id="@+id/button3"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(3)}"
+                    android:src="@drawable/three"
+                    app:layout_constraintBottom_toBottomOf="@+id/button2"
+                    app:layout_constraintStart_toEndOf="@+id/button2"
+                    app:layout_constraintTop_toTopOf="@+id/button2" />
+
+
+                <ImageView
+                    android:id="@+id/button4"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(4)}"
+                    android:src="@drawable/four"
+                    app:layout_constraintStart_toStartOf="@+id/button2"
+                    app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+                <ImageView
+                    android:id="@+id/button6"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:onClick="@{()-> viewModel.onBatsmanScore(6)}"
+                    android:src="@drawable/six"
+                    app:layout_constraintBottom_toBottomOf="@+id/button4"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/popup_nb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/themeA1"
+                    android:text="@string/nb"
+                    android:textColor="#0D736A"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/popup_lb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/themeA1"
+                    android:text="@string/lb"
+                    android:textColor="#0F7168"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/popup_nb"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/popup_wide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/themeA1"
+                    android:padding="0dp"
+                    android:text="@string/wide"
+                    android:textColor="#0B786E"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/rotate_strike"
+                    app:layout_constraintStart_toStartOf="@+id/popup_lb"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_lb" />
+
+                <Button
+                    android:id="@+id/popup_bye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="@color/themeA1"
+                    android:text="@string/byeRun"
+                    android:textColor="#0B786E"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/popup_out" />
+
+                <Button
+                    android:id="@+id/popup_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:text="@string/out"
+                    android:textColor="#0B8075"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/popup_bye"
+                    app:layout_constraintEnd_toEndOf="@+id/popup_nb"
+                    app:layout_constraintStart_toStartOf="@+id/popup_nb"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_nb"
+                    android:backgroundTint="@color/themeA1"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginHorizontal="16dp"
+            tools:backgroundTint="@color/themeB2"
+            app:cardBackgroundColor="@color/themeB2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutB1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:layout_editor_absoluteY="29dp">
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="44dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_group" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:hint="@string/team_name"
-                        android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
+                        android:id="@+id/textViewB1"
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/bowler"
+                        tools:textAlignment="center"
+                        android:textColor="#08675E"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewB2"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/over"
+                        tools:textAlignment="center"
+                        android:textColor="#0A6C63"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewB4"
+                        android:layout_width="51dp"
+                        android:layout_height="match_parent"
+                        android:text="R"
+                        tools:textAlignment="center"
+                        android:textColor="#0A7369"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewB5"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:text="w"
+                        tools:textAlignment="center"
                         android:textColor="#0A6E64"
-                        android:textColorHint="#0B7168"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
-                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-                    <ImageView
-                        android:id="@+id/textView20"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_cricket_batsman_dark"
-
-                        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                        app:layout_constraintStart_toStartOf="@+id/textView22"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/total_score"
-                        android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
+                        android:id="@+id/textViewB6"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:text="Econ"
                         android:textAlignment="center"
-                        android:textSize="24dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/textView18"
-                        app:layout_constraintStart_toStartOf="@+id/textView18"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                        tools:text="156/8" />
-                    <ImageView
-                        android:id="@+id/textView21"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_ball"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                        app:layout_constraintStart_toStartOf="@+id/textView23"
-                        app:layout_constraintTop_toTopOf="@+id/textView23" />
+                        android:textColor="#097369"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutB2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayoutB1"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayoutB1"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutB1">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bowlers"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        app:helperTextEnabled="false"
+                        app:hintEnabled="false">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/bowler_selection"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:inputType="none"
+                            android:padding="0dp"
+                            android:text="select"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
-                        android:id="@+id/textView23"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/over_played"
-                        android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
+                        android:id="@+id/bowler_over"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.overBowled)}"
                         android:textAlignment="center"
-                        android:textColor="#171616"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/textView22"
-                        app:layout_constraintStart_toStartOf="@+id/textView22"
-                        app:layout_constraintTop_toBottomOf="@+id/textView22"
-                        tools:text="12.5" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/bowler_run"
+                        android:layout_width="51dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.runGiven)}"
+                        android:textAlignment="center"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+                    <TextView
+                        android:id="@+id/bowler_wicket"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(viewModel.bowlersScore.wicketTaken)}"
+                        android:textAlignment="center"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView2"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="8dp"
-                tools:backgroundTint="@color/themeB2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/matchStateRv"
-                     android:layout_height="wrap_content"
-                     android:layout_width="match_parent"
-                     android:orientation="horizontal"
-                     android:layout_margin="4dp"
-                     tools:listitem="@layout/last_score"/>
-            </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/bowler_econ"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textAlignment="center" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="16dp"
-                tools:backgroundTint="@color/themeB2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp">
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="135dp"
-                            android:layout_height="match_parent"
-                            android:text="@string/batsman"
-                            tools:textAlignment="center"
-                            android:textColor="#087168"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="55dp"
-                            android:layout_height="match_parent"
-                            android:text="@string/r"
-                            tools:textAlignment="center"
-                            android:textColor="#096A61"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="44dp"
-                            android:layout_height="match_parent"
-                            android:text="@string/b"
-                            android:textAlignment="center"
-                            android:textColor="#0A756B"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/textView6"
-                            android:layout_width="46dp"
-                            android:layout_height="match_parent"
-                            android:text="@string/_4_s"
-                            android:textAlignment="center"
-                            android:textColor="#0A7369"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/textView7"
-                            android:layout_width="42dp"
-                            android:layout_height="match_parent"
-                            android:text="@string/_6_s"
-                            android:textAlignment="center"
-                            android:textColor="#0A7C71"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@{viewModel.batsmanAOnStrike ? @color/teal_200 : @color/themeB2}"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-                        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/selectBatsman1"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                            android:layout_width="135dp"
-                            android:layout_height="wrap_content"
-                            android:padding="0dp"
-                            app:helperTextEnabled="false"
-                            app:hintEnabled="false">
-                            <AutoCompleteTextView
-                                android:id="@+id/batsman_selection1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="true"
-                                android:inputType="none"
-                                android:padding="0dp"
-                                android:text="select" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="55dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanAScore.totalRun)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck" />
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="44dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanAScore.ballFaced)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-                        <TextView
-                            android:id="@+id/textView12"
-                            android:layout_width="46dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanAScore.fours)}"
-                            android:textAlignment="center"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="42dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanAScore.sixes)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@{viewModel.batsmanAOnStrike ? @color/themeB2 : @color/teal_200 }"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/linearLayout1"
-                        app:layout_constraintStart_toStartOf="@+id/linearLayout1"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/selectBatsman"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                            android:layout_width="135dp"
-                            android:layout_height="wrap_content"
-                            android:padding="0dp"
-                            app:helperTextEnabled="false"
-                            app:hintEnabled="false">
-                            <AutoCompleteTextView
-                                android:id="@+id/batsman_selection2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="true"
-                                android:inputType="none"
-                                android:padding="0dp"
-                                android:text="select" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="55dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanBScore.totalRun)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck" />
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="44dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanBScore.ballFaced)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="46dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanBScore.fours)}"
-                            android:textAlignment="center"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="42dp"
-                            android:layout_height="match_parent"
-                            android:text="@{Integer.toString(viewModel.batsmanBScore.sixes)}"
-                            android:textAlignment="center"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-              <com.google.android.material.card.MaterialCardView
-                  android:id="@+id/materialCardView4"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
-                  app:layout_constraintStart_toStartOf="@+id/materialCardView3"
-                  app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
-                  tools:backgroundTint="@color/themeB2">
-                  <androidx.constraintlayout.widget.ConstraintLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:padding="8dp"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintStart_toStartOf="parent">
-                      <Button
-                          android:id="@+id/rotate_strike"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginBottom="4dp"
-                          android:backgroundTint="@color/themeA1"
-                          android:onClick="@{()-> viewModel.changeStrike()}"
-                          android:text="Undo "
-                          android:textColor="#167168"
-                          android:textSize="14sp"
-                          android:textStyle="bold"
-                          app:layout_constraintBottom_toBottomOf="parent"
-                          app:layout_constraintEnd_toEndOf="@+id/popup_wide"
-                          app:layout_constraintStart_toStartOf="@+id/popup_wide"
-                          tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-                      <ImageView
-                          android:id="@+id/button0"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginStart="8dp"
-                          android:layout_marginTop="8dp"
-                          android:layout_marginBottom="4dp"
-                          android:padding="4dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(0)}"
-                          android:src="@drawable/zero"
-                          app:layout_constraintStart_toStartOf="parent"
-                          app:layout_constraintTop_toTopOf="parent"
-                          android:contentDescription="image_content" />
-
-                      <ImageView
-                          android:id="@+id/button1"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginStart="16dp"
-                          android:padding="4dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(1)}"
-                          android:src="@drawable/one"
-                          app:layout_constraintBottom_toBottomOf="@+id/button0"
-                          app:layout_constraintStart_toEndOf="@+id/button0"
-                          app:layout_constraintTop_toTopOf="@+id/button0" />
-
-                      <ImageView
-                          android:id="@+id/button2"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginTop="8dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:padding="4dp"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(2)}"
-                          android:src="@drawable/two"
-                          app:layout_constraintEnd_toEndOf="@+id/button0"
-                          app:layout_constraintStart_toStartOf="@+id/button0"
-                          app:layout_constraintTop_toBottomOf="@+id/button0" />
-
-                      <ImageView
-                          android:id="@+id/button3"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginStart="16dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:padding="4dp"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(3)}"
-                          android:src="@drawable/three"
-                          app:layout_constraintBottom_toBottomOf="@+id/button2"
-                          app:layout_constraintStart_toEndOf="@+id/button2"
-                          app:layout_constraintTop_toTopOf="@+id/button2" />
-
-
-                      <ImageView
-                          android:id="@+id/button4"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginTop="8dp"
-                          android:layout_marginBottom="4dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:padding="4dp"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(4)}"
-                          android:src="@drawable/four"
-                          app:layout_constraintStart_toStartOf="@+id/button2"
-                          app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-                      <ImageView
-                          android:id="@+id/button6"
-                          android:layout_width="45dp"
-                          android:layout_height="45dp"
-                          android:layout_marginStart="16dp"
-                          android:clickable="true"
-                          android:focusable="true"
-                          android:padding="4dp"
-                          android:onClick="@{()-> viewModel.onBatsmanScore(6)}"
-                          android:src="@drawable/six"
-                          app:layout_constraintBottom_toBottomOf="@+id/button4"
-                          app:layout_constraintStart_toEndOf="@+id/button4"
-                          app:layout_constraintTop_toTopOf="@+id/button4" />
-
-                      <Button
-                          android:id="@+id/popup_nb"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginEnd="8dp"
-                          android:backgroundTint="@color/themeA1"
-                          android:text="@string/nb"
-                          android:textColor="#0D736A"
-                          android:textStyle="bold"
-                          app:layout_constraintEnd_toEndOf="parent"
-                          app:layout_constraintTop_toTopOf="parent" />
-
-                      <Button
-                          android:id="@+id/popup_lb"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginStart="8dp"
-                          android:layout_marginEnd="8dp"
-                          android:backgroundTint="@color/themeA1"
-                          android:text="@string/lb"
-                          android:textColor="#0F7168"
-                          android:textStyle="bold"
-                          app:layout_constraintEnd_toStartOf="@+id/popup_nb"
-                          app:layout_constraintTop_toTopOf="parent" />
-
-                      <Button
-                          android:id="@+id/popup_wide"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:backgroundTint="@color/themeA1"
-                          android:padding="0dp"
-                          android:text="@string/wide"
-                          android:textColor="#0B786E"
-                          android:textStyle="bold"
-                          app:layout_constraintBottom_toTopOf="@+id/rotate_strike"
-                          app:layout_constraintStart_toStartOf="@+id/popup_lb"
-                          app:layout_constraintTop_toBottomOf="@+id/popup_lb" />
-
-                      <Button
-                          android:id="@+id/popup_bye"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginEnd="8dp"
-                          android:layout_marginBottom="4dp"
-                          android:backgroundTint="@color/themeA1"
-                          android:padding="0dp"
-                          android:text="@string/byeRun"
-                          android:textColor="#0B786E"
-                          android:textStyle="bold"
-                          app:layout_constraintBottom_toBottomOf="parent"
-                          app:layout_constraintEnd_toEndOf="parent"
-                          app:layout_constraintStart_toStartOf="@+id/popup_out" />
-
-                      <Button
-                          android:id="@+id/popup_out"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:padding="0dp"
-                          android:text="@string/out"
-                          android:textColor="#0B8075"
-                          android:textStyle="bold"
-                          app:layout_constraintBottom_toTopOf="@+id/popup_bye"
-                          app:layout_constraintEnd_toEndOf="@+id/popup_nb"
-                          app:layout_constraintHorizontal_bias="0.0"
-                          app:layout_constraintStart_toStartOf="@+id/popup_nb"
-                          app:layout_constraintTop_toBottomOf="@+id/popup_nb"
-                          tools:backgroundTint="@color/themeA1" />
-                  </androidx.constraintlayout.widget.ConstraintLayout>
-
-              </com.google.android.material.card.MaterialCardView>
-              <com.google.android.material.card.MaterialCardView
-                  android:id="@+id/materialCardView5"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:layout_marginBottom="24dp"
-                  android:layout_marginHorizontal="16dp"
-                  tools:backgroundTint="@color/themeB2"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
-
-                  <androidx.constraintlayout.widget.ConstraintLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintStart_toStartOf="parent">
-
-                      <LinearLayout
-                          android:id="@+id/linearLayoutB1"
-                          android:layout_width="0dp"
-                          android:layout_height="wrap_content"
-                          android:layout_marginHorizontal="16dp"
-                          android:layout_marginTop="8dp"
-                          app:layout_constraintEnd_toEndOf="parent"
-                          app:layout_constraintStart_toStartOf="parent"
-                          app:layout_constraintTop_toTopOf="parent">
-
-                          <TextView
-                              android:id="@+id/textViewB1"
-                              android:layout_width="130dp"
-                              android:layout_height="match_parent"
-                              android:text="@string/bowler"
-                              tools:textAlignment="center"
-                              android:textColor="#08675E"
-                              android:textSize="16sp"
-                              android:textStyle="bold" />
-
-                          <TextView
-                              android:id="@+id/textViewB2"
-                              android:layout_width="55dp"
-                              android:layout_height="match_parent"
-                              android:text="@string/over"
-                              tools:textAlignment="center"
-                              android:textColor="#0A6C63"
-                              android:textSize="16sp"
-                              android:textStyle="bold" />
-
-                          <TextView
-                              android:id="@+id/textViewB4"
-                              android:layout_width="51dp"
-                              android:layout_height="match_parent"
-                              android:text="R"
-                              tools:textAlignment="center"
-                              android:textColor="#0A7369"
-                              android:textSize="16sp"
-                              android:textStyle="bold" />
-
-                          <TextView
-                              android:id="@+id/textViewB5"
-                              android:layout_width="50dp"
-                              android:layout_height="match_parent"
-                              android:text="w"
-                              tools:textAlignment="center"
-                              android:textColor="#0A6E64"
-                              android:textSize="16sp"
-                              android:textStyle="bold" />
-
-                          <TextView
-                              android:id="@+id/textViewB6"
-                              android:layout_width="60dp"
-                              android:layout_height="match_parent"
-                              android:text="Econ"
-                              android:textAlignment="center"
-                              android:textColor="#097369"
-                              android:textStyle="bold" />
-
-                      </LinearLayout>
-
-
-                      <LinearLayout
-                          android:id="@+id/linearLayoutB2"
-                          android:layout_width="0dp"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="4dp"
-                          android:layout_marginBottom="8dp"
-                          app:layout_constraintBottom_toBottomOf="parent"
-                          app:layout_constraintEnd_toEndOf="@+id/linearLayoutB1"
-                          app:layout_constraintStart_toStartOf="@+id/linearLayoutB1"
-                          app:layout_constraintTop_toBottomOf="@+id/linearLayoutB1">
-
-                          <com.google.android.material.textfield.TextInputLayout
-                              android:id="@+id/bowlers"
-                              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:padding="0dp"
-                              app:helperTextEnabled="false"
-                              app:hintEnabled="false">
-
-                              <AutoCompleteTextView
-                                  android:id="@+id/bowler_selection"
-                                  android:layout_width="130dp"
-                                  android:layout_height="wrap_content"
-                                  android:focusable="true"
-                                  android:inputType="none"
-                                  android:padding="0dp"
-                                  android:text="select"
-                                  tools:ignore="TouchTargetSizeCheck" />
-
-                          </com.google.android.material.textfield.TextInputLayout>
-
-                          <TextView
-                              android:id="@+id/bowler_over"
-                              android:layout_width="55dp"
-                              android:layout_height="match_parent"
-                              android:text="@{Integer.toString(viewModel.bowlersScore.overBowled)}"
-                              android:textAlignment="center"
-                              tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                          <TextView
-                              android:id="@+id/bowler_run"
-                              android:layout_width="51dp"
-                              android:layout_height="match_parent"
-                              android:text="@{Integer.toString(viewModel.bowlersScore.runGiven)}"
-                              android:textAlignment="center"
-                              tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-                          <TextView
-                              android:id="@+id/bowler_wicket"
-                              android:layout_width="50dp"
-                              android:layout_height="match_parent"
-                              android:text="@{Integer.toString(viewModel.bowlersScore.wicketTaken)}"
-                              android:textAlignment="center"
-                              tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                          <TextView
-                              android:id="@+id/bowler_econ"
-                              android:layout_width="60dp"
-                              android:layout_height="match_parent"
-                              android:text="0"
-                              android:textAlignment="center" />
-
-                      </LinearLayout>
-
-                  </androidx.constraintlayout.widget.ConstraintLayout>
-
-              </com.google.android.material.card.MaterialCardView>
-
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@{viewModel.scoringTitleText}"
-                android:textAlignment="center"
-                android:layout_marginHorizontal="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+
 
 </layout>

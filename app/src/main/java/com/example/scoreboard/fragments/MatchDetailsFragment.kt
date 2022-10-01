@@ -103,11 +103,6 @@ class MatchDetailsFragment : Fragment() {
         return binding!!.root
     }
 
-    override fun onResume() {
-        super.onResume()
-       // findNavController().navigateUp()
-
-    }
 
 
     companion object {

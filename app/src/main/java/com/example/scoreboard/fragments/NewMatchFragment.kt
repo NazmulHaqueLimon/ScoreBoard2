@@ -75,7 +75,7 @@ class NewMatchFragment : Fragment() {
         return binding.root
     }
 
-    private fun inputsValidated():Boolean{
+    private fun isInputsValidated():Boolean{
         return if (binding.formatSelection.isSelected && binding.batFirst.isSelected ){
             true
         }else{
@@ -88,6 +88,8 @@ class NewMatchFragment : Fragment() {
         super.onResume()
         setDropDowns()
     }
+
+
 
     private fun navigateToTeamFragment(flag: String) {
         val action =NewMatchFragmentDirections.actionNewMatchFragmentToTeamFragment(flag)

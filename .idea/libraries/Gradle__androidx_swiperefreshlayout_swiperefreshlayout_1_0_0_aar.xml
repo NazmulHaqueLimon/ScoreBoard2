@@ -1,17 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f73d2d99587ed09a69ba5d865b58cd56/transformed/swiperefreshlayout-1.0.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1eef68abf3774fa9e0fe067b7b0f4b62/transformed/swiperefreshlayout-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bcbf7209fc40d2e771c8fe73c0a42842/transformed/swiperefreshlayout-1.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f73d2d99587ed09a69ba5d865b58cd56/transformed/swiperefreshlayout-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f73d2d99587ed09a69ba5d865b58cd56/transformed/swiperefreshlayout-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f73d2d99587ed09a69ba5d865b58cd56/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1eef68abf3774fa9e0fe067b7b0f4b62/transformed/swiperefreshlayout-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1eef68abf3774fa9e0fe067b7b0f4b62/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.swiperefreshlayout/swiperefreshlayout/1.0.0/ab92d86c004eb1d48e45f311b02ca53d6c86b607/swiperefreshlayout-1.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/modules-2/files-2.1/androidx.swiperefreshlayout/swiperefreshlayout/1.0.0/ab92d86c004eb1d48e45f311b02ca53d6c86b607/swiperefreshlayout-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

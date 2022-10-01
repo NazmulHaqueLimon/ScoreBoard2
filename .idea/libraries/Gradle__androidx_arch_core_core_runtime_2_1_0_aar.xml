@@ -1,14 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.arch.core:core-runtime:2.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a42376604b6e0c4f2888d0c707cf7945/transformed/core-runtime-2.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7ffb59e35f8f1c2a4ccedfd470f8a90f/transformed/core-runtime-2.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7ffb59e35f8f1c2a4ccedfd470f8a90f/transformed/core-runtime-2.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7ffb59e35f8f1c2a4ccedfd470f8a90f/transformed/core-runtime-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/f5f064def63bad8bd96d2643e7bae8ed/transformed/core-runtime-2.1.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/f5f064def63bad8bd96d2643e7bae8ed/transformed/core-runtime-2.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-runtime/2.1.0/f19886651c9946b39f83d8c184fd0e2ce9f43c16/core-runtime-2.1.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/modules-2/files-2.1/androidx.arch.core/core-runtime/2.1.0/f19886651c9946b39f83d8c184fd0e2ce9f43c16/core-runtime-2.1.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

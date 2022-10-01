@@ -2,6 +2,7 @@
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
  @AndroidEntryPoint
  class MainActivity : AppCompatActivity() {
 
-     private lateinit var binding :ActivityMainBinding
+     private lateinit var binding : ActivityMainBinding
      private lateinit var navController :NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,24 +30,18 @@ import dagger.hilt.android.AndroidEntryPoint
 
         NavigationUI.setupWithNavController(bottomNav, navController)
 
-//        val finalHost = NavHostFragment.create(R.navigation.nav_graph)
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.nav_host, finalHost)
-//            .setPrimaryNavigationFragment(finalHost) // equivalent to app:defaultNavHost="true"
-//            .commit()
+        navController.addOnDestinationChangedListener { _, destination, _ ->
 
-        // Setup the ActionBar with navController and 4 top level destinations
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.matchListFragment,
-//                R.id.matchListFragment,
-//                R.id.statisticsFragment
-//            )
-//        )
-//
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        //bottomNav.setupWithNavController(navController)
+            if(destination.id == R.id.matchDetailsFragment) {
+                bottomNav.visibility =View.GONE
+            }
+            else if (destination.id == R.id.scoringFragment){
+                bottomNav.visibility =View.GONE
+            }
+            else {
+                bottomNav.visibility = View.VISIBLE
+            }
+        }
 
     }
      /**
