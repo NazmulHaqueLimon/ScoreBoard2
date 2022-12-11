@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.adapters.BatsmanScoreAdapter
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class MatchDetailsFragment : Fragment() {
 
-    private  var binding : FragmentMatchDetailsBinding? =null
+    private lateinit var binding : FragmentMatchDetailsBinding
 
     private val detailsViewModel : MatchDetailsViewmodel by activityViewModels()
     private val args:MatchDetailsFragmentArgs by navArgs()
@@ -48,7 +49,7 @@ class MatchDetailsFragment : Fragment() {
 
         batsmanScoreAdapter = BatsmanScoreAdapter()
         bowlerScoreAdapter = BowlerScoreAdapter()
-        binding!!.batsmanRecyclerView.adapter = batsmanScoreAdapter
+        binding.batsmanRecyclerView.adapter = batsmanScoreAdapter
         //binding.bowlersRecyclerView.adapter =bowlerScoreAdapter
 
 
@@ -99,8 +100,12 @@ class MatchDetailsFragment : Fragment() {
             bowlerScoreAdapter.submitList(it)
         }
 
+        binding.arrowBack.setOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
 
-        return binding!!.root
+
+        return binding.root
     }
 
 

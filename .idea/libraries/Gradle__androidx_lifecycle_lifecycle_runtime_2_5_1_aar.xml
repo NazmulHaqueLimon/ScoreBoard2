@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-runtime:2.5.1@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/279e352e87de9f388c38156d20e3dc96/transformed/lifecycle-runtime-2.5.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/279e352e87de9f388c38156d20e3dc96/transformed/lifecycle-runtime-2.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/279e352e87de9f388c38156d20e3dc96/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/f563d9ab699219948b86e187f7bdbb20/transformed/lifecycle-runtime-2.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/f563d9ab699219948b86e187f7bdbb20/transformed/lifecycle-runtime-2.5.1/res" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/f563d9ab699219948b86e187f7bdbb20/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

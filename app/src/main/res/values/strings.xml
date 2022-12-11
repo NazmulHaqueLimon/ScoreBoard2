@@ -42,6 +42,7 @@
     <string name="six">+6</string>
     <string name="teamimage">teamImage</string>
     <string name="teamImage">team image</string>
+    <string name="image_content">image_content</string>
 
     <string-array name="formats">
         <item>T10</item>

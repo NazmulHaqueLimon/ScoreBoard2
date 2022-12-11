@@ -11,9 +11,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
+import com.example.scoreboard.adapters.MatchListAdapter
+import com.example.scoreboard.adapters.MatchStateAdapter
 import com.example.scoreboard.data.MatchState
 import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -27,7 +30,9 @@ class ScoringFragment : Fragment() {
     private lateinit var binding : FragmentScoringBinding
     private val scoringViewModel : ScoringViewModel by activityViewModels()
     private val args:ScoringFragmentArgs by navArgs()
+    private lateinit var matchStateAdapter: MatchStateAdapter
 
+    val stateList = ArrayList<MatchState>()
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +41,16 @@ class ScoringFragment : Fragment() {
         binding= FragmentScoringBinding.inflate(inflater,container,false).apply {
             viewModel=scoringViewModel
             lifecycleOwner=viewLifecycleOwner
-            
+
+            if (batsmanSelection1.isSelected){
+                scoringViewModel._strikerActive.value=true
+            }
+            if (batsmanSelection2.isSelected){
+                scoringViewModel._nonStrikerActive.value=true
+            }
+            if (bowlerSelection.isSelected){
+                scoringViewModel._bowlerActive.value=true
+            }
         }
         args.matchId.let { id ->
             if (id == "NO_ID"){
@@ -48,9 +62,13 @@ class ScoringFragment : Fragment() {
 
             }
         }
+        /**
+         *setting the batsmans and bowlers dropdown with value and click events */
         setBatsmanDropDown()
         setBowlerDropDown()
         //scoringViewModel.createScoreSheet()
+        /**
+         * */
         scoringViewModel.teamA.observe(viewLifecycleOwner){
             it.team.isBat.let { Bat->
                 if (Bat){
@@ -92,6 +110,15 @@ class ScoringFragment : Fragment() {
             view.findNavController().navigateUp()
         }
 
+        matchStateAdapter = MatchStateAdapter()
+        binding.matchStateRv.adapter = matchStateAdapter
+        scoringViewModel.stateList.let {
+            if(it.isNotEmpty()){
+                matchStateAdapter.submitList(scoringViewModel.stateList)
+            }
+        }
+
+
 
 
         return binding.root
@@ -107,8 +134,25 @@ class ScoringFragment : Fragment() {
         setListPopupBye()
         setListPopupNb()
         setListPopupWide()
+        showDialog("please add striker,non striker and a bowler to start scoring")
+        displayMatchState()
+
+    }
+
+    private fun displayMatchState() {
 
 
+    }
+    private fun showDialog(msg:String){
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(msg)
+            .setMessage(msg)
+
+            .setPositiveButton("Okey") { dialog, which ->
+                // Respond to positive button press
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -133,28 +177,26 @@ class ScoringFragment : Fragment() {
             (binding.batsmanSelection1 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
             (binding.batsmanSelection2 as? AutoCompleteTextView)?.setAdapter(batsmanAdapter)
 
-
             binding.batsmanSelection1.setOnItemClickListener{_, _, i, _ ->
                 players.map { player ->
                     if (batsmanAdapter.getItem(i).equals(player.name)){
                         scoringViewModel._batsmanA.value=player
+                        scoringViewModel._strikerActive.value =true
                         Toast.makeText(requireContext(),"player updated", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-
             binding.batsmanSelection2.setOnItemClickListener{_, _, i, _ ->
                 players.map { player ->
                     if (batsmanAdapter.getItem(i).equals(player.name)){
                         scoringViewModel._batsmanB.value=player
+                        scoringViewModel._nonStrikerActive.value =true
                         Toast.makeText(requireContext(),"another batsman steps on the crease ready", Toast.LENGTH_SHORT).show()
                     }
                 }
 
-
             }
         }
-
 
     }
     @ExperimentalCoroutinesApi
@@ -171,6 +213,7 @@ class ScoringFragment : Fragment() {
                 players.map { player ->
                     if (bowlersAdapter.getItem(i).equals(player.name)) {
                         scoringViewModel._bowler.value = player
+                        scoringViewModel._bowlerActive.value =true
                         Toast.makeText(requireContext(), "Bowler ready to deliver", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -225,6 +268,7 @@ class ScoringFragment : Fragment() {
         }
 
     }
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun openPlayersPopup(){
         val popupPlayers = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
         // Set list popup's content

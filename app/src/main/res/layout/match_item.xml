@@ -73,7 +73,7 @@
                 android:id="@+id/totalScore_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_margin="4dp"
                 android:text="@{Integer.toString(ScoreAndTeamA.score.totalRun)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/divider"

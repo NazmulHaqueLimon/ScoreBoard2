@@ -1,19 +1,45 @@
 package com.example.scoreboard.data
 
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.data.objects.PlayersScore
-
 data class MatchState(
     val run :Int =0,
     val extra:Int =0,
     val run_bat : Int=0,
-    val playerScore :PlayersScore?=null,
     val ballCount : Boolean =false,
-    val player_out : Player?=null,
-    val wicket_type : String?=null,
     val bat :Boolean =false,
     val nb : Boolean=false,
     val wide :Boolean =false,
     val bye :Boolean =false,
     val lb :Boolean =false,
-)
+){
+
+    fun getScoreString():String {
+        var scoreString : String =(run+extra+run_bat).toString()
+        if (bye && !nb){
+            scoreString = "Bye-$scoreString"
+        }
+        if (lb && !nb){
+            scoreString = "lb-$scoreString"
+        }
+
+        if (wide){
+            scoreString = "wide-$scoreString"
+        }
+
+        if (nb){
+            if (lb){
+                scoreString = "nb&lb-$scoreString"
+            }
+            else if (bye){
+                scoreString = "nb&bye-$scoreString"
+            }
+            else{
+                scoreString = "nb-$scoreString"
+            }
+        }
+        return scoreString
+    }
+
+   // override fun toString() = name
+}
+
+

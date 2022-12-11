@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.appcompat:appcompat-resources:1.5.1@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/8d3bfee5711aaecaa1862934073cf7b1/transformed/appcompat-resources-1.5.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/8d3bfee5711aaecaa1862934073cf7b1/transformed/appcompat-resources-1.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/8d3bfee5711aaecaa1862934073cf7b1/transformed/appcompat-resources-1.5.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/9eaf173775abd633fa256f5ede539e9f/transformed/appcompat-resources-1.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/9eaf173775abd633fa256f5ede539e9f/transformed/appcompat-resources-1.5.1/res" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/9eaf173775abd633fa256f5ede539e9f/transformed/appcompat-resources-1.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

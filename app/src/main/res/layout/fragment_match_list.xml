@@ -4,21 +4,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        >
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/themeB2"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/arrow_back"
+                android:layout_width="40dp"
+                android:padding="8dp"
+                android:src="@drawable/arrow_back"
+                android:layout_height="match_parent"
+                app:tint="@color/buttons"
+                android:contentDescription="@string/image_content" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleGravity="center"
+                app:contentScrim="?attr/colorSurface"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="?attr/colorSurface"
+                app:title="Match List"
+                app:titleEnabled="true">
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/matchList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingEnd="12dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:paddingStart="12dp"
             android:paddingTop="12dp"
+            android:paddingEnd="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/match_item"
-            tools:context=".fragments.MatchListFragment"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:context=".fragments.MatchListFragment"
+            tools:listitem="@layout/match_item" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

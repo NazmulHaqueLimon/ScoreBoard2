@@ -1,6 +1,7 @@
 package com.example.scoreboard.viewmodels
 
 
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.scoreboard.data.MatchState
 import com.example.scoreboard.data.objects.*
@@ -22,11 +23,7 @@ class ScoringViewModel @Inject internal constructor(
 
 ): ViewModel(){
 
-    val isScoringEnabled_ =MutableLiveData<Boolean>()
-    val isScoringEnabled :LiveData<Boolean> =isScoringEnabled_
 
-    val stateList = mutableListOf<MatchState>()
-//    val lastState = stateList.last()
 
     fun setMatchId(id:String){
         matchId.value =id
@@ -96,11 +93,6 @@ class ScoringViewModel @Inject internal constructor(
     /**
      * selected batsman from the dropdowns
      * */
-    val _isFirstInningsDone = MutableLiveData<Boolean>(false)
-    val isFirstInningsDone:LiveData<Boolean> =_isFirstInningsDone
-
-    private val _isScoreSheetCreated = MutableLiveData<Boolean>(false)
-    private val isScoreSheetCreated:LiveData<Boolean> =_isScoreSheetCreated
 
     private val _batsmanAOnStrike = MutableLiveData<Boolean>(true)
     val batsmanAOnStrike:LiveData<Boolean> =_batsmanAOnStrike
@@ -161,9 +153,7 @@ class ScoringViewModel @Inject internal constructor(
             }
         }
     }
-    /**
-     * getting the bowling team  score
-     */
+
     @ExperimentalCoroutinesApi
     val bowlingTeamScore :LiveData<TeamsScore> = bowlingTeamWithPlayers.switchMap { it ->
         it.team.teamId.let { teamId->
@@ -173,6 +163,127 @@ class ScoringViewModel @Inject internal constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun getStrikerScore(): PlayersScore {
+        return when(batsmanAOnStrike.value){
+            true -> batsmanAScore.value!!
+            else -> batsmanBScore.value!!
+        }
+    }
+
+
+    /**
+     *
+     * .................................scoring conditions...................................
+     *
+     */
+    val stateList = mutableListOf<MatchState>()
+    val lastState = MutableLiveData<List<MatchState>>()
+    val stateListLiveData =stateList.toMutableList()
+
+
+    var _strikerActive =MutableLiveData<Boolean>()
+    val strikerActive:LiveData<Boolean> =_strikerActive
+
+    val _bowlerActive =MutableLiveData<Boolean>()
+    val bowlerActive:LiveData<Boolean> =_bowlerActive
+
+    val _nonStrikerActive =MutableLiveData<Boolean>()
+    val nonStrikerActive:LiveData<Boolean> =_nonStrikerActive
+    
+     val _isFirstInningsDone = MutableLiveData<Boolean>()
+     val isFirstInningsDone:LiveData<Boolean> =_isFirstInningsDone
+
+    private fun isScoringEnabled():Boolean{
+        if (strikerActive.value == true && nonStrikerActive.value==true && bowlerActive.value==true){
+            return true
+        }
+        return false
+    }
+
+    fun onBatsmanScore (run:Int){
+        if (isScoringEnabled()){
+            val state = MatchState(run_bat = run, ballCount = true)
+            stateList.add(state)
+            updateMatchState(state)
+        }
+
+    }
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun updateMatchState(state: MatchState) {
+        stateList.add(state)
+        if (state.bye && !state.nb){
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+        if (state.lb && !state.nb){
+            updateBatsmanScore(getStrikerScore(),state)
+            bowlersScore.value?.let {
+                val newScore =it.copy(runGiven = it.runGiven+state.run, overBowled = it.overBowled+1)
+                updatePlayerScore(newScore)
+            }
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+        if (state.wide){
+            bowlersScore.value?.let {
+                val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
+                updatePlayerScore(newScore)
+            }
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
+                updateTeamScore(newScore)
+            }
+        }
+        if (state.ballCount){
+            //update player score
+            updateBatsmanScore( getStrikerScore(),state)
+            bowlersScore.value?.let {
+                val newScore =it.copy(runGiven = it.runGiven+state.run_bat, overBowled = it.overBowled+1)
+                updatePlayerScore(newScore)
+            }
+            battingTeamScore.value?.let {
+                val newScore =it.copy(totalRun = it.totalRun+state.run_bat, ballPlayed = it.ballPlayed +1)
+                updateTeamScore(newScore)
+            }
+        }
+        if (state.nb){
+            if (state.lb){
+                bowlersScore.value?.let {
+                    val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
+                    updatePlayerScore(newScore)
+                }
+                battingTeamScore.value?.let {
+                    val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
+                    updateTeamScore(newScore)
+                }
+            }
+            else if (state.bye){
+                battingTeamScore.value?.let {
+                    val newScore =it.copy(totalRun = it.totalRun+state.run+state.extra)
+                    updateTeamScore(newScore)
+                }
+            }
+            else{
+                //update player score
+                updateBatsmanScore( getStrikerScore(),state)
+                //update bowler score
+                bowlersScore.value?.let {
+                    val newScore =it.copy(runGiven = it.runGiven+state.run_bat+state.extra+state.run)
+                    updatePlayerScore(newScore)
+                }
+                //update batting team score
+                battingTeamScore.value?.let {
+                    val newScore =it.copy(totalRun = it.totalRun+state.run_bat+state.extra+state.run)
+                    updateTeamScore(newScore)
+                }
+            }
+        }
+    }
 
     private fun updateBatsmanScore(playerScore:PlayersScore, state: MatchState){
         var newScore :PlayersScore
@@ -231,103 +342,13 @@ class ScoringViewModel @Inject internal constructor(
         }
         updatePlayerScore(newScore)
     }
-
-    fun onBatsmanScore (run:Int){
-        val state = MatchState(run_bat = run, ballCount = true)
-        stateList.add(state)
-        updateMatchState(state)
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun updateMatchState(state: MatchState) {
-        stateList.add(state)
-        if (state.bye && !state.nb){
-
-            battingTeamScore.value?.let {
-                val newScore =it.copy(totalRun = it.totalRun+state.run)
-                updateTeamScore(newScore)
-            }
-        }
+    /**
+     *
+     * ..................................scoring conditions.................................
+     *
+     */
 
 
-        if (state.lb && !state.nb){
-            updateBatsmanScore(getStrikerScore(),state)
-            bowlersScore.value?.let {
-                val newScore =it.copy(runGiven = it.runGiven+state.run, overBowled = it.overBowled+1)
-                updatePlayerScore(newScore)
-            }
-            battingTeamScore.value?.let {
-                val newScore =it.copy(totalRun = it.totalRun+state.run)
-                updateTeamScore(newScore)
-            }
-        }
-
-
-        if (state.wide){
-            bowlersScore.value?.let {
-                val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
-                updatePlayerScore(newScore)
-            }
-            battingTeamScore.value?.let {
-                val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
-                updateTeamScore(newScore)
-            }
-        }
-
-
-        if (state.ballCount){
-            //update player score
-            updateBatsmanScore( getStrikerScore(),state)
-            bowlersScore.value?.let {
-                val newScore =it.copy(runGiven = it.runGiven+state.run_bat, overBowled = it.overBowled+1)
-                updatePlayerScore(newScore)
-            }
-            battingTeamScore.value?.let {
-                val newScore =it.copy(totalRun = it.totalRun+state.run_bat, ballPlayed = it.ballPlayed +1)
-                updateTeamScore(newScore)
-            }
-        }
-
-        if (state.nb){
-            if (state.lb){
-                bowlersScore.value?.let {
-                    val newScore =it.copy(runGiven = it.runGiven+state.extra+state.run)
-                    updatePlayerScore(newScore)
-                }
-                battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.extra+state.run)
-                    updateTeamScore(newScore)
-                }
-            }
-            else if (state.bye){
-                battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.run+state.extra)
-                    updateTeamScore(newScore)
-                }
-            }
-            else{
-                //update player score
-                updateBatsmanScore( getStrikerScore(),state)
-                //update bowler score
-                bowlersScore.value?.let {
-                    val newScore =it.copy(runGiven = it.runGiven+state.run_bat+state.extra+state.run)
-                    updatePlayerScore(newScore)
-                }
-                //update batting team score
-                battingTeamScore.value?.let {
-                    val newScore =it.copy(totalRun = it.totalRun+state.run_bat+state.extra+state.run)
-                    updateTeamScore(newScore)
-                }
-            }
-        }
-    }
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private fun getStrikerScore(): PlayersScore {
-        return when(batsmanAOnStrike.value){
-            true -> batsmanAScore.value!!
-            else -> batsmanBScore.value!!
-        }
-    }
 
 
     //update player score...by making new object every time
@@ -367,8 +388,6 @@ class ScoringViewModel @Inject internal constructor(
             updateTeam(team)
         }
     }
-
-
     fun onStrikerOut() {
         when(batsmanAOnStrike.value){
             true ->{
@@ -378,35 +397,23 @@ class ScoringViewModel @Inject internal constructor(
                 onBatsmanBOut()
         }
     }
-
     fun onBatsmanAOut() {
         val batsman = batsmanA.value?.copy(isOut = true)
         if (batsman != null) {
             updatePlayer(batsman)
         }
     }
-
     private fun updatePlayer(batsman: Player) {
         viewModelScope.launch {
             repository.updatePlayer(batsman)
         }
     }
-
     fun onBatsmanBOut() {
         val batsman = batsmanB.value?.copy(isOut = true)
         if (batsman != null) {
             updatePlayer(batsman)
         }
     }
-
-    @ExperimentalCoroutinesApi
-    private fun updateBattingTeamExtra(score: Int,extra:Int) {
-        battingTeamScore.value?.let {
-            val newScore =it.copy(totalRun = it.totalRun+score+extra, extra = it.extra+extra)
-            updateTeamScore(newScore)
-        }
-    }
-
 
     companion object {
         private const val NO_MATCH_ID = "NO_MATCH_ID"

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.hilt:hilt-navigation-fragment:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/a2ff747b255f813c3b8f5c7f15f3e367/transformed/hilt-navigation-fragment-1.0.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/a2ff747b255f813c3b8f5c7f15f3e367/transformed/hilt-navigation-fragment-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/a2ff747b255f813c3b8f5c7f15f3e367/transformed/hilt-navigation-fragment-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

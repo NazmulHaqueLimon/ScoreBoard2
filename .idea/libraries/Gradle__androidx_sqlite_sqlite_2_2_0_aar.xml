@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.sqlite:sqlite:2.2.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/4838a03aa3e213c007622712e6e8f3ed/transformed/sqlite-2.2.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/4838a03aa3e213c007622712e6e8f3ed/transformed/sqlite-2.2.0/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/4838a03aa3e213c007622712e6e8f3ed/transformed/sqlite-2.2.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1410c88c8b1600e355ba0ae55c88e61b/transformed/sqlite-2.2.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1410c88c8b1600e355ba0ae55c88e61b/transformed/sqlite-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/1410c88c8b1600e355ba0ae55c88e61b/transformed/sqlite-2.2.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

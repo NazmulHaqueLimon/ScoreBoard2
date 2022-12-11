@@ -17,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/themeB2"
         tools:context=".fragments.ScoringFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -35,7 +36,8 @@
                 android:padding="8dp"
                 android:src="@drawable/arrow_back"
                 android:layout_height="match_parent"
-                app:tint="@color/buttons" />
+                app:tint="@color/buttons"
+                android:contentDescription="@string/image_content" />
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -45,7 +47,7 @@
                 app:contentScrim="?attr/colorSurface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="?attr/colorSurface"
-                app:title="@{viewModel.teamA.team.name}"
+                app:title="@{viewModel.teamA.team.name.toString()}"
                 app:titleEnabled="true">
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -104,6 +106,7 @@
                     android:textColorHint="#0B7168"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -113,8 +116,7 @@
                     android:id="@+id/textView20"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_cricket_batsman_dark"
-
+                    android:src="@drawable/ic_cricket__3_batsman"
                     app:layout_constraintBottom_toBottomOf="@+id/textView22"
                     app:layout_constraintStart_toStartOf="@+id/textView22"
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -137,7 +139,7 @@
                     android:id="@+id/textView21"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_ball"
+                    android:src="@drawable/ic_cricket__red_ball"
                     app:layout_constraintBottom_toBottomOf="@+id/textView23"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
                     app:layout_constraintTop_toTopOf="@+id/textView23" />
@@ -179,7 +181,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="4dp"
-                tools:listitem="@layout/last_score"/>
+                tools:listitem="@layout/score_item"/>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -411,17 +413,18 @@
                     android:id="@+id/button0"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="4dp"
                     android:padding="4dp"
+                    android:elevation="6dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="@{()-> viewModel.onBatsmanScore(0)}"
                     android:src="@drawable/zero"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="image_content" />
+                    android:contentDescription="@string/image_content" />
 
                 <ImageView
                     android:id="@+id/button1"
@@ -429,6 +432,7 @@
                     android:layout_height="45dp"
                     android:layout_marginStart="16dp"
                     android:padding="4dp"
+                    android:elevation="6dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="@{()-> viewModel.onBatsmanScore(1)}"
@@ -704,7 +708,7 @@
                         android:id="@+id/bowler_econ"
                         android:layout_width="60dp"
                         android:layout_height="match_parent"
-                        android:text="0"
+                        tools:text="0"
                         android:textAlignment="center" />
 
                 </LinearLayout>
