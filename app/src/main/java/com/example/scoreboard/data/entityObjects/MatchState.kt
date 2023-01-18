@@ -1,15 +1,22 @@
-package com.example.scoreboard.data
+package com.example.scoreboard.data.entityObjects
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.*
+
+@Entity(tableName = "matchState")
 data class MatchState(
+    @PrimaryKey
+    val matchId:String,
     val run :Int =0,
-    val extra:Int =0,
+    var extra:Int =0,
     val run_bat : Int=0,
     val ballCount : Boolean =false,
-    val bat :Boolean =false,
-    val nb : Boolean=false,
-    val wide :Boolean =false,
-    val bye :Boolean =false,
-    val lb :Boolean =false,
+    var bat :Boolean =false,
+    var nb : Boolean=false,
+    var wide :Boolean =false,
+    var bye :Boolean =false,
+    var lb :Boolean =false,
 ){
 
     fun getScoreString():String {

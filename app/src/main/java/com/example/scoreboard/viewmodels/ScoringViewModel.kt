@@ -1,15 +1,13 @@
 package com.example.scoreboard.viewmodels
 
 
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.scoreboard.data.MatchState
-import com.example.scoreboard.data.objects.*
+import com.example.scoreboard.data.entityObjects.MatchState
+import com.example.scoreboard.data.entityObjects.*
 import com.example.scoreboard.data.repositories.ScoringRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
@@ -179,7 +177,9 @@ class ScoringViewModel @Inject internal constructor(
      */
     val stateList = mutableListOf<MatchState>()
     val lastState = MutableLiveData<List<MatchState>>()
-    val stateListLiveData =stateList.toMutableList()
+   // val stateListLiveData: LiveData<MatchState> =stateList.toMutableList()
+    val _stateListLiveData =MutableLiveData<List<MatchState>>(stateList)
+    val stateListLiveData:LiveData<List<MatchState>> =_stateListLiveData
 
 
     var _strikerActive =MutableLiveData<Boolean>()
@@ -201,17 +201,23 @@ class ScoringViewModel @Inject internal constructor(
         return false
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onBatsmanScore (run:Int){
         if (isScoringEnabled()){
-            val state = MatchState(run_bat = run, ballCount = true)
-            stateList.add(state)
-            updateMatchState(state)
+            match.value?.matchId?.let {
+                val state = MatchState(it,bat = true,run_bat = run, ballCount = true)
+                updateMatchState(state)
+            }
+
+            //stateList.add(state)
+
         }
 
     }
     @OptIn(ExperimentalCoroutinesApi::class)
     fun updateMatchState(state: MatchState) {
         stateList.add(state)
+        _stateListLiveData.value =stateList
         if (state.bye && !state.nb){
             battingTeamScore.value?.let {
                 val newScore =it.copy(totalRun = it.totalRun+state.run)

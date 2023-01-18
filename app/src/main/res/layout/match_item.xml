@@ -9,13 +9,13 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="MatchInfo"
-            type="com.example.scoreboard.data.objects.Match" />
+            type="com.example.scoreboard.data.entityObjects.Match" />
         <variable
             name="ScoreAndTeamA"
-            type="com.example.scoreboard.data.objects.TeamScoreAndTeam" />
+            type="com.example.scoreboard.data.entityObjects.TeamScoreAndTeam" />
         <variable
             name="ScoreAndTeamB"
-            type="com.example.scoreboard.data.objects.TeamScoreAndTeam" />
+            type="com.example.scoreboard.data.entityObjects.TeamScoreAndTeam" />
 
 
     </data>

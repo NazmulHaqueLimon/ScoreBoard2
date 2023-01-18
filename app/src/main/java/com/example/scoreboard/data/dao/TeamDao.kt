@@ -2,7 +2,7 @@ package com.example.scoreboard.data.dao
 
 import androidx.room.*
 
-import com.example.scoreboard.data.objects.Team
+import com.example.scoreboard.data.entityObjects.Team
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -11,9 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
-import com.example.scoreboard.adapters.MatchListAdapter
 import com.example.scoreboard.adapters.MatchStateAdapter
-import com.example.scoreboard.data.MatchState
+import com.example.scoreboard.data.entityObjects.MatchState
 import com.example.scoreboard.databinding.FragmentScoringBinding
 import com.example.scoreboard.viewmodels.ScoringViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -112,10 +111,8 @@ class ScoringFragment : Fragment() {
 
         matchStateAdapter = MatchStateAdapter()
         binding.matchStateRv.adapter = matchStateAdapter
-        scoringViewModel.stateList.let {
-            if(it.isNotEmpty()){
-                matchStateAdapter.submitList(scoringViewModel.stateList)
-            }
+        scoringViewModel.stateListLiveData.observe(viewLifecycleOwner) {
+            matchStateAdapter.submitList(it)
         }
 
 
@@ -311,37 +308,28 @@ class ScoringFragment : Fragment() {
         // Set list popup's content
         val items = listOf("+1", "+2", "+3","+4","+6")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
-        var newState: MatchState? =null
+        //val newState:MatchState = MatchState(args.matchId)
 
         if (state.nb){
             if (state.lb){
-                newState = MatchState(nb = true, lb = true, extra = 1)
                 listPopupScores.anchorView =binding.popupNb
             }
             else if(state.bye){
-                newState =MatchState(nb = true, bye = true, extra = 1)
                 listPopupScores.anchorView =binding.popupNb
             }
             else if (state.bat){
-                newState =MatchState(nb = true, bat = true, extra = 1)
                 listPopupScores.anchorView =binding.popupNb
-            }else{
-                newState = MatchState(nb = true, extra = 1)
             }
         }
          // counted the ball number in the viewmodel
          else if (state.lb){
-            newState =MatchState(lb = true)
             listPopupScores.anchorView =binding.popupLb
-
         }
          else if (state.wide){
-             newState =state
              listPopupScores.anchorView =binding.popupBye
         }
         //counted the ball number in the viewmodel
         else if (state.bye){
-            newState =MatchState(bye = true)
             listPopupScores.anchorView =binding.popupBye
         }
 
@@ -349,11 +337,11 @@ class ScoringFragment : Fragment() {
         // Set list popup's item click listener
         listPopupScores.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             when(adapter.getItem(position)){
-                "+1" -> newState?.let { updateState(it,1) }
-                "+2" -> newState?.let { updateState(it,2) }
-                "+3" -> newState?.let { updateState(it,3) }
-                "+4" -> newState?.let { updateState(it,4) }
-                "+6" -> newState?.let { updateState(it,6) }
+                "+1" -> updateState(state,1)
+                "+2" -> updateState(state,2)
+                "+3" -> updateState(state,3)
+                "+4" -> updateState(state,4)
+                "+6" -> updateState(state,6)
             }
 
             listPopupScores.dismiss()
@@ -384,18 +372,22 @@ class ScoringFragment : Fragment() {
         // Set list popup's item click listener
         listPopupWindowWide.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
-            val state :MatchState
+            val state = MatchState(args.matchId)
             when(adapter.getItem(position)){
                 "+0" ->{
-                    state = MatchState( wide = true, extra = 1)
+                    state.wide =true
+                    state.extra =1
+                    //state = MatchState( wide = true, extra = 1)
                     scoringViewModel.updateMatchState(state)
                 }
                 "+Bye" -> {
-                    state = MatchState( bye = true, wide = true, extra = 1)
+                    state.wide =true
+                    state.bye =true
+                    state.extra =1
+                    //state = MatchState( bye = true, wide = true, extra = 1)
                     openScoringOptions(state)
                 }
             }
-
             // Dismiss popup.
             listPopupWindowWide.dismiss()
         }
@@ -411,13 +403,13 @@ class ScoringFragment : Fragment() {
 
     private fun setListPopupBye(){
         binding.popupBye.setOnClickListener {
-            val state = MatchState( bye = true, ballCount = true)
+            val state = MatchState(args.matchId, bye = true, ballCount = true)
             openScoringOptions(state)
         }
     }
     private fun setListPopupLb(){
         binding.popupLb.setOnClickListener {
-            val state = MatchState( lb = true, ballCount = true)
+            val state = MatchState(args.matchId, lb = true, ballCount = true)
             openScoringOptions(state)
         }
     }
@@ -435,23 +427,33 @@ class ScoringFragment : Fragment() {
         // Set list popup's item click listener
         listPopupWindowNb.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
-            val state :MatchState
+            val state : MatchState = MatchState(args.matchId)
             when(adapter.getItem(position)){
                 "+O" ->{
-                    state = MatchState(nb = true,extra = 1)
+                    state.nb =true
+                    state.extra =1
+                    //state = MatchState(nb = true,extra = 1)
                     scoringViewModel.updateMatchState(state)
-                    //scoringViewModel.updateExtra(1,"EXTRA")
                 }
                 "+Lb" ->{
-                    state = MatchState(nb = true,extra = 1, lb = true)
+                    state.nb=true
+                    state.extra =1
+                    state.lb =true
+                    //state = MatchState(nb = true,extra = 1, lb = true)
                     openScoringOptions(state)
                 }
                 "+bye" ->{
-                    state = MatchState(nb = true,extra = 1, bye = true)
+                    state.nb =true
+                    state.bye =true
+                    state.extra =1
+                    //state = MatchState(nb = true,extra = 1, bye = true)
                     openScoringOptions(state)
                 }
                 "+bat" ->{
-                    state = MatchState(nb = true, extra = 1, bat = true)
+                    state.nb =true
+                    state.bat =true
+                    state.extra =1
+                    //state = MatchState(nb = true, extra = 1, bat = true)
                     openScoringOptions(state)
                 }
 

@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scoreboard.data.objects.PlayerScoreAndPlayer
-import com.example.scoreboard.databinding.BatsmanScoreItemBinding
+import com.example.scoreboard.data.entityObjects.PlayerScoreAndPlayer
 import com.example.scoreboard.databinding.BowlerScoreItemBinding
 
 

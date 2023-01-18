@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.scoreboard.data.dao.*
-import com.example.scoreboard.data.objects.TeamPlayers
-import com.example.scoreboard.data.objects.*
+import com.example.scoreboard.data.entityObjects.TeamPlayers
+import com.example.scoreboard.data.entityObjects.*
 
 import com.example.scoreboard.utils.DATABASE_NAME
 /**
@@ -15,8 +15,8 @@ import com.example.scoreboard.utils.DATABASE_NAME
  * Note that exportSchema should be true in production databases.
  */
 
-@Database(entities = [Player::class, Team::class, TeamPlayers::class, Match::class, PlayersScore::class, TeamsScore::class],
-           version =14, exportSchema = false)
+@Database(entities = [Player::class, Team::class, TeamPlayers::class, Match::class, PlayersScore::class, TeamsScore::class,MatchState::class],
+           version =1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun playerDao(): PlayerDao

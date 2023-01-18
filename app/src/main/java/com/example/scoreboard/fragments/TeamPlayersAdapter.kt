@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DiffUtil
-import com.example.scoreboard.data.objects.Player
+import com.example.scoreboard.data.entityObjects.Player
 import com.example.scoreboard.databinding.PlayerItemBinding
 
 class TeamPlayersAdapter : ListAdapter<Player, RecyclerView.ViewHolder>(PlayerDiffCallback()) {

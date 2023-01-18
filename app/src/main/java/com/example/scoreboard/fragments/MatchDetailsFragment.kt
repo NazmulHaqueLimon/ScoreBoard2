@@ -11,12 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.adapters.BatsmanScoreAdapter
 import com.example.scoreboard.adapters.BowlerScoreAdapter
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.data.objects.PlayerScoreAndPlayer
+import com.example.scoreboard.data.entityObjects.Player
+import com.example.scoreboard.data.entityObjects.PlayerScoreAndPlayer
 import com.example.scoreboard.databinding.FragmentMatchDetailsBinding
 import com.example.scoreboard.viewmodels.MatchDetailsViewmodel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
 class MatchDetailsFragment : Fragment() {
 

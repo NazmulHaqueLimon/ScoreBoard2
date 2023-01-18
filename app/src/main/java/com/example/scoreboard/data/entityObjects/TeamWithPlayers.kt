@@ -1,4 +1,4 @@
-package com.example.scoreboard.data.objects
+package com.example.scoreboard.data.entityObjects
 
 import androidx.room.Embedded
 import androidx.room.Junction

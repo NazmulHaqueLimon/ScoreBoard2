@@ -6,10 +6,10 @@
     <data>
         <variable
             name="bowler"
-            type="com.example.scoreboard.data.objects.Player" />
+            type="com.example.scoreboard.data.entityObjects.Player" />
         <variable
             name="bowlerScore"
-            type="com.example.scoreboard.data.objects.PlayersScore" />
+            type="com.example.scoreboard.data.entityObjects.PlayersScore" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scoreboard.data.MatchState
+import com.example.scoreboard.data.entityObjects.MatchState
 import com.example.scoreboard.databinding.ScoreItemBinding
 
 class MatchStateAdapter : ListAdapter<MatchState, RecyclerView.ViewHolder>(MatchStateDiffUtilCallback()) {

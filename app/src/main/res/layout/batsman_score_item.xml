@@ -4,15 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.scoreboard.data.objects.Player"/>
-        <import type="com.example.scoreboard.data.objects.PlayersScore"/>
-        <import type="com.example.scoreboard.data.objects.PlayerScoreAndPlayer"/>
+        <import type="com.example.scoreboard.data.entityObjects.Player"/>
+        <import type="com.example.scoreboard.data.entityObjects.PlayersScore"/>
+        <import type="com.example.scoreboard.data.entityObjects.PlayerScoreAndPlayer"/>
         <variable
             name="batsman"
-            type="com.example.scoreboard.data.objects.Player" />
+            type="com.example.scoreboard.data.entityObjects.Player" />
         <variable
             name="batsmanScore"
-            type="com.example.scoreboard.data.objects.PlayersScore" />
+            type="com.example.scoreboard.data.entityObjects.PlayersScore" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.scoreboard.data.objects.Player
-import com.example.scoreboard.data.objects.Team
+import com.example.scoreboard.data.entityObjects.Player
+import com.example.scoreboard.data.entityObjects.Team
 import com.example.scoreboard.databinding.FragmentTeamBinding
 import com.example.scoreboard.viewmodels.MatchViewModel
 import com.google.android.material.snackbar.Snackbar

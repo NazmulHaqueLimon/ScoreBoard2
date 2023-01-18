@@ -1,8 +1,7 @@
 package com.example.scoreboard.data.repositories
 
-import androidx.lifecycle.LiveData
 import com.example.scoreboard.data.dao.*
-import com.example.scoreboard.data.objects.*
+import com.example.scoreboard.data.entityObjects.*
 import javax.inject.Inject
 import javax.inject.Singleton
 

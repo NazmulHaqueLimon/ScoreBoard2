@@ -1,7 +1,7 @@
 package com.example.scoreboard.viewmodels
 
 import androidx.lifecycle.*
-import com.example.scoreboard.data.objects.*
+import com.example.scoreboard.data.entityObjects.*
 import com.example.scoreboard.data.repositories.MatchInfoRepository
 import com.example.scoreboard.data.repositories.ScoringRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

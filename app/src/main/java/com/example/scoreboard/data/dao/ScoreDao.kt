@@ -1,7 +1,7 @@
 package com.example.scoreboard.data.dao
 
 import androidx.room.*
-import com.example.scoreboard.data.objects.*
+import com.example.scoreboard.data.entityObjects.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
-        <import type="com.example.scoreboard.data.objects.Team"/>
+        <import type="com.example.scoreboard.data.entityObjects.Team"/>
         <variable
             name="viewModel"
             type="com.example.scoreboard.viewmodels.MatchViewModel" />

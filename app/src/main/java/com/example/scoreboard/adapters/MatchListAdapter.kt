@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scoreboard.data.objects.MatchTeamScoreTeam
+import com.example.scoreboard.data.entityObjects.MatchTeamScoreTeam
 import com.example.scoreboard.databinding.MatchItemBinding
 import com.example.scoreboard.fragments.MatchListFragmentDirections
 

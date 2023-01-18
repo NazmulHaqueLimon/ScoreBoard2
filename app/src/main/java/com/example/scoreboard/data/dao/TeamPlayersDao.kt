@@ -1,8 +1,8 @@
 package com.example.scoreboard.data.dao
 
 import androidx.room.*
-import com.example.scoreboard.data.objects.TeamPlayers
-import com.example.scoreboard.data.objects.TeamWithPlayers
+import com.example.scoreboard.data.entityObjects.TeamPlayers
+import com.example.scoreboard.data.entityObjects.TeamWithPlayers
 import kotlinx.coroutines.flow.Flow
 
 @Dao

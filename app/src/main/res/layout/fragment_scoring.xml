@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.scoreboard.data.objects.Team"/>
-        <import type="com.example.scoreboard.data.objects.Match"/>
-        <import type="com.example.scoreboard.data.objects.Player"/>
-        <import type="com.example.scoreboard.data.objects.TeamWithPlayers"/>
+        <import type="com.example.scoreboard.data.entityObjects.Team"/>
+        <import type="com.example.scoreboard.data.entityObjects.Match"/>
+        <import type="com.example.scoreboard.data.entityObjects.Player"/>
+        <import type="com.example.scoreboard.data.entityObjects.TeamWithPlayers"/>
         <variable
             name="viewModel"
             type="com.example.scoreboard.viewmodels.ScoringViewModel" />
@@ -72,94 +72,189 @@
             android:layout_height="120dp"
             android:layout_marginTop="5dp"
             app:cardBackgroundColor="@color/themeB2"
-            android:layout_marginHorizontal="50dp"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleText">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="29dp">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="44dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_group" />
-
-                <TextView
-                    android:id="@+id/textView18"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/teamACv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:hint="@string/team_name"
-                    android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
-                    android:textColor="#0A6E64"
-                    android:textColorHint="#0B7168"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-                <ImageView
-                    android:id="@+id/textView20"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_cricket__3_batsman"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                    app:layout_constraintStart_toStartOf="@+id/textView22"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/total_score"
-                    android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
-                    android:textAlignment="center"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/textView18"
-                    app:layout_constraintStart_toStartOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    tools:text="156/8" />
-                <ImageView
-                    android:id="@+id/textView21"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_cricket__red_ball"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                    app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toTopOf="@+id/textView23" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/over_played"
-                    android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
-                    android:textAlignment="center"
-                    android:textColor="#171616"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView22"
-                    app:layout_constraintStart_toStartOf="@+id/textView22"
-                    app:layout_constraintTop_toBottomOf="@+id/textView22"
-                    tools:text="12.5" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/teamALogoIV"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_group" />
+
+                    <TextView
+                        android:id="@+id/teamAnameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:hint="@string/team_name"
+                        android:maxLines="1"
+                        android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
+                        android:textAlignment="center"
+                        android:textColor="#0A6E64"
+                        android:textColorHint="#0B7168"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/teamALogoIV"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/teamALogoIV"
+                        app:layout_constraintTop_toTopOf="@+id/teamALogoIV" />
+
+                    <ImageView
+                        android:id="@+id/batsmanIconIV"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_cricket__3_batsman"
+                        app:layout_constraintBottom_toBottomOf="@+id/teamAscoreTv"
+                        app:layout_constraintStart_toStartOf="@+id/teamAscoreTv"
+                        app:layout_constraintTop_toBottomOf="@+id/teamAnameTV" />
+
+                    <TextView
+                        android:id="@+id/teamAscoreTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_score"
+                        android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
+                        android:textAlignment="center"
+                        android:textSize="24dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/teamAnameTV"
+                        app:layout_constraintStart_toStartOf="@+id/teamAnameTV"
+                        app:layout_constraintTop_toBottomOf="@+id/teamALogoIV"
+                        tools:text="156/8" />
+
+                    <ImageView
+                        android:id="@+id/ballIconIV"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_cricket__red_ball"
+                        app:layout_constraintBottom_toBottomOf="@+id/overPlayedTV"
+                        app:layout_constraintStart_toStartOf="@+id/overPlayedTV"
+                        app:layout_constraintTop_toTopOf="@+id/overPlayedTV" />
+
+                    <TextView
+                        android:id="@+id/overPlayedTV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/over_played"
+                        android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
+                        android:textAlignment="center"
+                        android:textColor="#171616"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/teamAscoreTv"
+                        app:layout_constraintStart_toStartOf="@+id/teamAscoreTv"
+                        app:layout_constraintTop_toBottomOf="@+id/teamAscoreTv"
+                        tools:text="12.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/teamBCV"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/teamACv"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="44dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_group" />
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:hint="@string/team_name"
+                        android:text="@{viewModel.battingTeamWithPlayers.team.name.toString()}"
+                        android:textAlignment="center"
+                        android:textColor="#0A6E64"
+                        android:textColorHint="#0B7168"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                    <ImageView
+                        android:id="@+id/textView20"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_cricket__3_batsman"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                        app:layout_constraintStart_toStartOf="@+id/textView22"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_score"
+                        android:text="@{Integer.toString(viewModel.battingTeamScore.totalRun)}"
+                        android:textAlignment="center"
+                        android:textSize="24dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/textView18"
+                        app:layout_constraintStart_toStartOf="@+id/textView18"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                        tools:text="156/8" />
+
+                    <ImageView
+                        android:id="@+id/textView21"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_cricket__red_ball"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                        app:layout_constraintStart_toStartOf="@+id/textView23"
+                        app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/over_played"
+                        android:text="@{Integer.toString(viewModel.battingTeamScore.ballPlayed)}"
+                        android:textAlignment="center"
+                        android:textColor="#171616"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/textView22"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/textView22"
+                        app:layout_constraintTop_toBottomOf="@+id/textView22"
+                        app:layout_constraintVertical_bias="0.2"
+                        tools:text="12.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </com.google.android.material.card.MaterialCardView>
 

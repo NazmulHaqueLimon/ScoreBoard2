@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
      <data>
-            <import type="com.example.scoreboard.data.objects.Team"/>
-            <import type="com.example.scoreboard.data.objects.Match"/>
-            <import type="com.example.scoreboard.data.objects.Player"/>
-            <import type="com.example.scoreboard.data.objects.TeamWithPlayers"/>
-            <import type="com.example.scoreboard.data.objects.PlayerScoreAndPlayer"/>
-            <import type="com.example.scoreboard.data.objects.MatchTeamScoreTeam"/>
+            <import type="com.example.scoreboard.data.entityObjects.Team"/>
+            <import type="com.example.scoreboard.data.entityObjects.Match"/>
+            <import type="com.example.scoreboard.data.entityObjects.Player"/>
+            <import type="com.example.scoreboard.data.entityObjects.TeamWithPlayers"/>
+            <import type="com.example.scoreboard.data.entityObjects.PlayerScoreAndPlayer"/>
+            <import type="com.example.scoreboard.data.entityObjects.MatchTeamScoreTeam"/>
             <variable
                    name="viewModel"
                    type="com.example.scoreboard.viewmodels.MatchDetailsViewmodel" />
