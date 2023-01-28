@@ -17,6 +17,7 @@ import com.example.scoreboard.databinding.FragmentTeamBinding
 import com.example.scoreboard.viewmodels.MatchViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.components.ViewWithFragmentComponent
 
 /**
  *this fragment adds or delete players for a match.edit team information
@@ -52,13 +53,18 @@ class TeamFragment : Fragment() {
             else{
                 val newPlayer =Player(name = playerName)
                 playerList.add(newPlayer)
+                binding.noPlayersCl.visibility=View.GONE
+                binding.playerListRecycler.visibility=View.VISIBLE
+                if (playerList.size>2){
+                    binding.saveTeamFab.visibility=View.VISIBLE
+                }
             }
             adapter.submitList(playerList.toMutableList())
             binding.playerName.text = null
             hideSoftKeyboard(it)
         }
 
-        binding.saveTramFab.setOnClickListener {
+        binding.saveTeamFab.setOnClickListener {
             val teamName = binding.teamName.text.toString()
             if (teamName.isNullOrEmpty()){
                 showToastMessage("please add a team name")

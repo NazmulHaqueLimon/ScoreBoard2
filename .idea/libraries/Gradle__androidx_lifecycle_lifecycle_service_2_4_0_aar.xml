@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-service:2.4.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/65814aae76292e3bfe2a49286ab13faf/transformed/lifecycle-service-2.4.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/65814aae76292e3bfe2a49286ab13faf/transformed/lifecycle-service-2.4.0/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/65814aae76292e3bfe2a49286ab13faf/transformed/lifecycle-service-2.4.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/ad984a75e8cc11cc8b9083bfa9343173/transformed/lifecycle-service-2.4.0/res" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/ad984a75e8cc11cc8b9083bfa9343173/transformed/lifecycle-service-2.4.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/transforms-3/ad984a75e8cc11cc8b9083bfa9343173/transformed/lifecycle-service-2.4.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-service/2.4.0/1be95a2b00fd4a7f88c01acae9f6635504f6a5ef/lifecycle-service-2.4.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-service/2.4.0/1be95a2b00fd4a7f88c01acae9f6635504f6a5ef/lifecycle-service-2.4.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

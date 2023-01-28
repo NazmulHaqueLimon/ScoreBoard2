@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.hilt:hilt-navigation-fragment:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/e00abe27b2325782afda723d3bba6a87/transformed/hilt-navigation-fragment-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/transforms-3/b1182bf16df1aa81e411cd155e730330/transformed/hilt-navigation-fragment-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/b1182bf16df1aa81e411cd155e730330/transformed/hilt-navigation-fragment-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/b1182bf16df1aa81e411cd155e730330/transformed/hilt-navigation-fragment-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/modules-2/files-2.1/androidx.hilt/hilt-navigation-fragment/1.0.0/90bc03b9dc9e8a3ea7064c539695d8dcc2f0c0fd/hilt-navigation-fragment-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/modules-2/files-2.1/androidx.hilt/hilt-navigation-fragment/1.0.0/90bc03b9dc9e8a3ea7064c539695d8dcc2f0c0fd/hilt-navigation-fragment-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

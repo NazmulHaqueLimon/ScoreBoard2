@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.5.1@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/6d4c68398d1be5b07516b82b642a01e0/transformed/lifecycle-livedata-core-2.5.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/6d4c68398d1be5b07516b82b642a01e0/transformed/lifecycle-livedata-core-2.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/transforms-3/6d4c68398d1be5b07516b82b642a01e0/transformed/lifecycle-livedata-core-2.5.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/transforms-3/f7b43890d5732f0cf4fb82882caff79a/transformed/lifecycle-livedata-core-2.5.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/f7b43890d5732f0cf4fb82882caff79a/transformed/lifecycle-livedata-core-2.5.1/res" />
+      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/f7b43890d5732f0cf4fb82882caff79a/transformed/lifecycle-livedata-core-2.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../New folder/ps_retail_agent_app/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata-core/2.5.1/38ecd5651d87b6db994df01f93fc72d6e59b846a/lifecycle-livedata-core-2.5.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/android/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata-core/2.5.1/38ecd5651d87b6db994df01f93fc72d6e59b846a/lifecycle-livedata-core-2.5.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

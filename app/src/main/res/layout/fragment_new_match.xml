@@ -36,9 +36,17 @@
                 app:contentScrim="@color/teal_700"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="@color/teal_700"
-                app:title="@string/start_a_new_match"
-                tools:text ="start a new match"
                 app:titleEnabled="true">
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/teal_700"
+                    android:textStyle="bold"
+                    android:text="Start A New Cricket Match"/>
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -182,6 +190,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:focusable="true"
+                android:elevation="4dp"
+                android:shadowColor="@color/teal_700"
+                android:shadowRadius="4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_cricket_ground">

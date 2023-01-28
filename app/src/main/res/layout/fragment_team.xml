@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/arrow_back"
                 android:layout_width="40dp"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:src="@drawable/arrow_back"
                 android:layout_height="match_parent"
                 app:tint="@color/buttons"
@@ -177,7 +177,7 @@
                 android:layout_height="58dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="@color/buttons"
                 android:text="ADD"
                 android:textAlignment="textStart"
                 android:textColor="#0B7168"
@@ -197,6 +197,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/no_PlayersCl"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/player_item" >
+
+                <ImageView
+                    android:id="@+id/no_playerImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/ic_cricket_batsman_dark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Players Added"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/no_playerImage"
+                    app:layout_constraintStart_toStartOf="@+id/no_playerImage"
+                    app:layout_constraintTop_toBottomOf="@+id/no_playerImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/player_list_recycler"
                 android:layout_width="match_parent"
@@ -204,6 +240,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
+                android:visibility="gone"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -214,7 +251,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/save_tram_fab"
+            android:id="@+id/save_team_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="55dp"
@@ -223,6 +260,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/save_button_txt"
+            android:visibility="gone"
             android:textColor="#0B5951"
             android:textSize="16sp"
             android:textStyle="bold"
