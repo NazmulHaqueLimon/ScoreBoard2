@@ -23,34 +23,41 @@
         android:id="@+id/matchItemCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         android:onClick="@{clickListener}"
-        android:layout_marginBottom="12dp"
+        android:layout_margin="16dp"
         app:cardElevation="4dp"
         app:cardPreventCornerOverlap="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/themeB2">
+            android:background="#A6F1D9">
 
             <TextView
                 android:id="@+id/ground_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@{}"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="16dp"
+                android:text="@{MatchInfo.ground.toString()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="college field open ground" />
+            <TextView
+                android:id="@+id/matchStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                android:text="@{MatchInfo.ground.toString()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="college field open ground" />
 
-
             <ImageView
                 android:id="@+id/teamIcon_id"
-                android:layout_width="43dp"
-                android:layout_height="34dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/player_image"
                 app:layout_constraintEnd_toStartOf="@+id/divider"
@@ -62,7 +69,7 @@
                 android:id="@+id/team_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@{ScoreAndTeamA.team.name.toString()}"
                 app:layout_constraintEnd_toStartOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,8 +91,8 @@
 
             <ImageView
                 android:id="@+id/teamIcon2_id"
-                android:layout_width="44dp"
-                android:layout_height="34dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/player_image"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +104,7 @@
                 android:id="@+id/team_name2_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider"
@@ -108,7 +115,7 @@
                 android:id="@+id/totalScore2_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@{Integer.toString(ScoreAndTeamB.score.totalRun)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider"

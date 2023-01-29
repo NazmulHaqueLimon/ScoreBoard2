@@ -63,6 +63,9 @@ class TeamFragment : Fragment() {
             binding.playerName.text = null
             hideSoftKeyboard(it)
         }
+        binding.arrowBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         binding.saveTeamFab.setOnClickListener {
             val teamName = binding.teamName.text.toString()
