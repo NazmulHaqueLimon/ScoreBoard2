@@ -33,7 +33,9 @@ class MatchStateAdapter : ListAdapter<MatchState, RecyclerView.ViewHolder>(Match
 
         fun bind(item: MatchState) {
             binding.apply {
-                currentScoreItem.text = item.getScoreString()
+
+                currentScoreItem.text=item.run_bat.toString()
+                //currentScoreItem.text = item.getScoreString()
                 //player = item
                 executePendingBindings()
             }
@@ -45,7 +47,7 @@ class MatchStateAdapter : ListAdapter<MatchState, RecyclerView.ViewHolder>(Match
 private class MatchStateDiffUtilCallback : DiffUtil.ItemCallback<MatchState>() {
 
     override fun areItemsTheSame(oldItem: MatchState, newItem: MatchState): Boolean {
-        return oldItem == newItem
+        return oldItem.matchId == newItem.matchId
     }
 
     override fun areContentsTheSame(oldItem: MatchState, newItem: MatchState): Boolean {

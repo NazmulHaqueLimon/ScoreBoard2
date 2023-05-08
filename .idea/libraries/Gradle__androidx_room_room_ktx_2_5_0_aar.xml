@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.room:room-ktx:2.5.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/9f74f45920e7ad86a3f0b2809c90b7ee/transformed/room-ktx-2.5.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/android/caches/transforms-3/9f74f45920e7ad86a3f0b2809c90b7ee/transformed/room-ktx-2.5.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/android/caches/transforms-3/9f74f45920e7ad86a3f0b2809c90b7ee/transformed/room-ktx-2.5.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1948824bb7f82cbadbc8151f7971bc93/transformed/room-ktx-2.5.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1948824bb7f82cbadbc8151f7971bc93/transformed/room-ktx-2.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1948824bb7f82cbadbc8151f7971bc93/transformed/room-ktx-2.5.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/android/caches/modules-2/files-2.1/androidx.room/room-ktx/2.5.0/1ec406c97bf1a275ef6a2787982ca73038913e58/room-ktx-2.5.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-ktx/2.5.0/1ec406c97bf1a275ef6a2787982ca73038913e58/room-ktx-2.5.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

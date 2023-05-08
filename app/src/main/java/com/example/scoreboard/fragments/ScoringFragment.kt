@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.scoreboard.R
+import com.example.scoreboard.adapters.MatchListAdapter
 import com.example.scoreboard.adapters.MatchStateAdapter
 import com.example.scoreboard.data.entityObjects.MatchState
 import com.example.scoreboard.databinding.FragmentScoringBinding
@@ -132,14 +133,10 @@ class ScoringFragment : Fragment() {
         setListPopupNb()
         setListPopupWide()
         showDialog("please add striker,non striker and a bowler to start scoring")
-        displayMatchState()
-
-    }
-
-    private fun displayMatchState() {
 
 
     }
+
     private fun showDialog(msg:String){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(msg)

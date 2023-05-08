@@ -2,6 +2,8 @@ package com.example.scoreboard.data.repositories
 
 import com.example.scoreboard.data.dao.*
 import com.example.scoreboard.data.entityObjects.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,6 +15,9 @@ class NewMatchRepository  @Inject constructor(
     private val teamPlayerDao : TeamPlayersDao,
     private val scoreDao: ScoreDao
 ){
+
+
+
 
     suspend fun saveMatch(match : Match)=matchDao.insertMatch(match)
 

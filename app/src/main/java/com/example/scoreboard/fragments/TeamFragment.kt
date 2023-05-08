@@ -45,9 +45,14 @@ class TeamFragment : Fragment() {
         val playerList = ArrayList<Player>()
         //val playerList = mutableListOf<Player>()
 
+        /** observing teamA players-to display the team information*/
+        viewModel.teamAplayers.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
+
         binding.buttonAdd.setOnClickListener {
             val playerName = binding.playerName.text.toString()
-            if (playerName.isNullOrEmpty()){
+            if (playerName.isEmpty()){
                 showToastMessage("please provide a player name")
             }
             else{
@@ -69,7 +74,7 @@ class TeamFragment : Fragment() {
 
         binding.saveTeamFab.setOnClickListener {
             val teamName = binding.teamName.text.toString()
-            if (teamName.isNullOrEmpty()){
+            if (teamName.isEmpty()){
                 showToastMessage("please add a team name")
             }else{
                 val team = Team(name = teamName)

@@ -1,8 +1,11 @@
 package com.example.scoreboard.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.scoreboard.data.entityObjects.*
 import com.example.scoreboard.data.repositories.NewMatchRepository
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -40,10 +43,10 @@ class MatchViewModel @Inject internal constructor(
      * team players
      * */
     private val _teamAplayers = MutableLiveData<List<Player>>()
-    private val teamAplayers :LiveData<List<Player>> =_teamAplayers
+    val teamAplayers :LiveData<List<Player>> =_teamAplayers
 
     private val _teamBplayers = MutableLiveData<List<Player>>()
-    private val teamBplayers :LiveData<List<Player>> =_teamBplayers
+    val teamBplayers :LiveData<List<Player>> =_teamBplayers
 
      /**
      * creating the match from the method and provide it as a liveData
@@ -190,6 +193,21 @@ class MatchViewModel @Inject internal constructor(
             repository.createPlayerScore(score)
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -43,16 +43,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="college field open ground" />
+
             <TextView
                 android:id="@+id/matchStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp"
                 android:text="@{MatchInfo.ground.toString()}"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ground_name_id"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="college field open ground" />
+
 
             <ImageView
                 android:id="@+id/teamIcon_id"

@@ -178,7 +178,7 @@ class ScoringViewModel @Inject internal constructor(
     val stateList = mutableListOf<MatchState>()
     val lastState = MutableLiveData<List<MatchState>>()
    // val stateListLiveData: LiveData<MatchState> =stateList.toMutableList()
-    val _stateListLiveData =MutableLiveData<List<MatchState>>(stateList)
+    val _stateListLiveData =MutableLiveData<List<MatchState>>()
     val stateListLiveData:LiveData<List<MatchState>> =_stateListLiveData
 
 
